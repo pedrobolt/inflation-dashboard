@@ -143,8 +143,8 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         prev = {}
         prev12 = {}
         p = pd.Period(latest_period, freq="M")
-        prev_period = str((p - 1))
-        prev12_period = str((p - 12))
+        prev_period = (p - 1).strftime("%Y%m")
+        prev12_period = (p - 12).strftime("%Y%m")
         for key in ["saar1", "saar3", "yoy"]:
             val = full_df[full_df["period"] == prev_period]
             val12 = full_df[full_df["period"] == prev12_period]
