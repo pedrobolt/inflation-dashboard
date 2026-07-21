@@ -34,10 +34,13 @@ def process_grupos(
     # Para BCB, usa dados reais dos núcleos se disponíveis
     if bcb_cores is not None and not bcb_cores.empty:
         bcb_df = bcb_cores.copy()
-        bcb_df["periodo"] = bcb_df["data"].dt.to_period("M").astype(str)
+        bcb_df["periodo"] = bcb_df["data"].dt.to_period("M").dt.strftime("%Y%m")
         bcb_df["mom"] = bcb_df["media"]
-        # Calcula YoY usando o valor acumulado em 12 meses: (1+mom)^12 - 1
-        bcb_df["yoy"] = ((1 + bcb_df["mom"] / 100) ** 12 - 1) * 100
+        # Calcula YoY real a partir do índice acumulado em 12 meses
+        bcb_df = bcb_df.sort_values("data").reset_index(drop=True)
+        bcb_df["index"] = (1 + bcb_df["mom"] / 100).cumprod()
+        bcb_df["yoy"] = (bcb_df["index"] / bcb_df["index"].shift(12) - 1) * 100
+        bcb_df["yoy"] = bcb_df["yoy"].where(bcb_df["index"].shift(12).notna())
         bcb_df = bcb_df[["periodo", "mom", "yoy"]].drop_duplicates("periodo")
         categories["BCB"] = bcb_df
     else:

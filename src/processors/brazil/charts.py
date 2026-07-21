@@ -32,7 +32,57 @@ def _new_id() -> str:
 
 
 def _to_json(fig: go.Figure) -> str:
-    return json.dumps(fig, cls=PlotlyJSONEncoder)
+    """Serializa figura Plotly para JSON com arrays como listas Python puras."""
+    plotly_json = fig.to_plotly_json()
+    clean = _convert_to_json_safe(plotly_json)
+    return json.dumps(clean, ensure_ascii=False)
+
+
+def _convert_to_json_safe(obj):
+    """Converte recursivamente numpy/pandas/datetime/base64 para tipos JSON nativos."""
+    import base64
+    import datetime
+    import numpy as np
+
+    if isinstance(obj, dict) and "dtype" in obj and "bdata" in obj and isinstance(obj["bdata"], str):
+        return _decode_bdata(obj)
+    if isinstance(obj, np.ndarray):
+        return [_convert_to_json_safe(v) for v in obj.tolist()]
+    if isinstance(obj, (pd.Series, pd.Index)):
+        return [_convert_to_json_safe(v) for v in obj.tolist()]
+    if isinstance(obj, (pd.Timestamp, pd.Period, datetime.datetime, datetime.date, np.datetime64)):
+        return str(obj)
+    if isinstance(obj, np.generic):
+        if pd.isna(obj):
+            return None
+        return obj.item()
+    if isinstance(obj, float):
+        if pd.isna(obj):
+            return None
+        return obj
+    if isinstance(obj, (list, tuple)):
+        return [_convert_to_json_safe(v) for v in obj]
+    if isinstance(obj, dict):
+        return {k: _convert_to_json_safe(v) for k, v in obj.items()}
+    return obj
+
+
+def _decode_bdata(obj: dict) -> list:
+    """Decodifica array Plotly base64 para lista Python."""
+    import base64
+    import numpy as np
+
+    try:
+        raw = base64.b64decode(obj["bdata"])
+        arr = np.frombuffer(raw, dtype=np.dtype(obj["dtype"]))
+    except Exception:
+        return obj
+
+    if np.issubdtype(arr.dtype, np.floating):
+        return [None if (isinstance(v, float) and np.isnan(v)) else float(v) for v in arr.tolist()]
+    if np.issubdtype(arr.dtype, np.bool_):
+        return [bool(v) for v in arr.tolist()]
+    return [int(v) if np.issubdtype(arr.dtype, np.integer) else v for v in arr.tolist()]
 
 
 def _parse_period(period_code: str) -> pd.Timestamp:

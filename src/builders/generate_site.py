@@ -12,6 +12,7 @@ import pandas as pd
 
 from ..collectors.brazil.ibge_client import IBGECollector, get_latest_available_period
 from ..collectors.brazil.bcb_client import BCBClient
+from ..collectors.brazil.focus_client import FocusClient
 from ..processors.brazil.resumo import process_resumo, format_period_label
 from ..processors.brazil.destaques import process_destaques
 from ..processors.brazil.surpresa import process_surpresa
@@ -108,9 +109,21 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         print(f"Aviso: não foi possível carregar núcleos do BCB: {e}")
         bcb_cores = None
 
+    # Busca projeções Focus
+    print("Buscando projeções Focus...")
+    focus_client = FocusClient()
+    try:
+        start_focus = pd.to_datetime(start_period, format="%Y%m").strftime("%Y-%m-%d")
+        end_focus = pd.to_datetime(end_period, format="%Y%m").strftime("%Y-%m-%d")
+        focus_proj = focus_client.fetch_ipca_projections(start_date=start_focus, end_date=end_focus)
+        print(f"Projeções carregadas: {len(focus_proj)} períodos")
+    except Exception as e:
+        print(f"Aviso: não foi possível carregar projeções Focus: {e}")
+        focus_proj = None
+
     resumo = process_resumo(df_general, df_groups, period=latest_period)
     destaques = process_destaques(df_groups[df_groups["periodo_codigo"] == latest_period], top_n=10)
-    surpresa = process_surpresa(df_general)
+    surpresa = process_surpresa(df_general, df_groups, projections=focus_proj)
     grupos = process_grupos(df_general, df_groups, bcb_cores=bcb_cores, period=latest_period)
 
     general_series = (
