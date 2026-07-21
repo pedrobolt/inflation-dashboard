@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPCA | Relatório · {{ period_label }}</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Inter:wght@400;600&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+  background: #f5f5f4; padding: 32px 16px; color: #1c1c1c;
+}
+.page { max-width: 1200px; margin: 0 auto; }
+section {
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 32px 28px 24px; margin-bottom: 24px;
+}
+
+/* ── Tab selectors ── */
+.seg-bar {
+  display: inline-flex; border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.65);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03); margin-bottom: 16px;
+}
+.seg-bar button {
+  border: none; border-right: 1px solid rgba(0,0,0,0.08);
+  background: transparent; color: #1c1c1c; padding: 6px 18px;
+  font-size: 0.85rem; font-weight: 500;
+  font-family: 'Source Sans 3', sans-serif;
+  cursor: pointer; white-space: nowrap; transition: background .15s, color .15s;
+}
+.seg-bar button:last-child { border-right: none; }
+.seg-bar button:hover { background: rgba(0,0,0,0.04); }
+.seg-bar.primary button.active { background: #0372B2; color: #fff; }
+.seg-bar.primary button.active:hover { background: #025E94; color: #fff; }
+.seg-bar.secondary button.active { background: #56B4E9; color: #fff; }
+.seg-bar.secondary button.active:hover { background: #4AA3D6; color: #fff; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.sub-selector { margin-bottom: 16px; }
+.title-bar {
+  border-left: 7px solid #0072B2; padding: 2px 0 2px 14px; margin-bottom: 4px;
+}
+.title-bar h2 { font-size: 28px; font-weight: 700; line-height: 1.2; color: #1c1c1c; }
+.title-bar .sub { font-size: 15px; color: #666; margin-top: 2px; line-height: 1.3; }
+.accent-line { width: 60px; height: 2px; background: #56B4E9; margin: 6px 0 20px 21px; }
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.row-2 > div, .row-70-30 > div { min-width: 0; overflow: hidden; }
+.row-70-30 { display: grid; grid-template-columns: 7fr 3fr; gap: 8px; margin-bottom: 8px; }
+.js-plotly-plot { width: 100% !important; }
+
+/* Resumo table */
+.ipca-tbl {
+  border-collapse: separate; border-spacing: 0;
+  font-size: 13px; width: 100%;
+  background: rgba(255,255,255,0.6); border-radius: 12px; overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.06);
+}
+.ipca-tbl th {
+  padding: 10px 12px; font-weight: 600; color: #4b5563;
+  background: rgba(0,0,0,0.07); text-align: center; border: none;
+}
+.ipca-tbl th.kind {
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.ipca-tbl th.tcol {
+  font-size: 11px; color: #6b7280; text-transform: uppercase;
+  letter-spacing: 0.06em; font-weight: 600; padding: 6px 10px 8px;
+}
+.ipca-tbl th.label { text-align: left; padding-left: 16px; }
+.ipca-tbl td {
+  padding: 8px 12px; font-variant-numeric: tabular-nums;
+  text-align: center; color: #1c1c1c; border: none;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+.ipca-tbl td.label { text-align: left; padding-left: 16px; }
+.ipca-tbl td.sub { padding-left: 32px; color: #1c1c1c; }
+.ipca-tbl td.bold { font-weight: 700; }
+.ipca-tbl td.muted { color: #1c1c1c; }
+.ipca-tbl tr.header td { font-weight: 700; }
+.ipca-tbl tr.lvl0 td { font-weight: 700; background: rgba(0,0,0,0.04); }
+.ipca-tbl tr.lvl1 td { font-weight: 400; background: rgba(0,0,0,0.015); }
+.ipca-tbl tr.top-sep td { border-top: 2px solid rgba(0,0,0,0.04); }
+.ipca-tbl tr.bot-sep td { border-bottom: 2px solid rgba(0,0,0,0.04); }
+.ipca-tbl tbody tr:first-child td { border-top: 2px solid rgba(0,0,0,0.04); }
+.ipca-tbl .sep-l { border-left: 2px solid rgba(0,0,0,0.04); }
+.ipca-tbl tbody tr:hover td { background: rgba(0,0,0,0.025); }
+.ipca-tbl tbody tr.lvl0:hover td { background: rgba(0,0,0,0.06); }
+/* Grupos table overrides */
+.ipca-tbl.grupos-tbl { margin-top: 20px; }
+.ipca-tbl tr.group td {
+  font-weight: 700; background: rgba(0,0,0,0.04); font-size: 14px;
+  border-top: 2px solid rgba(0,0,0,0.04); border-bottom: 2px solid rgba(0,0,0,0.04);
+}
+.ipca-tbl tr:not(.group) td { font-weight: 400; background: rgba(0,0,0,0.015); }
+.ipca-tbl tbody tr.group:hover td { background: rgba(0,0,0,0.06); }
+.ipca-tbl td.delta { font-size: 12px; font-weight: 500; padding: 8px 6px; }
+
+/* Destaques table */
+.dest-title {
+  font-family: 'Inter', sans-serif; font-weight: 700; color: #64748b;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  margin: 0 0 8px 4px;
+}
+.dest-tbl {
+  border-collapse: separate; border-spacing: 0;
+  font-size: 13px; width: 100%;
+  background: rgba(255,255,255,0.6); border-radius: 12px; overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.06);
+}
+.dest-tbl th {
+  padding: 8px 10px; font-weight: 600; color: #4b5563;
+  background: rgba(0,0,0,0.07); text-align: center;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+  border: none; border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.dest-tbl th.label { text-align: left; padding-left: 14px; }
+.dest-tbl td {
+  padding: 8px 10px; font-variant-numeric: tabular-nums;
+  text-align: center; color: #1c1c1c; border: none;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+.dest-tbl td.label { text-align: left; padding-left: 14px; line-height: 1.25; }
+.dest-tbl .parent { display: block; font-size: 11px; color: #6b7280; margin-top: 1px; }
+.dest-tbl td.bps { font-weight: 700; }
+.dest-tbl tbody tr:hover td { background: rgba(0,0,0,0.025); }
+
+/* Legendas customizadas */
+.custom-legend {
+  display: flex; flex-wrap: wrap; gap: 22px; align-items: center;
+  justify-content: center; font-size: 12.5px; color: #1c1c1c;
+  margin: 4px 0 16px 0; padding: 6px 10px;
+}
+.custom-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend-line { display: inline-block; width: 20px; height: 0; border-top: 2px dashed rgba(0,0,0,0.45); }
+.legend-box { display: inline-block; width: 14px; height: 10px; background: rgba(0,0,0,0.06); border-radius: 2px; }
+
+@media (max-width: 800px) {
+  body { padding: 8px 4px; }
+  section { padding: 16px 8px 12px; border-radius: 10px; }
+  .row-2, .row-70-30 { grid-template-columns: 1fr; }
+  .ipca-tbl, .dest-tbl { font-size: 11px; }
+  .title-bar h2 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div style="display:flex;align-items:baseline;gap:16px;margin-bottom:8px;">
+  <div class="seg-bar primary">
+    <button class="active" onclick="switchTab('resumo')">Resumo</button>
+    <button onclick="switchTab('destaques')">Destaques</button>
+    <button onclick="switchTab('surpresa')">Surpresa</button>
+    <button onclick="switchTab('grupos')">Por Grupos</button>
+  </div>
+</div>
+
+<!-- RESUMO -->
+<div id="tab-resumo" class="tab-content active">
+  <section>
+    <div class="title-bar">
+      <h2>IPCA | Resumo · {{ period_label }}</h2>
+      <div class="sub">Peso da última leitura, MoM bruto e YoY bruto em t-12, t-2, t-1 e t.</div>
+    </div>
+    <div class="accent-line"></div>
+    <table class="ipca-tbl">
+      <thead>
+        <tr>
+          <th rowspan="2" class="label">Métrica</th>
+          <th rowspan="2">Peso</th>
+          <th colspan="5" class="kind sep-l">MOM</th>
+          <th colspan="4" class="kind sep-l">YOY</th>
+        </tr>
+        <tr>
+          <th class="tcol sep-l">T-12</th>
+          <th class="tcol">T-2</th>
+          <th class="tcol">T-1</th>
+          <th class="tcol">{{ period_label_upper }}</th>
+          <th class="tcol">BPS</th>
+          <th class="tcol sep-l">T-12</th>
+          <th class="tcol">T-2</th>
+          <th class="tcol">T-1</th>
+          <th class="tcol">{{ period_label_upper }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in resumo %}
+        <tr class="{% if row.metric == 'Índice Geral' %}lvl0 header{% else %}lvl1 top-sep{% endif %}">
+          <td class="label" style="padding-left:{% if row.metric == 'Índice Geral' %}16{% else %}34{% endif %}px">{{ row.metric }}</td>
+          <td class="muted">{{ '%.1f'|format(row.weight) }}</td>
+          <td class="sep-l muted">{{ '%.2f'|format(row.mom_t_12) if row.mom_t_12 is not none else '–' }}</td>
+          <td class="muted">{{ '%.2f'|format(row.mom_t_2) if row.mom_t_2 is not none else '–' }}</td>
+          <td class="muted">{{ '%.2f'|format(row.mom_t_1) if row.mom_t_1 is not none else '–' }}</td>
+          <td>{{ '%.2f'|format(row.mom) if row.mom is not none else '–' }}</td>
+          <td style="{{ bps_style(row.mom_bps) }}">{{ '%+.1f'|format(row.mom_bps) if row.mom_bps is not none else '–' }}</td>
+          <td class="sep-l" style="{{ heatmap_style(row.yoy_t_12) }}">{{ '%.2f'|format(row.yoy_t_12) if row.yoy_t_12 is not none else '–' }}</td>
+          <td style="{{ heatmap_style(row.yoy_t_2) }}">{{ '%.2f'|format(row.yoy_t_2) if row.yoy_t_2 is not none else '–' }}</td>
+          <td style="{{ heatmap_style(row.yoy_t_1) }}">{{ '%.2f'|format(row.yoy_t_1) if row.yoy_t_1 is not none else '–' }}</td>
+          <td style="{{ heatmap_style(row.yoy) }}">{{ '%.2f'|format(row.yoy) if row.yoy is not none else '–' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
+<!-- DESTAQUES -->
+<div id="tab-destaques" class="tab-content">
+  <section>
+    <div class="title-bar">
+      <h2>IPCA | Destaques de subitens · {{ period_label }}</h2>
+      <div class="sub">(contribuição bps = peso × variação MoM)</div>
+    </div>
+    <div class="accent-line" style="margin-bottom:32px"></div>
+    <div class="row-2">
+      <div>
+        <div class="dest-title">Top 10 Contribuições Positivas</div>
+        <table class="dest-tbl">
+          <thead>
+            <tr><th class="label">Subitem</th><th>Peso (%)</th><th>MoM (%)</th><th>Bps</th></tr>
+          </thead>
+          <tbody>
+            {% for item in destaques.positive %}
+            <tr>
+              <td class="label">{{ item.name }}<span class="parent">{{ item.parent }}</span></td>
+              <td>{{ '%.2f'|format(item.weight) }}</td>
+              <td>{{ '%+.2f'|format(item.mom) }}</td>
+              <td class="bps" style="{{ bps_style(item.bps) }}">{{ '%+.1f'|format(item.bps) }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="dest-title">Top 10 Contribuições Negativas</div>
+        <table class="dest-tbl">
+          <thead>
+            <tr><th class="label">Subitem</th><th>Peso (%)</th><th>MoM (%)</th><th>Bps</th></tr>
+          </thead>
+          <tbody>
+            {% for item in destaques.negative %}
+            <tr>
+              <td class="label">{{ item.name }}<span class="parent">{{ item.parent }}</span></td>
+              <td>{{ '%.2f'|format(item.weight) }}</td>
+              <td>{{ '%+.2f'|format(item.mom) }}</td>
+              <td class="bps" style="{{ bps_style(item.bps) }}">{{ '%+.1f'|format(item.bps) }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SURPRESA -->
+<div id="tab-surpresa" class="tab-content">
+  <div class="sub-selector">
+    <div class="seg-bar secondary">
+      {% for cat in surpresa_categories %}
+      <button class="{% if loop.first %}active{% endif %}" onclick="switchSurpresa('{{ cat }}')">{{ cat }}</button>
+      {% endfor %}
+    </div>
+  </div>
+  {% for cat, charts in surpresa_charts.items() %}
+  <div id="surpresa-{{ cat }}" class="tab-content {% if loop.first %}active{% endif %}">
+    <section>
+      <div class="title-bar">
+        <h2>IPCA - {{ cat }} | Surpresa mensal em relação ao Focus</h2>
+        <div class="sub">(em bps, Surpresa = realizado(t) − média de 4 projeções Focus para o mês t)</div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="row-70-30">
+        <div>
+          <div id="{{ charts.main.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+        </div>
+        <div>
+          <div id="{{ charts.detail.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- POR GRUPOS -->
+<div id="tab-grupos" class="tab-content">
+  <div class="sub-selector">
+    <div class="seg-bar secondary">
+      {% for cat in grupos_categories %}
+      <button class="{% if loop.first %}active{% endif %}" onclick="switchGrupo('{{ cat }}')">{{ cat }}</button>
+      {% endfor %}
+    </div>
+  </div>
+  {% for cat, data in grupos_data.items() %}
+  <div id="grupo-{{ cat }}" class="tab-content {% if loop.first %}active{% endif %}">
+    <section>
+      <div class="title-bar">
+        <h2>IPCA | Média dos núcleos de {{ cat }}</h2>
+        <div class="sub">(variação anualizada)</div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="row-70-30">
+        <div>
+          <div id="{{ data.charts.main.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+        </div>
+        <div>
+          <div id="{{ data.charts.detail.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+        </div>
+      </div>
+
+      <table class="ipca-tbl grupos-tbl">
+        <thead>
+          <tr>
+            <th rowspan="2" class="label">Métrica</th>
+            <th colspan="3" class="kind">1M SAAR</th>
+            <th colspan="3" class="kind sep-l">3M SAAR</th>
+            <th colspan="3" class="kind sep-l">YoY</th>
+          </tr>
+          <tr>
+            <th class="tcol">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
+            <th class="tcol sep-l">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
+            <th class="tcol sep-l">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="group">
+            <td class="label">{{ cat }}</td>
+            <td>{{ '%.2f'|format(data.latest.saar1) if data.latest.saar1 is not none else '–' }}</td>
+            <td class="delta" style="{{ delta_style(data.latest.saar1, data.prev.saar1) }}">{{ delta_str(data.latest.saar1, data.prev.saar1) }}</td>
+            <td class="delta" style="{{ delta_style(data.latest.saar1, data.prev12.saar1) }}">{{ delta_str(data.latest.saar1, data.prev12.saar1) }}</td>
+            <td class="sep-l">{{ '%.2f'|format(data.latest.saar3) if data.latest.saar3 is not none else '–' }}</td>
+            <td class="delta" style="{{ delta_style(data.latest.saar3, data.prev.saar3) }}">{{ delta_str(data.latest.saar3, data.prev.saar3) }}</td>
+            <td class="delta" style="{{ delta_style(data.latest.saar3, data.prev12.saar3) }}">{{ delta_str(data.latest.saar3, data.prev12.saar3) }}</td>
+            <td class="sep-l">{{ '%.2f'|format(data.latest.yoy) if data.latest.yoy is not none else '–' }}</td>
+            <td class="delta" style="{{ delta_style(data.latest.yoy, data.prev.yoy) }}">{{ delta_str(data.latest.yoy, data.prev.yoy) }}</td>
+            <td class="delta" style="{{ delta_style(data.latest.yoy, data.prev12.yoy) }}">{{ delta_str(data.latest.yoy, data.prev12.yoy) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  {% endfor %}
+</div>
+
+</div>
+
+<script>
+function resizePlots(container) {
+  requestAnimationFrame(function() {
+    container.querySelectorAll('.js-plotly-plot').forEach(function(p) {
+      Plotly.Plots.resize(p);
+    });
+  });
+}
+function switchTab(id) {
+  document.querySelectorAll('.page > .tab-content').forEach(el => el.classList.remove('active'));
+  var tab = document.getElementById('tab-' + id);
+  tab.classList.add('active');
+  document.querySelectorAll('.seg-bar.primary button').forEach(btn => btn.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  resizePlots(tab);
+  if (id === 'grupos' || id === 'surpresa') {
+    var active = tab.querySelector('.tab-content.active');
+    if (active) resizePlots(active);
+  }
+}
+function switchSub(parentId, prefix, id) {
+  document.querySelectorAll('#' + parentId + ' .tab-content').forEach(el => el.classList.remove('active'));
+  var el = document.getElementById(prefix + id);
+  el.classList.add('active');
+  event.currentTarget.parentElement.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  resizePlots(el);
+}
+function switchGrupo(cat) { switchSub('tab-grupos', 'grupo-', cat); }
+function switchSurpresa(comp) { switchSub('tab-surpresa', 'surpresa-', comp); }
+
+// Render Plotly charts
+{% for cat, charts in surpresa_charts.items() %}
+Plotly.newPlot("{{ charts.main.div_id }}", {{ charts.main.json|safe }}, {});
+Plotly.newPlot("{{ charts.detail.div_id }}", {{ charts.detail.json|safe }}, {});
+{% endfor %}
+
+{% for cat, data in grupos_data.items() %}
+Plotly.newPlot("{{ data.charts.main.div_id }}", {{ data.charts.main.json|safe }}, {});
+Plotly.newPlot("{{ data.charts.detail.div_id }}", {{ data.charts.detail.json|safe }}, {});
+{% endfor %}
+</script>
+</body>
+</html>

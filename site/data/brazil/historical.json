@@ -1,0 +1,6852 @@
+{
+  "historical": {
+    "202406": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.21,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 4.23,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.52,
+          "mom": 0.44,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 4.71,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.19,
+          "mom": 0.25,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 3.05,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.68,
+          "mom": 0.19,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": -0.29,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.69,
+          "mom": 0.02,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 2.3,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.53,
+          "mom": -0.19,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 4.56,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.5,
+          "mom": 0.54,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 6.09,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.07,
+          "mom": 0.29,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 4.45,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.03,
+          "mom": 0.06,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 6.93,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.78,
+          "mom": -0.08,
+          "mom_t_1": null,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 1.03,
+          "yoy_t_1": null,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202406"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.77,
+            "mom": 7.43,
+            "bps": 5.7
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.55,
+            "mom": 1.5,
+            "bps": 0.8
+          },
+          {
+            "name": "Manicure",
+            "full_name": "7101005.Manicure",
+            "weight": 0.41,
+            "mom": 1.5,
+            "bps": 0.6
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.06,
+            "mom": 0.47,
+            "bps": 0.5
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.6,
+            "mom": 0.73,
+            "bps": 0.4
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.23,
+            "mom": 1.71,
+            "bps": 0.4
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.59,
+            "mom": 0.56,
+            "bps": 0.3
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.19,
+            "mom": 1.52,
+            "bps": 0.3
+          },
+          {
+            "name": "Cursos diversos",
+            "full_name": "8104.Cursos diversos",
+            "weight": 0.8,
+            "mom": 0.26,
+            "bps": 0.2
+          },
+          {
+            "name": "Chocolate e achocolatado em pó",
+            "full_name": "1104052.Chocolate e achocolatado em pó",
+            "weight": 0.12,
+            "mom": 1.71,
+            "bps": 0.2
+          }
+        ],
+        "negative": [
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.51,
+            "mom": -1.7,
+            "bps": -0.9
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.07,
+            "mom": -10.48,
+            "bps": -0.7
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.21,
+            "mom": -2.81,
+            "bps": -0.6
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.13,
+            "mom": -4.29,
+            "bps": -0.6
+          },
+          {
+            "name": "Pneu",
+            "full_name": "5102010.Pneu",
+            "weight": 0.23,
+            "mom": -1.41,
+            "bps": -0.3
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.39,
+            "mom": -0.68,
+            "bps": -0.3
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.69,
+            "mom": -0.12,
+            "bps": -0.2
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.37,
+            "mom": -0.4,
+            "bps": -0.1
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.66,
+            "mom": -0.21,
+            "bps": -0.1
+          },
+          {
+            "name": "Carne-seca e de sol",
+            "full_name": "1109056.Carne-seca e de sol",
+            "weight": 0.09,
+            "mom": -1.34,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202407": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.38,
+          "mom_t_1": 0.21,
+          "mom_t_2": 0.21,
+          "mom_t_12": null,
+          "yoy": 4.5,
+          "yoy_t_1": 4.23,
+          "yoy_t_2": 4.23,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.57,
+          "mom": -1.0,
+          "mom_t_1": 0.44,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 4.15,
+          "yoy_t_1": 4.71,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.2,
+          "mom": 0.77,
+          "mom_t_1": 0.25,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 4.9,
+          "yoy_t_1": 3.05,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.68,
+          "mom": 0.48,
+          "mom_t_1": 0.19,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 0.16,
+          "yoy_t_1": -0.29,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.69,
+          "mom": -0.02,
+          "mom_t_1": 0.02,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 2.53,
+          "yoy_t_1": 2.3,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.45,
+          "mom": 1.82,
+          "mom_t_1": -0.19,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 4.88,
+          "yoy_t_1": 4.56,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.54,
+          "mom": 0.22,
+          "mom_t_1": 0.54,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 6.04,
+          "yoy_t_1": 6.09,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.08,
+          "mom": 0.52,
+          "mom_t_1": 0.29,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 4.59,
+          "yoy_t_1": 4.45,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.02,
+          "mom": 0.08,
+          "mom_t_1": 0.06,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 6.87,
+          "yoy_t_1": 6.93,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.77,
+          "mom": 0.18,
+          "mom_t_1": -0.08,
+          "mom_t_2": null,
+          "mom_t_12": null,
+          "yoy": 1.21,
+          "yoy_t_1": 1.03,
+          "yoy_t_2": null,
+          "yoy_t_12": null,
+          "period": "202407"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.82,
+            "mom": 0.47,
+            "bps": 1.8
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.5,
+            "mom": 1.85,
+            "bps": 0.9
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.07,
+            "mom": 0.67,
+            "bps": 0.7
+          },
+          {
+            "name": "Combo de telefonia, internet e tv por assinatura",
+            "full_name": "9101116.Combo de telefonia, internet e tv por assinatura",
+            "weight": 1.51,
+            "mom": 0.38,
+            "bps": 0.6
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.61,
+            "mom": 0.83,
+            "bps": 0.5
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.39,
+            "mom": 1.21,
+            "bps": 0.5
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.59,
+            "mom": 0.54,
+            "bps": 0.3
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.19,
+            "mom": 1.1,
+            "bps": 0.2
+          },
+          {
+            "name": "Produto para barba",
+            "full_name": "6301004.Produto para barba",
+            "weight": 0.12,
+            "mom": 1.61,
+            "bps": 0.2
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.24,
+            "mom": 0.77,
+            "bps": 0.2
+          }
+        ],
+        "negative": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.83,
+            "mom": -0.92,
+            "bps": -0.8
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.21,
+            "mom": -2.23,
+            "bps": -0.5
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.68,
+            "mom": -0.19,
+            "bps": -0.3
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.11,
+            "mom": -2.25,
+            "bps": -0.2
+          },
+          {
+            "name": "Serviço de higiene para animais",
+            "full_name": "7201256.Serviço de higiene para animais",
+            "weight": 0.14,
+            "mom": -1.68,
+            "bps": -0.2
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.12,
+            "mom": -1.82,
+            "bps": -0.2
+          },
+          {
+            "name": "Manicure",
+            "full_name": "7101005.Manicure",
+            "weight": 0.42,
+            "mom": -0.44,
+            "bps": -0.2
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.06,
+            "mom": -3.02,
+            "bps": -0.2
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": -0.42,
+            "bps": -0.2
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.56,
+            "mom": -0.27,
+            "bps": -0.2
+          }
+        ]
+      }
+    },
+    "202408": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": -0.02,
+          "mom_t_1": 0.38,
+          "mom_t_2": 0.38,
+          "mom_t_12": null,
+          "yoy": 4.24,
+          "yoy_t_1": 4.5,
+          "yoy_t_2": 4.5,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.27,
+          "mom": -0.44,
+          "mom_t_1": -1.0,
+          "mom_t_2": 0.44,
+          "mom_t_12": null,
+          "yoy": 4.59,
+          "yoy_t_1": 4.15,
+          "yoy_t_2": 4.71,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.26,
+          "mom": -0.51,
+          "mom_t_1": 0.77,
+          "mom_t_2": 0.25,
+          "mom_t_12": null,
+          "yoy": 3.22,
+          "yoy_t_1": 4.9,
+          "yoy_t_2": 3.05,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.68,
+          "mom": 0.74,
+          "mom_t_1": 0.48,
+          "mom_t_2": 0.19,
+          "mom_t_12": null,
+          "yoy": 0.94,
+          "yoy_t_1": 0.16,
+          "yoy_t_2": -0.29,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.67,
+          "mom": 0.39,
+          "mom_t_1": -0.02,
+          "mom_t_2": 0.02,
+          "mom_t_12": null,
+          "yoy": 2.38,
+          "yoy_t_1": 2.53,
+          "yoy_t_2": 2.3,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.74,
+          "mom": 0.0,
+          "mom_t_1": 1.82,
+          "mom_t_2": -0.19,
+          "mom_t_12": null,
+          "yoy": 4.53,
+          "yoy_t_1": 4.88,
+          "yoy_t_2": 4.56,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.52,
+          "mom": 0.25,
+          "mom_t_1": 0.22,
+          "mom_t_2": 0.54,
+          "mom_t_12": null,
+          "yoy": 5.7,
+          "yoy_t_1": 6.04,
+          "yoy_t_2": 6.09,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.09,
+          "mom": 0.25,
+          "mom_t_1": 0.52,
+          "mom_t_2": 0.29,
+          "mom_t_12": null,
+          "yoy": 4.45,
+          "yoy_t_1": 4.59,
+          "yoy_t_2": 4.45,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.0,
+          "mom": 0.73,
+          "mom_t_1": 0.08,
+          "mom_t_2": 0.06,
+          "mom_t_12": null,
+          "yoy": 6.91,
+          "yoy_t_1": 6.87,
+          "yoy_t_2": 6.93,
+          "yoy_t_12": null,
+          "period": "202408"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.76,
+          "mom": 0.1,
+          "mom_t_1": 0.18,
+          "mom_t_2": -0.08,
+          "mom_t_12": null,
+          "yoy": 1.41,
+          "yoy_t_1": 1.21,
+          "yoy_t_2": 1.03,
+          "yoy_t_12": null,
+          "period": "202408"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Cursos regulares",
+            "full_name": "8101.Cursos regulares",
+            "weight": 4.51,
+            "mom": 0.76,
+            "bps": 3.4
+          },
+          {
+            "name": "Ensino superior",
+            "full_name": "8101005.Ensino superior",
+            "weight": 1.65,
+            "mom": 1.09,
+            "bps": 1.8
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.61,
+            "mom": 1.96,
+            "bps": 1.2
+          },
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.83,
+            "mom": 0.26,
+            "bps": 1.0
+          },
+          {
+            "name": "Ensino fundamental",
+            "full_name": "8101003.Ensino fundamental",
+            "weight": 1.62,
+            "mom": 0.57,
+            "bps": 0.9
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.65,
+            "mom": 0.92,
+            "bps": 0.6
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.56,
+            "mom": 0.95,
+            "bps": 0.5
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": 1.22,
+            "bps": 0.5
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.24,
+            "mom": 1.94,
+            "bps": 0.5
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.63,
+            "mom": 0.62,
+            "bps": 0.4
+          }
+        ],
+        "negative": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.81,
+            "mom": -1.21,
+            "bps": -1.0
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.51,
+            "mom": -1.34,
+            "bps": -0.7
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.67,
+            "mom": -0.34,
+            "bps": -0.6
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.12,
+            "mom": -4.1,
+            "bps": -0.5
+          },
+          {
+            "name": "Revestimento de piso e parede",
+            "full_name": "2103032.Revestimento de piso e parede",
+            "weight": 0.25,
+            "mom": -1.66,
+            "bps": -0.4
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.07,
+            "mom": -0.21,
+            "bps": -0.2
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.37,
+            "mom": -0.56,
+            "bps": -0.2
+          },
+          {
+            "name": "Aluguel de veículo",
+            "full_name": "5102051.Aluguel de veículo",
+            "weight": 0.02,
+            "mom": -6.4,
+            "bps": -0.1
+          },
+          {
+            "name": "Produto para barba",
+            "full_name": "6301004.Produto para barba",
+            "weight": 0.12,
+            "mom": -0.79,
+            "bps": -0.1
+          },
+          {
+            "name": "Bermuda/short feminino",
+            "full_name": "4102013.Bermuda/short feminino",
+            "weight": 0.07,
+            "mom": -0.96,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202409": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.44,
+          "mom_t_1": -0.02,
+          "mom_t_2": -0.02,
+          "mom_t_12": null,
+          "yoy": 4.42,
+          "yoy_t_1": 4.24,
+          "yoy_t_2": 4.24,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.19,
+          "mom": 0.5,
+          "mom_t_1": -0.44,
+          "mom_t_2": -1.0,
+          "mom_t_12": null,
+          "yoy": 5.86,
+          "yoy_t_1": 4.59,
+          "yoy_t_2": 4.15,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.18,
+          "mom": 1.8,
+          "mom_t_1": -0.51,
+          "mom_t_2": 0.77,
+          "mom_t_12": null,
+          "yoy": 4.58,
+          "yoy_t_1": 3.22,
+          "yoy_t_2": 4.9,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.71,
+          "mom": -0.19,
+          "mom_t_1": 0.74,
+          "mom_t_2": 0.48,
+          "mom_t_12": null,
+          "yoy": 1.33,
+          "yoy_t_1": 0.94,
+          "yoy_t_2": 0.16,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.69,
+          "mom": 0.18,
+          "mom_t_1": 0.39,
+          "mom_t_2": -0.02,
+          "mom_t_12": null,
+          "yoy": 2.18,
+          "yoy_t_1": 2.38,
+          "yoy_t_2": 2.53,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.75,
+          "mom": 0.14,
+          "mom_t_1": 0.0,
+          "mom_t_2": 1.82,
+          "mom_t_12": null,
+          "yoy": 3.22,
+          "yoy_t_1": 4.53,
+          "yoy_t_2": 4.88,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.56,
+          "mom": 0.46,
+          "mom_t_1": 0.25,
+          "mom_t_2": 0.22,
+          "mom_t_12": null,
+          "yoy": 6.14,
+          "yoy_t_1": 5.7,
+          "yoy_t_2": 6.04,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.11,
+          "mom": -0.31,
+          "mom_t_1": 0.25,
+          "mom_t_2": 0.52,
+          "mom_t_12": null,
+          "yoy": 3.67,
+          "yoy_t_1": 4.45,
+          "yoy_t_2": 4.59,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.05,
+          "mom": 0.05,
+          "mom_t_1": 0.73,
+          "mom_t_2": 0.08,
+          "mom_t_12": null,
+          "yoy": 6.91,
+          "yoy_t_1": 6.91,
+          "yoy_t_2": 6.87,
+          "yoy_t_12": null,
+          "period": "202409"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.77,
+          "mom": -0.05,
+          "mom_t_1": 0.1,
+          "mom_t_2": 0.18,
+          "mom_t_12": null,
+          "yoy": 1.48,
+          "yoy_t_1": 1.41,
+          "yoy_t_2": 1.21,
+          "yoy_t_12": null,
+          "period": "202409"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.8,
+            "mom": 1.17,
+            "bps": 0.9
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.2,
+            "mom": 3.27,
+            "bps": 0.7
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.62,
+            "mom": 0.92,
+            "bps": 0.6
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.6,
+            "mom": 0.57,
+            "bps": 0.3
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.56,
+            "mom": 0.59,
+            "bps": 0.3
+          },
+          {
+            "name": "Revestimento de piso e parede",
+            "full_name": "2103032.Revestimento de piso e parede",
+            "weight": 0.24,
+            "mom": 1.37,
+            "bps": 0.3
+          },
+          {
+            "name": "Refrigerante e água mineral",
+            "full_name": "1114083.Refrigerante e água mineral",
+            "weight": 0.53,
+            "mom": 0.6,
+            "bps": 0.3
+          },
+          {
+            "name": "Iogurte e bebidas lácteas",
+            "full_name": "1111019.Iogurte e bebidas lácteas",
+            "weight": 0.18,
+            "mom": 1.66,
+            "bps": 0.3
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.66,
+            "mom": 0.45,
+            "bps": 0.3
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.2,
+            "mom": 1.48,
+            "bps": 0.3
+          }
+        ],
+        "negative": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.84,
+            "mom": -1.2,
+            "bps": -4.6
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.5,
+            "mom": -8.75,
+            "bps": -4.4
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": -1.46,
+            "bps": -0.6
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.39,
+            "mom": -1.26,
+            "bps": -0.5
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.5,
+            "mom": -0.34,
+            "bps": -0.2
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.11,
+            "mom": -1.42,
+            "bps": -0.2
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.63,
+            "mom": -0.17,
+            "bps": -0.1
+          },
+          {
+            "name": "Serviço de higiene para animais",
+            "full_name": "7201256.Serviço de higiene para animais",
+            "weight": 0.14,
+            "mom": -0.66,
+            "bps": -0.1
+          },
+          {
+            "name": "Utensílios de metal",
+            "full_name": "3102007.Utensílios de metal",
+            "weight": 0.15,
+            "mom": -0.55,
+            "bps": -0.1
+          },
+          {
+            "name": "Massa semipreparada",
+            "full_name": "1102029.Massa semipreparada",
+            "weight": 0.12,
+            "mom": -0.52,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202410": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.56,
+          "mom_t_1": 0.44,
+          "mom_t_2": 0.44,
+          "mom_t_12": null,
+          "yoy": 4.76,
+          "yoy_t_1": 4.42,
+          "yoy_t_2": 4.42,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.2,
+          "mom": 1.06,
+          "mom_t_1": 0.5,
+          "mom_t_2": -0.44,
+          "mom_t_12": null,
+          "yoy": 6.65,
+          "yoy_t_1": 5.86,
+          "yoy_t_2": 4.59,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.39,
+          "mom": 1.49,
+          "mom_t_1": 1.8,
+          "mom_t_2": -0.51,
+          "mom_t_12": null,
+          "yoy": 6.12,
+          "yoy_t_1": 4.58,
+          "yoy_t_2": 3.22,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.69,
+          "mom": 0.43,
+          "mom_t_1": -0.19,
+          "mom_t_2": 0.74,
+          "mom_t_12": null,
+          "yoy": 1.3,
+          "yoy_t_1": 1.33,
+          "yoy_t_2": 0.94,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.68,
+          "mom": 0.37,
+          "mom_t_1": 0.18,
+          "mom_t_2": 0.39,
+          "mom_t_12": null,
+          "yoy": 2.1,
+          "yoy_t_1": 2.18,
+          "yoy_t_2": 2.38,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.68,
+          "mom": -0.38,
+          "mom_t_1": 0.14,
+          "mom_t_2": 0.0,
+          "mom_t_12": null,
+          "yoy": 2.48,
+          "yoy_t_1": 3.22,
+          "yoy_t_2": 4.53,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.56,
+          "mom": 0.38,
+          "mom_t_1": 0.46,
+          "mom_t_2": 0.25,
+          "mom_t_12": null,
+          "yoy": 6.2,
+          "yoy_t_1": 6.14,
+          "yoy_t_2": 5.7,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.04,
+          "mom": 0.7,
+          "mom_t_1": -0.31,
+          "mom_t_2": 0.25,
+          "mom_t_12": null,
+          "yoy": 4.11,
+          "yoy_t_1": 3.67,
+          "yoy_t_2": 4.45,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.03,
+          "mom": 0.04,
+          "mom_t_1": 0.05,
+          "mom_t_2": 0.73,
+          "mom_t_12": null,
+          "yoy": 6.9,
+          "yoy_t_1": 6.91,
+          "yoy_t_2": 6.91,
+          "yoy_t_12": null,
+          "period": "202410"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.74,
+          "mom": 0.52,
+          "mom_t_1": -0.05,
+          "mom_t_2": 0.1,
+          "mom_t_12": null,
+          "yoy": 2.2,
+          "yoy_t_1": 1.48,
+          "yoy_t_2": 1.41,
+          "yoy_t_12": null,
+          "period": "202410"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.77,
+            "mom": 1.21,
+            "bps": 4.6
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.46,
+            "mom": 7.54,
+            "bps": 3.5
+          },
+          {
+            "name": "Combo de telefonia, internet e tv por assinatura",
+            "full_name": "9101116.Combo de telefonia, internet e tv por assinatura",
+            "weight": 1.51,
+            "mom": 1.32,
+            "bps": 2.0
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.81,
+            "mom": 1.97,
+            "bps": 1.6
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.5,
+            "mom": 1.91,
+            "bps": 1.0
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.11,
+            "mom": 5.1,
+            "bps": 0.6
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.63,
+            "mom": 0.65,
+            "bps": 0.4
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.37,
+            "mom": 1.02,
+            "bps": 0.4
+          },
+          {
+            "name": "Lagarto comum",
+            "full_name": "1107091.Lagarto comum",
+            "weight": 0.06,
+            "mom": 6.16,
+            "bps": 0.4
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.6,
+            "mom": 0.59,
+            "bps": 0.4
+          }
+        ],
+        "negative": [
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.21,
+            "mom": -1.52,
+            "bps": -0.3
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.24,
+            "mom": -1.15,
+            "bps": -0.3
+          },
+          {
+            "name": "Neurológico",
+            "full_name": "6101148.Neurológico",
+            "weight": 0.14,
+            "mom": -1.13,
+            "bps": -0.2
+          },
+          {
+            "name": "Integração transporte público",
+            "full_name": "5101053.Integração transporte público",
+            "weight": 0.05,
+            "mom": -3.04,
+            "bps": -0.2
+          },
+          {
+            "name": "Tratamento de animais (clínica)",
+            "full_name": "7201015.Tratamento de animais (clínica)",
+            "weight": 0.27,
+            "mom": -0.36,
+            "bps": -0.1
+          },
+          {
+            "name": "Amaciante e alvejante",
+            "full_name": "2104085.Amaciante e alvejante",
+            "weight": 0.17,
+            "mom": -0.5,
+            "bps": -0.1
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.11,
+            "mom": -0.48,
+            "bps": -0.1
+          },
+          {
+            "name": "Feijão - macáçar (fradinho)",
+            "full_name": "1101053.Feijão - macáçar (fradinho)",
+            "weight": 0.02,
+            "mom": -2.28,
+            "bps": -0.0
+          },
+          {
+            "name": "Hormonal",
+            "full_name": "6101011.Hormonal",
+            "weight": 0.2,
+            "mom": -0.18,
+            "bps": -0.0
+          },
+          {
+            "name": "Utensílios para bebê",
+            "full_name": "3102337.Utensílios para bebê",
+            "weight": 0.02,
+            "mom": -1.65,
+            "bps": -0.0
+          }
+        ]
+      }
+    },
+    "202411": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.39,
+          "mom_t_1": 0.56,
+          "mom_t_2": 0.56,
+          "mom_t_12": null,
+          "yoy": 4.87,
+          "yoy_t_1": 4.76,
+          "yoy_t_2": 4.76,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.31,
+          "mom": 1.55,
+          "mom_t_1": 1.06,
+          "mom_t_2": 0.5,
+          "mom_t_12": null,
+          "yoy": 7.63,
+          "yoy_t_1": 6.65,
+          "yoy_t_2": 5.86,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.53,
+          "mom": -1.53,
+          "mom_t_1": 1.49,
+          "mom_t_2": 1.8,
+          "mom_t_12": null,
+          "yoy": 4.0,
+          "yoy_t_1": 6.12,
+          "yoy_t_2": 4.58,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.68,
+          "mom": -0.31,
+          "mom_t_1": 0.43,
+          "mom_t_2": -0.19,
+          "mom_t_12": null,
+          "yoy": 1.41,
+          "yoy_t_1": 1.3,
+          "yoy_t_2": 1.33,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.67,
+          "mom": -0.12,
+          "mom_t_1": 0.37,
+          "mom_t_2": 0.18,
+          "mom_t_12": null,
+          "yoy": 2.34,
+          "yoy_t_1": 2.1,
+          "yoy_t_2": 2.18,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.49,
+          "mom": 0.89,
+          "mom_t_1": -0.38,
+          "mom_t_2": 0.14,
+          "mom_t_12": null,
+          "yoy": 3.11,
+          "yoy_t_1": 2.48,
+          "yoy_t_2": 3.22,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.54,
+          "mom": -0.06,
+          "mom_t_1": 0.38,
+          "mom_t_2": 0.46,
+          "mom_t_12": null,
+          "yoy": 6.06,
+          "yoy_t_1": 6.2,
+          "yoy_t_2": 6.14,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.05,
+          "mom": 1.43,
+          "mom_t_1": 0.7,
+          "mom_t_2": -0.31,
+          "mom_t_12": null,
+          "yoy": 4.98,
+          "yoy_t_1": 4.11,
+          "yoy_t_2": 3.67,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Educação",
+          "weight": 5.99,
+          "mom": -0.04,
+          "mom_t_1": 0.04,
+          "mom_t_2": 0.05,
+          "mom_t_12": null,
+          "yoy": 6.84,
+          "yoy_t_1": 6.9,
+          "yoy_t_2": 6.91,
+          "yoy_t_12": null,
+          "period": "202411"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.74,
+          "mom": -0.1,
+          "mom_t_1": 0.52,
+          "mom_t_2": -0.05,
+          "mom_t_12": null,
+          "yoy": 2.61,
+          "yoy_t_1": 2.2,
+          "yoy_t_2": 1.48,
+          "yoy_t_12": null,
+          "period": "202411"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.8,
+            "mom": 3.13,
+            "bps": 11.9
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.5,
+            "mom": 4.12,
+            "bps": 2.1
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.62,
+            "mom": 2.2,
+            "bps": 1.4
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.63,
+            "mom": 1.72,
+            "bps": 1.1
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.37,
+            "mom": 2.5,
+            "bps": 0.9
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.06,
+            "mom": 0.72,
+            "bps": 0.8
+          },
+          {
+            "name": "Manicure",
+            "full_name": "7101005.Manicure",
+            "weight": 0.41,
+            "mom": 1.6,
+            "bps": 0.7
+          },
+          {
+            "name": "Lagarto comum",
+            "full_name": "1107091.Lagarto comum",
+            "weight": 0.07,
+            "mom": 8.75,
+            "bps": 0.6
+          },
+          {
+            "name": "Carne-seca e de sol",
+            "full_name": "1109056.Carne-seca e de sol",
+            "weight": 0.09,
+            "mom": 6.07,
+            "bps": 0.5
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.49,
+            "mom": 1.1,
+            "bps": 0.5
+          }
+        ],
+        "negative": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.82,
+            "mom": -1.72,
+            "bps": -1.4
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.65,
+            "mom": -0.47,
+            "bps": -0.8
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.2,
+            "mom": -3.04,
+            "bps": -0.6
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": -0.83,
+            "bps": -0.3
+          },
+          {
+            "name": "Revista",
+            "full_name": "8102004.Revista",
+            "weight": 0.04,
+            "mom": -7.64,
+            "bps": -0.3
+          },
+          {
+            "name": "Produtos óticos",
+            "full_name": "6102.Produtos óticos",
+            "weight": 0.24,
+            "mom": -0.82,
+            "bps": -0.2
+          },
+          {
+            "name": "Óculos de grau",
+            "full_name": "6102012.Óculos de grau",
+            "weight": 0.24,
+            "mom": -0.82,
+            "bps": -0.2
+          },
+          {
+            "name": "Hormonal",
+            "full_name": "6101011.Hormonal",
+            "weight": 0.2,
+            "mom": -0.84,
+            "bps": -0.2
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.24,
+            "mom": -0.62,
+            "bps": -0.1
+          },
+          {
+            "name": "Artigos de iluminação",
+            "full_name": "3102001.Artigos de iluminação",
+            "weight": 0.06,
+            "mom": -1.55,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202412": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.52,
+          "mom_t_1": 0.39,
+          "mom_t_2": 0.39,
+          "mom_t_12": 0.21,
+          "yoy": 4.83,
+          "yoy_t_1": 4.87,
+          "yoy_t_2": 4.87,
+          "yoy_t_12": 4.23,
+          "period": "202412"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.55,
+          "mom": 1.18,
+          "mom_t_1": 1.55,
+          "mom_t_2": 1.06,
+          "mom_t_12": null,
+          "yoy": 7.69,
+          "yoy_t_1": 7.63,
+          "yoy_t_2": 6.65,
+          "yoy_t_12": null,
+          "period": "202412"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.23,
+          "mom": -0.56,
+          "mom_t_1": -1.53,
+          "mom_t_2": 1.49,
+          "mom_t_12": null,
+          "yoy": 3.06,
+          "yoy_t_1": 4.0,
+          "yoy_t_2": 6.12,
+          "yoy_t_12": null,
+          "period": "202412"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.66,
+          "mom": 0.65,
+          "mom_t_1": -0.31,
+          "mom_t_2": 0.43,
+          "mom_t_12": null,
+          "yoy": 1.31,
+          "yoy_t_1": 1.41,
+          "yoy_t_2": 1.3,
+          "yoy_t_12": null,
+          "period": "202412"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.64,
+          "mom": 1.14,
+          "mom_t_1": -0.12,
+          "mom_t_2": 0.37,
+          "mom_t_12": null,
+          "yoy": 2.78,
+          "yoy_t_1": 2.34,
+          "yoy_t_2": 2.1,
+          "yoy_t_12": null,
+          "period": "202412"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.59,
+          "mom": 0.67,
+          "mom_t_1": 0.89,
+          "mom_t_2": -0.38,
+          "mom_t_12": null,
+          "yoy": 3.3,
+          "yoy_t_1": 3.11,
+          "yoy_t_2": 2.48,
+          "yoy_t_12": null,
+          "period": "202412"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.48,
+          "mom": 0.38,
+          "mom_t_1": -0.06,
+          "mom_t_2": 0.38,
+          "mom_t_12": null,
+          "yoy": 6.09,
+          "yoy_t_1": 6.06,
+          "yoy_t_2": 6.2,
+          "yoy_t_12": null,
+          "period": "202412"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.16,
+          "mom": 0.62,
+          "mom_t_1": 1.43,
+          "mom_t_2": 0.7,
+          "mom_t_12": null,
+          "yoy": 5.13,
+          "yoy_t_1": 4.98,
+          "yoy_t_2": 4.11,
+          "yoy_t_12": null,
+          "period": "202412"
+        },
+        {
+          "metric": "Educação",
+          "weight": 5.97,
+          "mom": 0.11,
+          "mom_t_1": -0.04,
+          "mom_t_2": 0.04,
+          "mom_t_12": null,
+          "yoy": 6.7,
+          "yoy_t_1": 6.84,
+          "yoy_t_2": 6.9,
+          "yoy_t_12": null,
+          "period": "202412"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.72,
+          "mom": 0.37,
+          "mom_t_1": -0.1,
+          "mom_t_2": 0.52,
+          "mom_t_12": null,
+          "yoy": 2.94,
+          "yoy_t_1": 2.61,
+          "yoy_t_2": 2.2,
+          "yoy_t_12": null,
+          "period": "202412"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.2,
+            "mom": 20.7,
+            "bps": 4.1
+          },
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.9,
+            "mom": 0.8,
+            "bps": 3.1
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.07,
+            "mom": 1.26,
+            "bps": 1.3
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.64,
+            "mom": 2.07,
+            "bps": 1.3
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.38,
+            "mom": 2.86,
+            "bps": 1.1
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.52,
+            "mom": 1.95,
+            "bps": 1.0
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.65,
+            "mom": 1.32,
+            "bps": 0.9
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.49,
+            "mom": 1.5,
+            "bps": 0.7
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.56,
+            "mom": 1.0,
+            "bps": 0.6
+          },
+          {
+            "name": "Livro didático",
+            "full_name": "8102007.Livro didático",
+            "weight": 0.37,
+            "mom": 1.36,
+            "bps": 0.5
+          }
+        ],
+        "negative": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.8,
+            "mom": -2.53,
+            "bps": -2.0
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.63,
+            "mom": -0.66,
+            "bps": -0.4
+          },
+          {
+            "name": "Revestimento de piso e parede",
+            "full_name": "2103032.Revestimento de piso e parede",
+            "weight": 0.25,
+            "mom": -0.64,
+            "bps": -0.2
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.39,
+            "mom": -0.37,
+            "bps": -0.1
+          },
+          {
+            "name": "Utensílios de metal",
+            "full_name": "3102007.Utensílios de metal",
+            "weight": 0.15,
+            "mom": -0.79,
+            "bps": -0.1
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.11,
+            "mom": -0.82,
+            "bps": -0.1
+          },
+          {
+            "name": "Tratamento de animais (clínica)",
+            "full_name": "7201015.Tratamento de animais (clínica)",
+            "weight": 0.27,
+            "mom": -0.22,
+            "bps": -0.1
+          },
+          {
+            "name": "Livro não didático",
+            "full_name": "8102008.Livro não didático",
+            "weight": 0.11,
+            "mom": -0.44,
+            "bps": -0.0
+          },
+          {
+            "name": "Bolsa",
+            "full_name": "4201015.Bolsa",
+            "weight": 0.06,
+            "mom": -0.73,
+            "bps": -0.0
+          },
+          {
+            "name": "Peixe - tambaqui",
+            "full_name": "1108087.Peixe - tambaqui",
+            "weight": 0.02,
+            "mom": -1.98,
+            "bps": -0.0
+          }
+        ]
+      }
+    },
+    "202501": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.16,
+          "mom_t_1": 0.52,
+          "mom_t_2": 0.52,
+          "mom_t_12": 0.38,
+          "yoy": 4.56,
+          "yoy_t_1": 4.83,
+          "yoy_t_2": 4.83,
+          "yoy_t_12": 4.5,
+          "period": "202501"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.69,
+          "mom": 0.96,
+          "mom_t_1": 1.18,
+          "mom_t_2": 1.55,
+          "mom_t_12": null,
+          "yoy": 7.25,
+          "yoy_t_1": 7.69,
+          "yoy_t_2": 7.63,
+          "yoy_t_12": null,
+          "period": "202501"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.07,
+          "mom": -3.08,
+          "mom_t_1": -0.56,
+          "mom_t_2": -1.53,
+          "mom_t_12": null,
+          "yoy": -0.36,
+          "yoy_t_1": 3.06,
+          "yoy_t_2": 4.0,
+          "yoy_t_12": null,
+          "period": "202501"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.66,
+          "mom": -0.09,
+          "mom_t_1": 0.65,
+          "mom_t_2": -0.31,
+          "mom_t_12": null,
+          "yoy": 0.99,
+          "yoy_t_1": 1.31,
+          "yoy_t_2": 1.41,
+          "yoy_t_12": null,
+          "period": "202501"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.67,
+          "mom": -0.14,
+          "mom_t_1": 1.14,
+          "mom_t_2": -0.12,
+          "mom_t_12": null,
+          "yoy": 2.49,
+          "yoy_t_1": 2.78,
+          "yoy_t_2": 2.34,
+          "yoy_t_12": null,
+          "period": "202501"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.63,
+          "mom": 1.3,
+          "mom_t_1": 0.67,
+          "mom_t_2": 0.89,
+          "mom_t_12": null,
+          "yoy": 5.32,
+          "yoy_t_1": 3.3,
+          "yoy_t_2": 3.11,
+          "yoy_t_12": null,
+          "period": "202501"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.46,
+          "mom": 0.7,
+          "mom_t_1": 0.38,
+          "mom_t_2": -0.06,
+          "mom_t_12": null,
+          "yoy": 5.96,
+          "yoy_t_1": 6.09,
+          "yoy_t_2": 6.06,
+          "yoy_t_12": null,
+          "period": "202501"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.17,
+          "mom": 0.51,
+          "mom_t_1": 0.62,
+          "mom_t_2": 1.43,
+          "mom_t_12": null,
+          "yoy": 4.8,
+          "yoy_t_1": 5.13,
+          "yoy_t_2": 4.98,
+          "yoy_t_12": null,
+          "period": "202501"
+        },
+        {
+          "metric": "Educação",
+          "weight": 5.94,
+          "mom": 0.26,
+          "mom_t_1": 0.11,
+          "mom_t_2": -0.04,
+          "mom_t_12": null,
+          "yoy": 6.63,
+          "yoy_t_1": 6.7,
+          "yoy_t_2": 6.84,
+          "yoy_t_12": null,
+          "period": "202501"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.71,
+          "mom": -0.17,
+          "mom_t_1": 0.37,
+          "mom_t_2": -0.1,
+          "mom_t_12": null,
+          "yoy": 2.85,
+          "yoy_t_1": 2.94,
+          "yoy_t_2": 2.61,
+          "yoy_t_12": null,
+          "period": "202501"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.91,
+            "mom": 0.56,
+            "bps": 2.2
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.62,
+            "mom": 2.11,
+            "bps": 1.3
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.65,
+            "mom": 1.51,
+            "bps": 1.0
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.38,
+            "mom": 2.51,
+            "bps": 1.0
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.07,
+            "mom": 0.77,
+            "bps": 0.8
+          },
+          {
+            "name": "Livro didático",
+            "full_name": "8102007.Livro didático",
+            "weight": 0.37,
+            "mom": 2.1,
+            "bps": 0.8
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.07,
+            "mom": 9.85,
+            "bps": 0.7
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.2,
+            "mom": 3.18,
+            "bps": 0.6
+          },
+          {
+            "name": "Manicure",
+            "full_name": "7101005.Manicure",
+            "weight": 0.42,
+            "mom": 1.22,
+            "bps": 0.5
+          },
+          {
+            "name": "Cursos diversos",
+            "full_name": "8104.Cursos diversos",
+            "weight": 0.79,
+            "mom": 0.54,
+            "bps": 0.4
+          }
+        ],
+        "negative": [
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.24,
+            "mom": -5.95,
+            "bps": -1.4
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.78,
+            "mom": -1.53,
+            "bps": -1.2
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.63,
+            "mom": -0.15,
+            "bps": -0.2
+          },
+          {
+            "name": "Camisa/camiseta infantil",
+            "full_name": "4103011.Camisa/camiseta infantil",
+            "weight": 0.19,
+            "mom": -0.8,
+            "bps": -0.2
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.11,
+            "mom": -1.35,
+            "bps": -0.1
+          },
+          {
+            "name": "Utensílios de vidro e louça",
+            "full_name": "3102009.Utensílios de vidro e louça",
+            "weight": 0.05,
+            "mom": -1.6,
+            "bps": -0.1
+          },
+          {
+            "name": "Conserto de bicicleta",
+            "full_name": "3301130.Conserto de bicicleta",
+            "weight": 0.21,
+            "mom": -0.37,
+            "bps": -0.1
+          },
+          {
+            "name": "Bermuda/short infantil",
+            "full_name": "4103008.Bermuda/short infantil",
+            "weight": 0.05,
+            "mom": -1.43,
+            "bps": -0.1
+          },
+          {
+            "name": "Sandália/chinelo",
+            "full_name": "4201098.Sandália/chinelo",
+            "weight": 0.2,
+            "mom": -0.3,
+            "bps": -0.1
+          },
+          {
+            "name": "Amaciante e alvejante",
+            "full_name": "2104085.Amaciante e alvejante",
+            "weight": 0.17,
+            "mom": -0.28,
+            "bps": -0.0
+          }
+        ]
+      }
+    },
+    "202502": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 1.31,
+          "mom_t_1": 0.16,
+          "mom_t_2": 0.16,
+          "mom_t_12": -0.02,
+          "yoy": 5.06,
+          "yoy_t_1": 4.56,
+          "yoy_t_2": 4.56,
+          "yoy_t_12": 4.24,
+          "period": "202502"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.87,
+          "mom": 0.7,
+          "mom_t_1": 0.96,
+          "mom_t_2": 1.18,
+          "mom_t_12": null,
+          "yoy": 7.0,
+          "yoy_t_1": 7.25,
+          "yoy_t_2": 7.69,
+          "yoy_t_12": null,
+          "period": "202502"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 14.58,
+          "mom": 4.44,
+          "mom_t_1": -3.08,
+          "mom_t_2": -0.56,
+          "mom_t_12": null,
+          "yoy": 3.78,
+          "yoy_t_1": -0.36,
+          "yoy_t_2": 3.06,
+          "yoy_t_12": null,
+          "period": "202502"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.65,
+          "mom": 0.44,
+          "mom_t_1": -0.09,
+          "mom_t_2": 0.65,
+          "mom_t_12": null,
+          "yoy": 1.51,
+          "yoy_t_1": 0.99,
+          "yoy_t_2": 1.31,
+          "yoy_t_12": null,
+          "period": "202502"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.66,
+          "mom": 0.0,
+          "mom_t_1": -0.14,
+          "mom_t_2": 1.14,
+          "mom_t_12": null,
+          "yoy": 2.95,
+          "yoy_t_1": 2.49,
+          "yoy_t_2": 2.78,
+          "yoy_t_12": null,
+          "period": "202502"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.86,
+          "mom": 0.61,
+          "mom_t_1": 1.3,
+          "mom_t_2": 0.67,
+          "mom_t_12": null,
+          "yoy": 5.21,
+          "yoy_t_1": 5.32,
+          "yoy_t_2": 3.3,
+          "yoy_t_12": null,
+          "period": "202502"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.53,
+          "mom": 0.49,
+          "mom_t_1": 0.7,
+          "mom_t_2": 0.38,
+          "mom_t_12": null,
+          "yoy": 5.78,
+          "yoy_t_1": 5.96,
+          "yoy_t_2": 6.09,
+          "yoy_t_12": null,
+          "period": "202502"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.2,
+          "mom": 0.13,
+          "mom_t_1": 0.51,
+          "mom_t_2": 0.62,
+          "mom_t_12": null,
+          "yoy": 4.88,
+          "yoy_t_1": 4.8,
+          "yoy_t_2": 5.13,
+          "yoy_t_12": null,
+          "period": "202502"
+        },
+        {
+          "metric": "Educação",
+          "weight": 5.95,
+          "mom": 4.7,
+          "mom_t_1": 0.26,
+          "mom_t_2": 0.11,
+          "mom_t_12": null,
+          "yoy": 6.35,
+          "yoy_t_1": 6.63,
+          "yoy_t_2": 6.7,
+          "yoy_t_12": null,
+          "period": "202502"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.7,
+          "mom": 0.17,
+          "mom_t_1": -0.17,
+          "mom_t_2": 0.37,
+          "mom_t_12": null,
+          "yoy": 1.44,
+          "yoy_t_1": 2.85,
+          "yoy_t_2": 2.94,
+          "yoy_t_12": null,
+          "period": "202502"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Cursos regulares",
+            "full_name": "8101.Cursos regulares",
+            "weight": 4.45,
+            "mom": 5.69,
+            "bps": 25.3
+          },
+          {
+            "name": "Ensino fundamental",
+            "full_name": "8101003.Ensino fundamental",
+            "weight": 1.59,
+            "mom": 7.51,
+            "bps": 11.9
+          },
+          {
+            "name": "Ensino superior",
+            "full_name": "8101005.Ensino superior",
+            "weight": 1.63,
+            "mom": 4.11,
+            "bps": 6.7
+          },
+          {
+            "name": "Ensino médio",
+            "full_name": "8101004.Ensino médio",
+            "weight": 0.4,
+            "mom": 7.27,
+            "bps": 2.9
+          },
+          {
+            "name": "Pré-escola",
+            "full_name": "8101002.Pré-escola",
+            "weight": 0.33,
+            "mom": 7.02,
+            "bps": 2.3
+          },
+          {
+            "name": "Cursos diversos",
+            "full_name": "8104.Cursos diversos",
+            "weight": 0.8,
+            "mom": 2.56,
+            "bps": 2.0
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.22,
+            "mom": 7.09,
+            "bps": 1.6
+          },
+          {
+            "name": "Curso de idioma",
+            "full_name": "8104003.Curso de idioma",
+            "weight": 0.28,
+            "mom": 4.34,
+            "bps": 1.2
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.08,
+            "mom": 0.82,
+            "bps": 0.9
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.07,
+            "mom": 10.07,
+            "bps": 0.7
+          }
+        ],
+        "negative": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.93,
+            "mom": -0.95,
+            "bps": -3.7
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.5,
+            "mom": -6.96,
+            "bps": -3.5
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.53,
+            "mom": -1.57,
+            "bps": -0.8
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.77,
+            "mom": -1.04,
+            "bps": -0.8
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.11,
+            "mom": -3.33,
+            "bps": -0.4
+          },
+          {
+            "name": "Fralda descartável",
+            "full_name": "6301002.Fralda descartável",
+            "weight": 0.23,
+            "mom": -1.37,
+            "bps": -0.3
+          },
+          {
+            "name": "Revestimento de piso e parede",
+            "full_name": "2103032.Revestimento de piso e parede",
+            "weight": 0.25,
+            "mom": -1.17,
+            "bps": -0.3
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.38,
+            "mom": -0.76,
+            "bps": -0.3
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.66,
+            "mom": -0.34,
+            "bps": -0.2
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": -0.46,
+            "bps": -0.2
+          }
+        ]
+      }
+    },
+    "202503": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.56,
+          "mom_t_1": 1.31,
+          "mom_t_2": 1.31,
+          "mom_t_12": 0.44,
+          "yoy": 5.48,
+          "yoy_t_1": 5.06,
+          "yoy_t_2": 5.06,
+          "yoy_t_12": 4.42,
+          "period": "202503"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.74,
+          "mom": 1.17,
+          "mom_t_1": 0.7,
+          "mom_t_2": 0.96,
+          "mom_t_12": null,
+          "yoy": 7.68,
+          "yoy_t_1": 7.0,
+          "yoy_t_2": 7.25,
+          "yoy_t_12": null,
+          "period": "202503"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.03,
+          "mom": 0.24,
+          "mom_t_1": 4.44,
+          "mom_t_2": -3.08,
+          "mom_t_12": null,
+          "yoy": 3.84,
+          "yoy_t_1": 3.78,
+          "yoy_t_2": -0.36,
+          "yoy_t_12": null,
+          "period": "202503"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.62,
+          "mom": 0.13,
+          "mom_t_1": 0.44,
+          "mom_t_2": -0.09,
+          "mom_t_12": null,
+          "yoy": 1.69,
+          "yoy_t_1": 1.51,
+          "yoy_t_2": 0.99,
+          "yoy_t_12": null,
+          "period": "202503"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.6,
+          "mom": 0.59,
+          "mom_t_1": 0.0,
+          "mom_t_2": -0.14,
+          "mom_t_12": null,
+          "yoy": 3.53,
+          "yoy_t_1": 2.95,
+          "yoy_t_2": 2.49,
+          "yoy_t_12": null,
+          "period": "202503"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.72,
+          "mom": 0.46,
+          "mom_t_1": 0.61,
+          "mom_t_2": 1.3,
+          "mom_t_12": null,
+          "yoy": 6.05,
+          "yoy_t_1": 5.21,
+          "yoy_t_2": 5.32,
+          "yoy_t_12": null,
+          "period": "202503"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.42,
+          "mom": 0.43,
+          "mom_t_1": 0.49,
+          "mom_t_2": 0.7,
+          "mom_t_12": null,
+          "yoy": 5.79,
+          "yoy_t_1": 5.78,
+          "yoy_t_2": 5.96,
+          "yoy_t_12": null,
+          "period": "202503"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.08,
+          "mom": 0.7,
+          "mom_t_1": 0.13,
+          "mom_t_2": 0.51,
+          "mom_t_12": null,
+          "yoy": 5.28,
+          "yoy_t_1": 4.88,
+          "yoy_t_2": 4.8,
+          "yoy_t_12": null,
+          "period": "202503"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.15,
+          "mom": 0.1,
+          "mom_t_1": 4.7,
+          "mom_t_2": 0.26,
+          "mom_t_12": null,
+          "yoy": 6.31,
+          "yoy_t_1": 6.35,
+          "yoy_t_2": 6.63,
+          "yoy_t_12": null,
+          "period": "202503"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.64,
+          "mom": 0.24,
+          "mom_t_1": 0.17,
+          "mom_t_2": -0.17,
+          "mom_t_12": null,
+          "yoy": 1.82,
+          "yoy_t_1": 1.44,
+          "yoy_t_2": 2.85,
+          "yoy_t_12": null,
+          "period": "202503"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.84,
+            "mom": 1.19,
+            "bps": 4.6
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.46,
+            "mom": 7.76,
+            "bps": 3.6
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.75,
+            "mom": 3.34,
+            "bps": 2.5
+          },
+          {
+            "name": "Plano de telefonia móvel",
+            "full_name": "9101008.Plano de telefonia móvel",
+            "weight": 1.28,
+            "mom": 1.4,
+            "bps": 1.8
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.56,
+            "mom": 1.45,
+            "bps": 0.8
+          },
+          {
+            "name": "Refrigerante e água mineral",
+            "full_name": "1114083.Refrigerante e água mineral",
+            "weight": 0.52,
+            "mom": 1.46,
+            "bps": 0.8
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.63,
+            "mom": 1.17,
+            "bps": 0.7
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.08,
+            "mom": 8.62,
+            "bps": 0.7
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.65,
+            "mom": 1.01,
+            "bps": 0.7
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.4,
+            "mom": 1.45,
+            "bps": 0.6
+          }
+        ],
+        "negative": [
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.52,
+            "mom": -2.14,
+            "bps": -1.1
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.61,
+            "mom": -0.17,
+            "bps": -0.3
+          },
+          {
+            "name": "Lagarto comum",
+            "full_name": "1107091.Lagarto comum",
+            "weight": 0.08,
+            "mom": -1.47,
+            "bps": -0.1
+          },
+          {
+            "name": "Pneu",
+            "full_name": "5102010.Pneu",
+            "weight": 0.23,
+            "mom": -0.34,
+            "bps": -0.1
+          },
+          {
+            "name": "Sandália/chinelo",
+            "full_name": "4201098.Sandália/chinelo",
+            "weight": 0.19,
+            "mom": -0.37,
+            "bps": -0.1
+          },
+          {
+            "name": "Hormonal",
+            "full_name": "6101011.Hormonal",
+            "weight": 0.2,
+            "mom": -0.3,
+            "bps": -0.1
+          },
+          {
+            "name": "Suco em pó",
+            "full_name": "1114090.Suco em pó",
+            "weight": 0.05,
+            "mom": -1.13,
+            "bps": -0.1
+          },
+          {
+            "name": "Livro didático",
+            "full_name": "8102007.Livro didático",
+            "weight": 0.37,
+            "mom": -0.15,
+            "bps": -0.1
+          },
+          {
+            "name": "Bermuda/short infantil",
+            "full_name": "4103008.Bermuda/short infantil",
+            "weight": 0.05,
+            "mom": -0.91,
+            "bps": -0.0
+          },
+          {
+            "name": "Feijão - macáçar (fradinho)",
+            "full_name": "1101053.Feijão - macáçar (fradinho)",
+            "weight": 0.02,
+            "mom": -1.92,
+            "bps": -0.0
+          }
+        ]
+      }
+    },
+    "202504": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.43,
+          "mom_t_1": 0.56,
+          "mom_t_2": 0.56,
+          "mom_t_12": 0.56,
+          "yoy": 5.53,
+          "yoy_t_1": 5.48,
+          "yoy_t_2": 5.48,
+          "yoy_t_12": 4.76,
+          "period": "202504"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.87,
+          "mom": 0.82,
+          "mom_t_1": 1.17,
+          "mom_t_2": 0.7,
+          "mom_t_12": null,
+          "yoy": 7.81,
+          "yoy_t_1": 7.68,
+          "yoy_t_2": 7.0,
+          "yoy_t_12": null,
+          "period": "202504"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 14.98,
+          "mom": 0.14,
+          "mom_t_1": 0.24,
+          "mom_t_2": 4.44,
+          "mom_t_12": null,
+          "yoy": 4.0,
+          "yoy_t_1": 3.84,
+          "yoy_t_2": 3.78,
+          "yoy_t_12": null,
+          "period": "202504"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.61,
+          "mom": 0.53,
+          "mom_t_1": 0.13,
+          "mom_t_2": 0.44,
+          "mom_t_12": null,
+          "yoy": 2.49,
+          "yoy_t_1": 1.69,
+          "yoy_t_2": 1.51,
+          "yoy_t_12": null,
+          "period": "202504"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.6,
+          "mom": 1.02,
+          "mom_t_1": 0.59,
+          "mom_t_2": 0.0,
+          "mom_t_12": null,
+          "yoy": 4.01,
+          "yoy_t_1": 3.53,
+          "yoy_t_2": 2.95,
+          "yoy_t_12": null,
+          "period": "202504"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.7,
+          "mom": -0.38,
+          "mom_t_1": 0.46,
+          "mom_t_2": 0.61,
+          "mom_t_12": null,
+          "yoy": 5.49,
+          "yoy_t_1": 6.05,
+          "yoy_t_2": 5.21,
+          "yoy_t_12": null,
+          "period": "202504"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.4,
+          "mom": 1.18,
+          "mom_t_1": 0.43,
+          "mom_t_2": 0.49,
+          "mom_t_12": null,
+          "yoy": 5.81,
+          "yoy_t_1": 5.79,
+          "yoy_t_2": 5.78,
+          "yoy_t_12": null,
+          "period": "202504"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.1,
+          "mom": 0.54,
+          "mom_t_1": 0.7,
+          "mom_t_2": 0.13,
+          "mom_t_12": null,
+          "yoy": 5.74,
+          "yoy_t_1": 5.28,
+          "yoy_t_2": 4.88,
+          "yoy_t_12": null,
+          "period": "202504"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.12,
+          "mom": 0.05,
+          "mom_t_1": 0.1,
+          "mom_t_2": 4.7,
+          "mom_t_12": null,
+          "yoy": 6.31,
+          "yoy_t_1": 6.31,
+          "yoy_t_2": 6.35,
+          "yoy_t_12": null,
+          "period": "202504"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.63,
+          "mom": 0.69,
+          "mom_t_1": 0.24,
+          "mom_t_2": 0.17,
+          "mom_t_12": null,
+          "yoy": 2.03,
+          "yoy_t_1": 1.82,
+          "yoy_t_2": 1.44,
+          "yoy_t_12": null,
+          "period": "202504"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.87,
+            "mom": 0.48,
+            "bps": 1.9
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.77,
+            "mom": 1.71,
+            "bps": 1.3
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.66,
+            "mom": 1.9,
+            "bps": 1.3
+          },
+          {
+            "name": "Combo de telefonia, internet e tv por assinatura",
+            "full_name": "9101116.Combo de telefonia, internet e tv por assinatura",
+            "weight": 1.47,
+            "mom": 0.75,
+            "bps": 1.1
+          },
+          {
+            "name": "Tv por assinatura",
+            "full_name": "9101010.Tv por assinatura",
+            "weight": 0.38,
+            "mom": 2.64,
+            "bps": 1.0
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.07,
+            "mom": 0.84,
+            "bps": 0.9
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.65,
+            "mom": 1.35,
+            "bps": 0.9
+          },
+          {
+            "name": "Hormonal",
+            "full_name": "6101011.Hormonal",
+            "weight": 0.2,
+            "mom": 2.83,
+            "bps": 0.6
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.63,
+            "mom": 0.83,
+            "bps": 0.5
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.4,
+            "mom": 1.28,
+            "bps": 0.5
+          }
+        ],
+        "negative": [
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.5,
+            "mom": -1.03,
+            "bps": -0.5
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.6,
+            "mom": -0.3,
+            "bps": -0.5
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.37,
+            "mom": -1.11,
+            "bps": -0.4
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.12,
+            "mom": -1.08,
+            "bps": -0.1
+          },
+          {
+            "name": "Material hidráulico",
+            "full_name": "2103041.Material hidráulico",
+            "weight": 0.04,
+            "mom": -1.91,
+            "bps": -0.1
+          },
+          {
+            "name": "Atividades físicas",
+            "full_name": "8104006.Atividades físicas",
+            "weight": 0.39,
+            "mom": -0.19,
+            "bps": -0.1
+          },
+          {
+            "name": "Gás veicular",
+            "full_name": "5104005.Gás veicular",
+            "weight": 0.07,
+            "mom": -0.91,
+            "bps": -0.1
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.21,
+            "mom": -0.29,
+            "bps": -0.1
+          },
+          {
+            "name": "Picanha",
+            "full_name": "1107208.Picanha",
+            "weight": 0.04,
+            "mom": -1.4,
+            "bps": -0.1
+          },
+          {
+            "name": "Bermuda/short masculino",
+            "full_name": "4101006.Bermuda/short masculino",
+            "weight": 0.18,
+            "mom": -0.31,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202505": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.26,
+          "mom_t_1": 0.43,
+          "mom_t_2": 0.43,
+          "mom_t_12": 0.39,
+          "yoy": 5.32,
+          "yoy_t_1": 5.53,
+          "yoy_t_2": 5.53,
+          "yoy_t_12": 4.87,
+          "period": "202505"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.95,
+          "mom": 0.17,
+          "mom_t_1": 0.82,
+          "mom_t_2": 1.17,
+          "mom_t_12": null,
+          "yoy": 7.33,
+          "yoy_t_1": 7.81,
+          "yoy_t_2": 7.68,
+          "yoy_t_12": null,
+          "period": "202505"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 14.94,
+          "mom": 1.19,
+          "mom_t_1": 0.14,
+          "mom_t_2": 0.24,
+          "mom_t_12": null,
+          "yoy": 4.53,
+          "yoy_t_1": 4.0,
+          "yoy_t_2": 3.84,
+          "yoy_t_12": null,
+          "period": "202505"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.61,
+          "mom": -0.27,
+          "mom_t_1": 0.53,
+          "mom_t_2": 0.13,
+          "mom_t_12": null,
+          "yoy": 2.77,
+          "yoy_t_1": 2.49,
+          "yoy_t_2": 1.69,
+          "yoy_t_12": null,
+          "period": "202505"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.63,
+          "mom": 0.41,
+          "mom_t_1": 1.02,
+          "mom_t_2": 0.59,
+          "mom_t_12": null,
+          "yoy": 3.92,
+          "yoy_t_1": 4.01,
+          "yoy_t_2": 3.53,
+          "yoy_t_12": null,
+          "period": "202505"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.53,
+          "mom": -0.37,
+          "mom_t_1": -0.38,
+          "mom_t_2": 0.46,
+          "mom_t_12": null,
+          "yoy": 4.64,
+          "yoy_t_1": 5.49,
+          "yoy_t_2": 6.05,
+          "yoy_t_12": null,
+          "period": "202505"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.5,
+          "mom": 0.54,
+          "mom_t_1": 1.18,
+          "mom_t_2": 0.43,
+          "mom_t_12": null,
+          "yoy": 5.66,
+          "yoy_t_1": 5.81,
+          "yoy_t_2": 5.79,
+          "yoy_t_12": null,
+          "period": "202505"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.11,
+          "mom": 0.35,
+          "mom_t_1": 0.54,
+          "mom_t_2": 0.7,
+          "mom_t_12": null,
+          "yoy": 5.87,
+          "yoy_t_1": 5.74,
+          "yoy_t_2": 5.28,
+          "yoy_t_12": null,
+          "period": "202505"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.1,
+          "mom": 0.05,
+          "mom_t_1": 0.05,
+          "mom_t_2": 0.1,
+          "mom_t_12": null,
+          "yoy": 6.27,
+          "yoy_t_1": 6.31,
+          "yoy_t_2": 6.31,
+          "yoy_t_12": null,
+          "period": "202505"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.64,
+          "mom": 0.07,
+          "mom_t_1": 0.69,
+          "mom_t_2": 0.24,
+          "mom_t_12": null,
+          "yoy": 1.96,
+          "yoy_t_1": 2.03,
+          "yoy_t_2": 1.82,
+          "yoy_t_12": null,
+          "period": "202505"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.24,
+            "mom": 5.0,
+            "bps": 1.2
+          },
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.87,
+            "mom": 0.28,
+            "bps": 1.1
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.08,
+            "mom": 0.76,
+            "bps": 0.8
+          },
+          {
+            "name": "Plano de telefonia móvel",
+            "full_name": "9101008.Plano de telefonia móvel",
+            "weight": 1.28,
+            "mom": 0.59,
+            "bps": 0.8
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.21,
+            "mom": 3.59,
+            "bps": 0.8
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.49,
+            "mom": 1.11,
+            "bps": 0.5
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.67,
+            "mom": 0.81,
+            "bps": 0.5
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.39,
+            "mom": 1.25,
+            "bps": 0.5
+          },
+          {
+            "name": "Tratamento de animais (clínica)",
+            "full_name": "7201015.Tratamento de animais (clínica)",
+            "weight": 0.27,
+            "mom": 1.42,
+            "bps": 0.4
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.6,
+            "mom": 0.63,
+            "bps": 0.4
+          }
+        ],
+        "negative": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.78,
+            "mom": -0.89,
+            "bps": -0.7
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.57,
+            "mom": -1.04,
+            "bps": -0.6
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.11,
+            "mom": -4.26,
+            "bps": -0.5
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": -0.74,
+            "bps": -0.3
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.59,
+            "mom": -0.14,
+            "bps": -0.2
+          },
+          {
+            "name": "Revestimento de piso e parede",
+            "full_name": "2103032.Revestimento de piso e parede",
+            "weight": 0.24,
+            "mom": -0.87,
+            "bps": -0.2
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.09,
+            "mom": -2.27,
+            "bps": -0.2
+          },
+          {
+            "name": "Camisa/camiseta infantil",
+            "full_name": "4103011.Camisa/camiseta infantil",
+            "weight": 0.18,
+            "mom": -1.03,
+            "bps": -0.2
+          },
+          {
+            "name": "Peixe - tilápia",
+            "full_name": "1108080.Peixe - tilápia",
+            "weight": 0.04,
+            "mom": -2.24,
+            "bps": -0.1
+          },
+          {
+            "name": "Neurológico",
+            "full_name": "6101148.Neurológico",
+            "weight": 0.14,
+            "mom": -0.61,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202506": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.24,
+          "mom_t_1": 0.26,
+          "mom_t_2": 0.26,
+          "mom_t_12": 0.52,
+          "yoy": 5.35,
+          "yoy_t_1": 5.32,
+          "yoy_t_2": 5.32,
+          "yoy_t_12": 4.83,
+          "period": "202506"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.93,
+          "mom": -0.18,
+          "mom_t_1": 0.17,
+          "mom_t_2": 0.82,
+          "mom_t_12": 0.44,
+          "yoy": 6.66,
+          "yoy_t_1": 7.33,
+          "yoy_t_2": 7.81,
+          "yoy_t_12": 4.71,
+          "period": "202506"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.08,
+          "mom": 0.99,
+          "mom_t_1": 1.19,
+          "mom_t_2": 0.14,
+          "mom_t_12": 0.25,
+          "yoy": 5.3,
+          "yoy_t_1": 4.53,
+          "yoy_t_2": 4.0,
+          "yoy_t_12": 3.05,
+          "period": "202506"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.59,
+          "mom": 0.08,
+          "mom_t_1": -0.27,
+          "mom_t_2": 0.53,
+          "mom_t_12": 0.19,
+          "yoy": 2.66,
+          "yoy_t_1": 2.77,
+          "yoy_t_2": 2.49,
+          "yoy_t_12": -0.29,
+          "period": "202506"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.63,
+          "mom": 0.75,
+          "mom_t_1": 0.41,
+          "mom_t_2": 1.02,
+          "mom_t_12": 0.02,
+          "yoy": 4.68,
+          "yoy_t_1": 3.92,
+          "yoy_t_2": 4.01,
+          "yoy_t_12": 2.3,
+          "period": "202506"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.4,
+          "mom": 0.27,
+          "mom_t_1": -0.37,
+          "mom_t_2": -0.38,
+          "mom_t_12": -0.19,
+          "yoy": 5.11,
+          "yoy_t_1": 4.64,
+          "yoy_t_2": 5.49,
+          "yoy_t_12": 4.56,
+          "period": "202506"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.54,
+          "mom": 0.07,
+          "mom_t_1": 0.54,
+          "mom_t_2": 1.18,
+          "mom_t_12": 0.54,
+          "yoy": 5.16,
+          "yoy_t_1": 5.66,
+          "yoy_t_2": 5.81,
+          "yoy_t_12": 6.09,
+          "period": "202506"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.12,
+          "mom": 0.23,
+          "mom_t_1": 0.35,
+          "mom_t_2": 0.54,
+          "mom_t_12": 0.29,
+          "yoy": 5.81,
+          "yoy_t_1": 5.87,
+          "yoy_t_2": 5.74,
+          "yoy_t_12": 4.45,
+          "period": "202506"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.09,
+          "mom": 0.0,
+          "mom_t_1": 0.05,
+          "mom_t_2": 0.05,
+          "mom_t_12": 0.06,
+          "yoy": 6.21,
+          "yoy_t_1": 6.27,
+          "yoy_t_2": 6.31,
+          "yoy_t_12": 6.93,
+          "period": "202506"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.63,
+          "mom": 0.11,
+          "mom_t_1": 0.07,
+          "mom_t_2": 0.69,
+          "mom_t_12": -0.08,
+          "yoy": 2.16,
+          "yoy_t_1": 1.96,
+          "yoy_t_2": 2.03,
+          "yoy_t_12": 1.03,
+          "period": "202506"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.25,
+            "mom": 13.77,
+            "bps": 3.4
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.5,
+            "mom": 1.48,
+            "bps": 0.7
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.66,
+            "mom": 1.0,
+            "bps": 0.7
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.08,
+            "mom": 0.59,
+            "bps": 0.6
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.56,
+            "mom": 0.73,
+            "bps": 0.4
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.6,
+            "mom": 0.6,
+            "bps": 0.4
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.22,
+            "mom": 1.51,
+            "bps": 0.3
+          },
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.87,
+            "mom": 0.07,
+            "bps": 0.3
+          },
+          {
+            "name": "Oftalmológico",
+            "full_name": "6101051.Oftalmológico",
+            "weight": 0.11,
+            "mom": 2.37,
+            "bps": 0.3
+          },
+          {
+            "name": "Chocolate e achocolatado em pó",
+            "full_name": "1104052.Chocolate e achocolatado em pó",
+            "weight": 0.14,
+            "mom": 1.79,
+            "bps": 0.3
+          }
+        ],
+        "negative": [
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.37,
+            "mom": -1.69,
+            "bps": -0.6
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.64,
+            "mom": -0.65,
+            "bps": -0.4
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.08,
+            "mom": -5.19,
+            "bps": -0.4
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.4,
+            "mom": -0.9,
+            "bps": -0.4
+          },
+          {
+            "name": "Produtos óticos",
+            "full_name": "6102.Produtos óticos",
+            "weight": 0.24,
+            "mom": -1.3,
+            "bps": -0.3
+          },
+          {
+            "name": "Óculos de grau",
+            "full_name": "6102012.Óculos de grau",
+            "weight": 0.24,
+            "mom": -1.3,
+            "bps": -0.3
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.58,
+            "mom": -0.14,
+            "bps": -0.2
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.77,
+            "mom": -0.25,
+            "bps": -0.2
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.11,
+            "mom": -1.73,
+            "bps": -0.2
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.39,
+            "mom": -0.47,
+            "bps": -0.2
+          }
+        ]
+      }
+    },
+    "202507": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.26,
+          "mom_t_1": 0.24,
+          "mom_t_2": 0.24,
+          "mom_t_12": 0.16,
+          "yoy": 5.23,
+          "yoy_t_1": 5.35,
+          "yoy_t_2": 5.35,
+          "yoy_t_12": 4.56,
+          "period": "202507"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.84,
+          "mom": -0.27,
+          "mom_t_1": -0.18,
+          "mom_t_2": 0.17,
+          "mom_t_12": -1.0,
+          "yoy": 7.44,
+          "yoy_t_1": 6.66,
+          "yoy_t_2": 7.33,
+          "yoy_t_12": 4.15,
+          "period": "202507"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.19,
+          "mom": 0.91,
+          "mom_t_1": 0.99,
+          "mom_t_2": 1.19,
+          "mom_t_12": 0.77,
+          "yoy": 5.44,
+          "yoy_t_1": 5.3,
+          "yoy_t_2": 4.53,
+          "yoy_t_12": 4.9,
+          "period": "202507"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.59,
+          "mom": 0.09,
+          "mom_t_1": 0.08,
+          "mom_t_2": -0.27,
+          "mom_t_12": 0.48,
+          "yoy": 2.26,
+          "yoy_t_1": 2.66,
+          "yoy_t_2": 2.77,
+          "yoy_t_12": 0.16,
+          "period": "202507"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.66,
+          "mom": -0.54,
+          "mom_t_1": 0.75,
+          "mom_t_2": 0.41,
+          "mom_t_12": -0.02,
+          "yoy": 4.12,
+          "yoy_t_1": 4.68,
+          "yoy_t_2": 3.92,
+          "yoy_t_12": 2.53,
+          "period": "202507"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.4,
+          "mom": 0.35,
+          "mom_t_1": 0.27,
+          "mom_t_2": -0.37,
+          "mom_t_12": 1.82,
+          "yoy": 3.6,
+          "yoy_t_1": 5.11,
+          "yoy_t_2": 4.64,
+          "yoy_t_12": 4.88,
+          "period": "202507"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.52,
+          "mom": 0.45,
+          "mom_t_1": 0.07,
+          "mom_t_2": 0.54,
+          "mom_t_12": 0.22,
+          "yoy": 5.4,
+          "yoy_t_1": 5.16,
+          "yoy_t_2": 5.66,
+          "yoy_t_12": 6.04,
+          "period": "202507"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.12,
+          "mom": 0.76,
+          "mom_t_1": 0.23,
+          "mom_t_2": 0.35,
+          "mom_t_12": 0.52,
+          "yoy": 6.07,
+          "yoy_t_1": 5.81,
+          "yoy_t_2": 5.87,
+          "yoy_t_12": 4.59,
+          "period": "202507"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.07,
+          "mom": 0.02,
+          "mom_t_1": 0.0,
+          "mom_t_2": 0.05,
+          "mom_t_12": 0.08,
+          "yoy": 6.15,
+          "yoy_t_1": 6.21,
+          "yoy_t_2": 6.27,
+          "yoy_t_12": 6.87,
+          "period": "202507"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.63,
+          "mom": -0.09,
+          "mom_t_1": 0.11,
+          "mom_t_2": 0.07,
+          "mom_t_12": 0.18,
+          "yoy": 1.89,
+          "yoy_t_1": 2.16,
+          "yoy_t_2": 1.96,
+          "yoy_t_12": 1.21,
+          "period": "202507"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.86,
+            "mom": 1.69,
+            "bps": 6.5
+          },
+          {
+            "name": "Jogos de azar",
+            "full_name": "7201063.Jogos de azar",
+            "weight": 0.44,
+            "mom": 11.17,
+            "bps": 4.9
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.4,
+            "mom": 3.41,
+            "bps": 1.4
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.5,
+            "mom": 1.84,
+            "bps": 0.9
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.22,
+            "mom": 2.74,
+            "bps": 0.6
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.6,
+            "mom": 0.6,
+            "bps": 0.4
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.57,
+            "mom": 0.17,
+            "bps": 0.3
+          },
+          {
+            "name": "Refrigerante e água mineral",
+            "full_name": "1114083.Refrigerante e água mineral",
+            "weight": 0.53,
+            "mom": 0.45,
+            "bps": 0.2
+          },
+          {
+            "name": "Conserto de bicicleta",
+            "full_name": "3301130.Conserto de bicicleta",
+            "weight": 0.21,
+            "mom": 1.12,
+            "bps": 0.2
+          },
+          {
+            "name": "Produto para higiene bucal",
+            "full_name": "6301007.Produto para higiene bucal",
+            "weight": 0.28,
+            "mom": 0.77,
+            "bps": 0.2
+          }
+        ],
+        "negative": [
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.28,
+            "mom": -3.41,
+            "bps": -1.0
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.66,
+            "mom": -1.17,
+            "bps": -0.8
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.56,
+            "mom": -0.91,
+            "bps": -0.5
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.08,
+            "mom": -5.22,
+            "bps": -0.4
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.24,
+            "mom": -1.65,
+            "bps": -0.4
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.36,
+            "mom": -0.86,
+            "bps": -0.3
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.1,
+            "mom": -2.29,
+            "bps": -0.2
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.67,
+            "mom": -0.33,
+            "bps": -0.2
+          },
+          {
+            "name": "Bermuda/short masculino",
+            "full_name": "4101006.Bermuda/short masculino",
+            "weight": 0.18,
+            "mom": -0.84,
+            "bps": -0.2
+          },
+          {
+            "name": "Fralda descartável",
+            "full_name": "6301002.Fralda descartável",
+            "weight": 0.22,
+            "mom": -0.59,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202508": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": -0.11,
+          "mom_t_1": 0.26,
+          "mom_t_2": 0.26,
+          "mom_t_12": 1.31,
+          "yoy": 5.13,
+          "yoy_t_1": 5.23,
+          "yoy_t_2": 5.23,
+          "yoy_t_12": 5.06,
+          "period": "202508"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.72,
+          "mom": -0.46,
+          "mom_t_1": -0.27,
+          "mom_t_2": -0.18,
+          "mom_t_12": -0.44,
+          "yoy": 7.42,
+          "yoy_t_1": 7.44,
+          "yoy_t_2": 6.66,
+          "yoy_t_12": 4.59,
+          "period": "202508"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.29,
+          "mom": -0.9,
+          "mom_t_1": 0.91,
+          "mom_t_2": 0.99,
+          "mom_t_12": -0.51,
+          "yoy": 5.03,
+          "yoy_t_1": 5.44,
+          "yoy_t_2": 5.3,
+          "yoy_t_12": 3.22,
+          "period": "202508"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.58,
+          "mom": -0.09,
+          "mom_t_1": 0.09,
+          "mom_t_2": 0.08,
+          "mom_t_12": 0.74,
+          "yoy": 1.42,
+          "yoy_t_1": 2.26,
+          "yoy_t_2": 2.66,
+          "yoy_t_12": 0.94,
+          "period": "202508"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.62,
+          "mom": 0.72,
+          "mom_t_1": -0.54,
+          "mom_t_2": 0.75,
+          "mom_t_12": 0.39,
+          "yoy": 4.47,
+          "yoy_t_1": 4.12,
+          "yoy_t_2": 4.68,
+          "yoy_t_12": 2.38,
+          "period": "202508"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.42,
+          "mom": -0.27,
+          "mom_t_1": 0.35,
+          "mom_t_2": 0.27,
+          "mom_t_12": 0.0,
+          "yoy": 3.31,
+          "yoy_t_1": 3.6,
+          "yoy_t_2": 5.11,
+          "yoy_t_12": 4.53,
+          "period": "202508"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.54,
+          "mom": 0.54,
+          "mom_t_1": 0.45,
+          "mom_t_2": 0.07,
+          "mom_t_12": 0.25,
+          "yoy": 5.7,
+          "yoy_t_1": 5.4,
+          "yoy_t_2": 5.16,
+          "yoy_t_12": 5.7,
+          "period": "202508"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.17,
+          "mom": 0.4,
+          "mom_t_1": 0.76,
+          "mom_t_2": 0.23,
+          "mom_t_12": 0.25,
+          "yoy": 6.23,
+          "yoy_t_1": 6.07,
+          "yoy_t_2": 5.81,
+          "yoy_t_12": 4.45,
+          "period": "202508"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.06,
+          "mom": 0.75,
+          "mom_t_1": 0.02,
+          "mom_t_2": 0.0,
+          "mom_t_12": 0.73,
+          "yoy": 6.17,
+          "yoy_t_1": 6.15,
+          "yoy_t_2": 6.21,
+          "yoy_t_12": 6.91,
+          "period": "202508"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.61,
+          "mom": -0.09,
+          "mom_t_1": -0.09,
+          "mom_t_2": 0.11,
+          "mom_t_12": 0.1,
+          "yoy": 1.69,
+          "yoy_t_1": 1.89,
+          "yoy_t_2": 2.16,
+          "yoy_t_12": 1.41,
+          "period": "202508"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Cursos regulares",
+            "full_name": "8101.Cursos regulares",
+            "weight": 4.56,
+            "mom": 0.8,
+            "bps": 3.6
+          },
+          {
+            "name": "Ensino superior",
+            "full_name": "8101005.Ensino superior",
+            "weight": 1.65,
+            "mom": 1.26,
+            "bps": 2.1
+          },
+          {
+            "name": "Jogos de azar",
+            "full_name": "7201063.Jogos de azar",
+            "weight": 0.49,
+            "mom": 3.6,
+            "bps": 1.8
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.63,
+            "mom": 1.87,
+            "bps": 1.2
+          },
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.92,
+            "mom": 0.3,
+            "bps": 1.2
+          },
+          {
+            "name": "Ensino fundamental",
+            "full_name": "8101003.Ensino fundamental",
+            "weight": 1.66,
+            "mom": 0.65,
+            "bps": 1.1
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.09,
+            "mom": 0.92,
+            "bps": 1.0
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.27,
+            "mom": 3.27,
+            "bps": 0.9
+          },
+          {
+            "name": "Cursos diversos",
+            "full_name": "8104.Cursos diversos",
+            "weight": 0.8,
+            "mom": 0.91,
+            "bps": 0.7
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.65,
+            "mom": 0.88,
+            "bps": 0.6
+          }
+        ],
+        "negative": [
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.51,
+            "mom": -4.02,
+            "bps": -2.1
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.77,
+            "mom": -1.04,
+            "bps": -0.8
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.57,
+            "mom": -0.48,
+            "bps": -0.8
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.39,
+            "mom": -1.45,
+            "bps": -0.6
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.07,
+            "mom": -3.59,
+            "bps": -0.3
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.36,
+            "mom": -0.66,
+            "bps": -0.2
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.1,
+            "mom": -2.3,
+            "bps": -0.2
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.11,
+            "mom": -1.24,
+            "bps": -0.1
+          },
+          {
+            "name": "Conserto de bicicleta",
+            "full_name": "3301130.Conserto de bicicleta",
+            "weight": 0.22,
+            "mom": -0.49,
+            "bps": -0.1
+          },
+          {
+            "name": "Revestimento de piso e parede",
+            "full_name": "2103032.Revestimento de piso e parede",
+            "weight": 0.24,
+            "mom": -0.38,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202509": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.48,
+          "mom_t_1": -0.11,
+          "mom_t_2": -0.11,
+          "mom_t_12": 0.56,
+          "yoy": 5.17,
+          "yoy_t_1": 5.13,
+          "yoy_t_2": 5.13,
+          "yoy_t_12": 5.48,
+          "period": "202509"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.65,
+          "mom": -0.26,
+          "mom_t_1": -0.46,
+          "mom_t_2": -0.27,
+          "mom_t_12": 0.5,
+          "yoy": 6.61,
+          "yoy_t_1": 7.42,
+          "yoy_t_2": 7.44,
+          "yoy_t_12": 5.86,
+          "period": "202509"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.16,
+          "mom": 2.97,
+          "mom_t_1": -0.9,
+          "mom_t_2": 0.91,
+          "mom_t_12": 1.8,
+          "yoy": 6.24,
+          "yoy_t_1": 5.03,
+          "yoy_t_2": 5.44,
+          "yoy_t_12": 4.58,
+          "period": "202509"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.58,
+          "mom": -0.4,
+          "mom_t_1": -0.09,
+          "mom_t_2": 0.09,
+          "mom_t_12": -0.19,
+          "yoy": 1.21,
+          "yoy_t_1": 1.42,
+          "yoy_t_2": 2.26,
+          "yoy_t_12": 1.33,
+          "period": "202509"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.66,
+          "mom": 0.63,
+          "mom_t_1": 0.72,
+          "mom_t_2": -0.54,
+          "mom_t_12": 0.18,
+          "yoy": 4.93,
+          "yoy_t_1": 4.47,
+          "yoy_t_2": 4.12,
+          "yoy_t_12": 2.18,
+          "period": "202509"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.39,
+          "mom": 0.01,
+          "mom_t_1": -0.27,
+          "mom_t_2": 0.35,
+          "mom_t_12": 0.14,
+          "yoy": 3.18,
+          "yoy_t_1": 3.31,
+          "yoy_t_2": 3.6,
+          "yoy_t_12": 3.22,
+          "period": "202509"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.63,
+          "mom": 0.17,
+          "mom_t_1": 0.54,
+          "mom_t_2": 0.45,
+          "mom_t_12": 0.46,
+          "yoy": 5.39,
+          "yoy_t_1": 5.7,
+          "yoy_t_2": 5.4,
+          "yoy_t_12": 6.14,
+          "period": "202509"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.22,
+          "mom": 0.51,
+          "mom_t_1": 0.4,
+          "mom_t_2": 0.76,
+          "mom_t_12": -0.31,
+          "yoy": 7.1,
+          "yoy_t_1": 6.23,
+          "yoy_t_2": 6.07,
+          "yoy_t_12": 3.67,
+          "period": "202509"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.11,
+          "mom": 0.07,
+          "mom_t_1": 0.75,
+          "mom_t_2": 0.02,
+          "mom_t_12": 0.05,
+          "yoy": 6.19,
+          "yoy_t_1": 6.17,
+          "yoy_t_2": 6.15,
+          "yoy_t_12": 6.91,
+          "period": "202509"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.61,
+          "mom": -0.17,
+          "mom_t_1": -0.09,
+          "mom_t_2": -0.09,
+          "mom_t_12": -0.05,
+          "yoy": 1.56,
+          "yoy_t_1": 1.69,
+          "yoy_t_2": 1.89,
+          "yoy_t_12": 1.48,
+          "period": "202509"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.93,
+            "mom": 0.85,
+            "bps": 3.3
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.49,
+            "mom": 2.87,
+            "bps": 1.4
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.49,
+            "mom": 2.75,
+            "bps": 1.3
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.28,
+            "mom": 4.07,
+            "bps": 1.1
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.64,
+            "mom": 1.77,
+            "bps": 1.1
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.66,
+            "mom": 1.38,
+            "bps": 0.9
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.23,
+            "mom": 1.85,
+            "bps": 0.4
+          },
+          {
+            "name": "Conserto de bicicleta",
+            "full_name": "3301130.Conserto de bicicleta",
+            "weight": 0.21,
+            "mom": 2.02,
+            "bps": 0.4
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.61,
+            "mom": 0.64,
+            "bps": 0.4
+          },
+          {
+            "name": "Livro não didático",
+            "full_name": "8102008.Livro não didático",
+            "weight": 0.11,
+            "mom": 2.47,
+            "bps": 0.3
+          }
+        ],
+        "negative": [
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": -1.28,
+            "bps": -0.5
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.38,
+            "mom": -1.23,
+            "bps": -0.5
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.57,
+            "mom": -0.23,
+            "bps": -0.4
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.67,
+            "mom": -0.53,
+            "bps": -0.4
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.76,
+            "mom": -0.45,
+            "bps": -0.3
+          },
+          {
+            "name": "Pneu",
+            "full_name": "5102010.Pneu",
+            "weight": 0.22,
+            "mom": -1.09,
+            "bps": -0.2
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.24,
+            "mom": -0.81,
+            "bps": -0.2
+          },
+          {
+            "name": "Carne-seca e de sol",
+            "full_name": "1109056.Carne-seca e de sol",
+            "weight": 0.1,
+            "mom": -1.91,
+            "bps": -0.2
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.07,
+            "mom": -2.34,
+            "bps": -0.2
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.1,
+            "mom": -0.1,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202510": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.09,
+          "mom_t_1": 0.48,
+          "mom_t_2": 0.48,
+          "mom_t_12": 0.43,
+          "yoy": 4.68,
+          "yoy_t_1": 5.17,
+          "yoy_t_2": 5.17,
+          "yoy_t_12": 5.53,
+          "period": "202510"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.49,
+          "mom": 0.01,
+          "mom_t_1": -0.26,
+          "mom_t_2": -0.46,
+          "mom_t_12": 1.06,
+          "yoy": 5.5,
+          "yoy_t_1": 6.61,
+          "yoy_t_2": 7.42,
+          "yoy_t_12": 6.65,
+          "period": "202510"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.54,
+          "mom": -0.3,
+          "mom_t_1": 2.97,
+          "mom_t_2": -0.9,
+          "mom_t_12": 1.49,
+          "yoy": 4.36,
+          "yoy_t_1": 6.24,
+          "yoy_t_2": 5.03,
+          "yoy_t_12": 6.12,
+          "period": "202510"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.55,
+          "mom": -0.34,
+          "mom_t_1": -0.4,
+          "mom_t_2": -0.09,
+          "mom_t_12": 0.43,
+          "yoy": 0.43,
+          "yoy_t_1": 1.21,
+          "yoy_t_2": 1.42,
+          "yoy_t_12": 1.3,
+          "period": "202510"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.67,
+          "mom": 0.51,
+          "mom_t_1": 0.63,
+          "mom_t_2": 0.72,
+          "mom_t_12": 0.37,
+          "yoy": 5.07,
+          "yoy_t_1": 4.93,
+          "yoy_t_2": 4.47,
+          "yoy_t_12": 2.1,
+          "period": "202510"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.29,
+          "mom": 0.11,
+          "mom_t_1": 0.01,
+          "mom_t_2": -0.27,
+          "mom_t_12": -0.38,
+          "yoy": 3.69,
+          "yoy_t_1": 3.18,
+          "yoy_t_2": 3.31,
+          "yoy_t_12": 2.48,
+          "period": "202510"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.59,
+          "mom": 0.41,
+          "mom_t_1": 0.17,
+          "mom_t_2": 0.54,
+          "mom_t_12": 0.38,
+          "yoy": 5.42,
+          "yoy_t_1": 5.39,
+          "yoy_t_2": 5.7,
+          "yoy_t_12": 6.2,
+          "period": "202510"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.22,
+          "mom": 0.45,
+          "mom_t_1": 0.51,
+          "mom_t_2": 0.4,
+          "mom_t_12": 0.7,
+          "yoy": 6.83,
+          "yoy_t_1": 7.1,
+          "yoy_t_2": 6.23,
+          "yoy_t_12": 4.11,
+          "period": "202510"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.08,
+          "mom": 0.06,
+          "mom_t_1": 0.07,
+          "mom_t_2": 0.75,
+          "mom_t_12": 0.04,
+          "yoy": 6.21,
+          "yoy_t_1": 6.19,
+          "yoy_t_2": 6.17,
+          "yoy_t_12": 6.9,
+          "period": "202510"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.58,
+          "mom": -0.16,
+          "mom_t_1": -0.17,
+          "mom_t_2": -0.09,
+          "mom_t_12": 0.52,
+          "yoy": 0.88,
+          "yoy_t_1": 1.56,
+          "yoy_t_2": 1.69,
+          "yoy_t_12": 2.2,
+          "period": "202510"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.95,
+            "mom": 0.46,
+            "bps": 1.8
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.5,
+            "mom": 1.97,
+            "bps": 1.0
+          },
+          {
+            "name": "Combo de telefonia, internet e tv por assinatura",
+            "full_name": "9101116.Combo de telefonia, internet e tv por assinatura",
+            "weight": 1.46,
+            "mom": 0.54,
+            "bps": 0.8
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.09,
+            "mom": 0.7,
+            "bps": 0.8
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.29,
+            "mom": 2.31,
+            "bps": 0.7
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.23,
+            "mom": 2.56,
+            "bps": 0.6
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.5,
+            "mom": 0.91,
+            "bps": 0.5
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": 1.05,
+            "bps": 0.4
+          },
+          {
+            "name": "Manicure",
+            "full_name": "7101005.Manicure",
+            "weight": 0.43,
+            "mom": 0.89,
+            "bps": 0.4
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.61,
+            "mom": 0.59,
+            "bps": 0.4
+          }
+        ],
+        "negative": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.75,
+            "mom": -1.88,
+            "bps": -1.4
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.56,
+            "mom": -0.28,
+            "bps": -0.4
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.07,
+            "mom": -4.28,
+            "bps": -0.3
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.55,
+            "mom": -0.5,
+            "bps": -0.3
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.23,
+            "mom": -0.67,
+            "bps": -0.2
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.66,
+            "mom": -0.16,
+            "bps": -0.1
+          },
+          {
+            "name": "Carne-seca e de sol",
+            "full_name": "1109056.Carne-seca e de sol",
+            "weight": 0.1,
+            "mom": -0.96,
+            "bps": -0.1
+          },
+          {
+            "name": "Produtos óticos",
+            "full_name": "6102.Produtos óticos",
+            "weight": 0.24,
+            "mom": -0.37,
+            "bps": -0.1
+          },
+          {
+            "name": "Óculos de grau",
+            "full_name": "6102012.Óculos de grau",
+            "weight": 0.24,
+            "mom": -0.37,
+            "bps": -0.1
+          },
+          {
+            "name": "Iogurte e bebidas lácteas",
+            "full_name": "1111019.Iogurte e bebidas lácteas",
+            "weight": 0.18,
+            "mom": -0.47,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202511": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.18,
+          "mom_t_1": 0.09,
+          "mom_t_2": 0.09,
+          "mom_t_12": 0.26,
+          "yoy": 4.46,
+          "yoy_t_1": 4.68,
+          "yoy_t_2": 4.68,
+          "yoy_t_12": 5.32,
+          "period": "202511"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.47,
+          "mom": -0.01,
+          "mom_t_1": 0.01,
+          "mom_t_2": -0.26,
+          "mom_t_12": 1.55,
+          "yoy": 3.88,
+          "yoy_t_1": 5.5,
+          "yoy_t_2": 6.61,
+          "yoy_t_12": 7.63,
+          "period": "202511"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.48,
+          "mom": 0.52,
+          "mom_t_1": -0.3,
+          "mom_t_2": 2.97,
+          "mom_t_12": -1.53,
+          "yoy": 6.54,
+          "yoy_t_1": 4.36,
+          "yoy_t_2": 6.24,
+          "yoy_t_12": 4.0,
+          "period": "202511"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.53,
+          "mom": -1.0,
+          "mom_t_1": -0.34,
+          "mom_t_2": -0.4,
+          "mom_t_12": -0.31,
+          "yoy": -0.26,
+          "yoy_t_1": 0.43,
+          "yoy_t_2": 1.21,
+          "yoy_t_12": 1.41,
+          "period": "202511"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.68,
+          "mom": 0.49,
+          "mom_t_1": 0.51,
+          "mom_t_2": 0.63,
+          "mom_t_12": -0.12,
+          "yoy": 5.71,
+          "yoy_t_1": 5.07,
+          "yoy_t_2": 4.93,
+          "yoy_t_12": 2.34,
+          "period": "202511"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.3,
+          "mom": 0.22,
+          "mom_t_1": 0.11,
+          "mom_t_2": 0.01,
+          "mom_t_12": 0.89,
+          "yoy": 3.0,
+          "yoy_t_1": 3.69,
+          "yoy_t_2": 3.18,
+          "yoy_t_12": 3.11,
+          "period": "202511"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.63,
+          "mom": -0.04,
+          "mom_t_1": 0.41,
+          "mom_t_2": 0.17,
+          "mom_t_12": -0.06,
+          "yoy": 5.44,
+          "yoy_t_1": 5.42,
+          "yoy_t_2": 5.39,
+          "yoy_t_12": 6.06,
+          "period": "202511"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.26,
+          "mom": 0.77,
+          "mom_t_1": 0.45,
+          "mom_t_2": 0.51,
+          "mom_t_12": 1.43,
+          "yoy": 6.14,
+          "yoy_t_1": 6.83,
+          "yoy_t_2": 7.1,
+          "yoy_t_12": 4.98,
+          "period": "202511"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.08,
+          "mom": 0.01,
+          "mom_t_1": 0.06,
+          "mom_t_2": 0.07,
+          "mom_t_12": -0.04,
+          "yoy": 6.26,
+          "yoy_t_1": 6.21,
+          "yoy_t_2": 6.19,
+          "yoy_t_12": 6.84,
+          "period": "202511"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.57,
+          "mom": -0.2,
+          "mom_t_1": -0.16,
+          "mom_t_2": -0.17,
+          "mom_t_12": -0.1,
+          "yoy": 0.77,
+          "yoy_t_1": 0.88,
+          "yoy_t_2": 1.56,
+          "yoy_t_12": 2.61,
+          "period": "202511"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.96,
+            "mom": 1.3,
+            "bps": 5.1
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.65,
+            "mom": 4.09,
+            "bps": 2.7
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.51,
+            "mom": 3.86,
+            "bps": 2.0
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.3,
+            "mom": 5.02,
+            "bps": 1.5
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.1,
+            "mom": 0.65,
+            "bps": 0.7
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.24,
+            "mom": 2.54,
+            "bps": 0.6
+          },
+          {
+            "name": "Manicure",
+            "full_name": "7101005.Manicure",
+            "weight": 0.44,
+            "mom": 1.12,
+            "bps": 0.5
+          },
+          {
+            "name": "Refrigerante e água mineral",
+            "full_name": "1114083.Refrigerante e água mineral",
+            "weight": 0.53,
+            "mom": 0.79,
+            "bps": 0.4
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.5,
+            "mom": 0.8,
+            "bps": 0.4
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.61,
+            "mom": 0.6,
+            "bps": 0.4
+          }
+        ],
+        "negative": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.74,
+            "mom": -4.98,
+            "bps": -3.7
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.55,
+            "mom": -0.39,
+            "bps": -0.6
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.23,
+            "mom": -2.46,
+            "bps": -0.6
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.07,
+            "mom": -7.58,
+            "bps": -0.5
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": -0.99,
+            "bps": -0.4
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.55,
+            "mom": -0.55,
+            "bps": -0.3
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.66,
+            "mom": -0.42,
+            "bps": -0.3
+          },
+          {
+            "name": "Integração transporte público",
+            "full_name": "5101053.Integração transporte público",
+            "weight": 0.05,
+            "mom": -4.51,
+            "bps": -0.2
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.1,
+            "mom": -1.89,
+            "bps": -0.2
+          },
+          {
+            "name": "Alimento para animais",
+            "full_name": "7201020.Alimento para animais",
+            "weight": 0.35,
+            "mom": -0.52,
+            "bps": -0.2
+          }
+        ]
+      }
+    },
+    "202512": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.33,
+          "mom_t_1": 0.18,
+          "mom_t_2": 0.18,
+          "mom_t_12": 0.24,
+          "yoy": 4.26,
+          "yoy_t_1": 4.46,
+          "yoy_t_2": 4.46,
+          "yoy_t_12": 5.35,
+          "period": "202512"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.43,
+          "mom": 0.27,
+          "mom_t_1": -0.01,
+          "mom_t_2": 0.01,
+          "mom_t_12": 1.18,
+          "yoy": 2.95,
+          "yoy_t_1": 3.88,
+          "yoy_t_2": 5.5,
+          "yoy_t_12": 7.69,
+          "period": "202512"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.53,
+          "mom": -0.33,
+          "mom_t_1": 0.52,
+          "mom_t_2": -0.3,
+          "mom_t_12": -0.56,
+          "yoy": 6.79,
+          "yoy_t_1": 6.54,
+          "yoy_t_2": 4.36,
+          "yoy_t_12": 3.06,
+          "period": "202512"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.49,
+          "mom": 0.64,
+          "mom_t_1": -1.0,
+          "mom_t_2": -0.34,
+          "mom_t_12": 0.65,
+          "yoy": -0.28,
+          "yoy_t_1": -0.26,
+          "yoy_t_2": 0.43,
+          "yoy_t_12": 1.31,
+          "period": "202512"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.7,
+          "mom": 0.45,
+          "mom_t_1": 0.49,
+          "mom_t_2": 0.51,
+          "mom_t_12": 1.14,
+          "yoy": 4.99,
+          "yoy_t_1": 5.71,
+          "yoy_t_2": 5.07,
+          "yoy_t_12": 2.78,
+          "period": "202512"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.3,
+          "mom": 0.74,
+          "mom_t_1": 0.22,
+          "mom_t_2": 0.11,
+          "mom_t_12": 0.67,
+          "yoy": 3.07,
+          "yoy_t_1": 3.0,
+          "yoy_t_2": 3.69,
+          "yoy_t_12": 3.3,
+          "period": "202512"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.6,
+          "mom": 0.52,
+          "mom_t_1": -0.04,
+          "mom_t_2": 0.41,
+          "mom_t_12": 0.38,
+          "yoy": 5.59,
+          "yoy_t_1": 5.44,
+          "yoy_t_2": 5.42,
+          "yoy_t_12": 6.09,
+          "period": "202512"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.32,
+          "mom": 0.36,
+          "mom_t_1": 0.77,
+          "mom_t_2": 0.45,
+          "mom_t_12": 0.62,
+          "yoy": 5.87,
+          "yoy_t_1": 6.14,
+          "yoy_t_2": 6.83,
+          "yoy_t_12": 5.13,
+          "period": "202512"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.07,
+          "mom": 0.08,
+          "mom_t_1": 0.01,
+          "mom_t_2": 0.06,
+          "mom_t_12": 0.11,
+          "yoy": 6.22,
+          "yoy_t_1": 6.26,
+          "yoy_t_2": 6.21,
+          "yoy_t_12": 6.7,
+          "period": "202512"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.55,
+          "mom": 0.37,
+          "mom_t_1": -0.2,
+          "mom_t_2": -0.16,
+          "mom_t_12": 0.37,
+          "yoy": 0.77,
+          "yoy_t_1": 0.77,
+          "yoy_t_2": 0.88,
+          "yoy_t_12": 2.94,
+          "period": "202512"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.31,
+            "mom": 13.79,
+            "bps": 4.3
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.1,
+            "mom": 1.28,
+            "bps": 1.4
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.53,
+            "mom": 2.47,
+            "bps": 1.3
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.65,
+            "mom": 0.89,
+            "bps": 0.6
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.51,
+            "mom": 1.09,
+            "bps": 0.6
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.55,
+            "mom": 1.0,
+            "bps": 0.6
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.67,
+            "mom": 0.77,
+            "bps": 0.5
+          },
+          {
+            "name": "Manicure",
+            "full_name": "7101005.Manicure",
+            "weight": 0.44,
+            "mom": 1.14,
+            "bps": 0.5
+          },
+          {
+            "name": "Produtos óticos",
+            "full_name": "6102.Produtos óticos",
+            "weight": 0.24,
+            "mom": 1.75,
+            "bps": 0.4
+          },
+          {
+            "name": "Óculos de grau",
+            "full_name": "6102012.Óculos de grau",
+            "weight": 0.24,
+            "mom": 1.75,
+            "bps": 0.4
+          }
+        ],
+        "negative": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.7,
+            "mom": -6.42,
+            "bps": -4.5
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.68,
+            "mom": -3.1,
+            "bps": -2.1
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.54,
+            "mom": -0.51,
+            "bps": -0.8
+          },
+          {
+            "name": "Pneu",
+            "full_name": "5102010.Pneu",
+            "weight": 0.22,
+            "mom": -1.45,
+            "bps": -0.3
+          },
+          {
+            "name": "Refrigerante e água mineral",
+            "full_name": "1114083.Refrigerante e água mineral",
+            "weight": 0.54,
+            "mom": -0.17,
+            "bps": -0.1
+          },
+          {
+            "name": "Tratamento de animais (clínica)",
+            "full_name": "7201015.Tratamento de animais (clínica)",
+            "weight": 0.27,
+            "mom": -0.22,
+            "bps": -0.1
+          },
+          {
+            "name": "Produto para barba",
+            "full_name": "6301004.Produto para barba",
+            "weight": 0.13,
+            "mom": -0.45,
+            "bps": -0.1
+          },
+          {
+            "name": "Utensílios de metal",
+            "full_name": "3102007.Utensílios de metal",
+            "weight": 0.14,
+            "mom": -0.41,
+            "bps": -0.1
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.1,
+            "mom": -0.51,
+            "bps": -0.1
+          },
+          {
+            "name": "Iogurte e bebidas lácteas",
+            "full_name": "1111019.Iogurte e bebidas lácteas",
+            "weight": 0.18,
+            "mom": -0.28,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202601": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.33,
+          "mom_t_1": 0.33,
+          "mom_t_2": 0.33,
+          "mom_t_12": 0.26,
+          "yoy": 4.44,
+          "yoy_t_1": 4.26,
+          "yoy_t_2": 4.26,
+          "yoy_t_12": 5.23,
+          "period": "202601"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.42,
+          "mom": 0.23,
+          "mom_t_1": 0.27,
+          "mom_t_2": -0.01,
+          "mom_t_12": 0.96,
+          "yoy": 2.2,
+          "yoy_t_1": 2.95,
+          "yoy_t_2": 3.88,
+          "yoy_t_12": 7.25,
+          "period": "202601"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.43,
+          "mom": -0.11,
+          "mom_t_1": -0.33,
+          "mom_t_2": 0.52,
+          "mom_t_12": -3.08,
+          "yoy": 10.06,
+          "yoy_t_1": 6.79,
+          "yoy_t_2": 6.54,
+          "yoy_t_12": -0.36,
+          "period": "202601"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.5,
+          "mom": 0.2,
+          "mom_t_1": 0.64,
+          "mom_t_2": -1.0,
+          "mom_t_12": -0.09,
+          "yoy": 0.01,
+          "yoy_t_1": -0.28,
+          "yoy_t_2": -0.26,
+          "yoy_t_12": 0.99,
+          "period": "202601"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.71,
+          "mom": -0.25,
+          "mom_t_1": 0.45,
+          "mom_t_2": 0.49,
+          "mom_t_12": -0.14,
+          "yoy": 4.88,
+          "yoy_t_1": 4.99,
+          "yoy_t_2": 5.71,
+          "yoy_t_12": 2.49,
+          "period": "202601"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.39,
+          "mom": 0.6,
+          "mom_t_1": 0.74,
+          "mom_t_2": 0.22,
+          "mom_t_12": 1.3,
+          "yoy": 2.36,
+          "yoy_t_1": 3.07,
+          "yoy_t_2": 3.0,
+          "yoy_t_12": 5.32,
+          "period": "202601"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.63,
+          "mom": 0.7,
+          "mom_t_1": 0.52,
+          "mom_t_2": -0.04,
+          "mom_t_12": 0.7,
+          "yoy": 5.59,
+          "yoy_t_1": 5.59,
+          "yoy_t_2": 5.44,
+          "yoy_t_12": 5.96,
+          "period": "202601"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.32,
+          "mom": 0.41,
+          "mom_t_1": 0.36,
+          "mom_t_2": 0.77,
+          "mom_t_12": 0.51,
+          "yoy": 5.76,
+          "yoy_t_1": 5.87,
+          "yoy_t_2": 6.14,
+          "yoy_t_12": 4.8,
+          "period": "202601"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.05,
+          "mom": 0.02,
+          "mom_t_1": 0.08,
+          "mom_t_2": 0.01,
+          "mom_t_12": 0.26,
+          "yoy": 5.97,
+          "yoy_t_1": 6.22,
+          "yoy_t_2": 6.26,
+          "yoy_t_12": 6.63,
+          "period": "202601"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.55,
+          "mom": 0.82,
+          "mom_t_1": 0.37,
+          "mom_t_2": -0.2,
+          "mom_t_12": -0.17,
+          "yoy": 1.78,
+          "yoy_t_1": 0.77,
+          "yoy_t_2": 0.77,
+          "yoy_t_12": 2.85,
+          "period": "202601"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.99,
+            "mom": 0.44,
+            "bps": 1.8
+          },
+          {
+            "name": "Combo de telefonia, internet e tv por assinatura",
+            "full_name": "9101116.Combo de telefonia, internet e tv por assinatura",
+            "weight": 1.46,
+            "mom": 0.76,
+            "bps": 1.1
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.11,
+            "mom": 0.71,
+            "bps": 0.8
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.53,
+            "mom": 0.4,
+            "bps": 0.6
+          },
+          {
+            "name": "Tv por assinatura",
+            "full_name": "9101010.Tv por assinatura",
+            "weight": 0.38,
+            "mom": 1.34,
+            "bps": 0.5
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.62,
+            "mom": 0.66,
+            "bps": 0.4
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.23,
+            "mom": 1.71,
+            "bps": 0.4
+          },
+          {
+            "name": "Livro didático",
+            "full_name": "8102007.Livro didático",
+            "weight": 0.37,
+            "mom": 0.99,
+            "bps": 0.4
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.66,
+            "mom": 0.54,
+            "bps": 0.4
+          },
+          {
+            "name": "Integração transporte público",
+            "full_name": "5101053.Integração transporte público",
+            "weight": 0.05,
+            "mom": 6.88,
+            "bps": 0.3
+          }
+        ],
+        "negative": [
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.35,
+            "mom": -17.23,
+            "bps": -6.0
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.65,
+            "mom": -5.59,
+            "bps": -3.6
+          },
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.66,
+            "mom": -1.41,
+            "bps": -0.9
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.55,
+            "mom": -0.63,
+            "bps": -0.3
+          },
+          {
+            "name": "Cursos diversos",
+            "full_name": "8104.Cursos diversos",
+            "weight": 0.8,
+            "mom": -0.38,
+            "bps": -0.3
+          },
+          {
+            "name": "Autoescola",
+            "full_name": "8104005.Autoescola",
+            "weight": 0.06,
+            "mom": -3.89,
+            "bps": -0.2
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.67,
+            "mom": -0.3,
+            "bps": -0.2
+          },
+          {
+            "name": "Bermuda/short masculino",
+            "full_name": "4101006.Bermuda/short masculino",
+            "weight": 0.19,
+            "mom": -0.94,
+            "bps": -0.2
+          },
+          {
+            "name": "Camisa/camiseta infantil",
+            "full_name": "4103011.Camisa/camiseta infantil",
+            "weight": 0.19,
+            "mom": -0.8,
+            "bps": -0.2
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.38,
+            "mom": -0.37,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202602": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.7,
+          "mom_t_1": 0.33,
+          "mom_t_2": 0.33,
+          "mom_t_12": -0.11,
+          "yoy": 3.81,
+          "yoy_t_1": 4.44,
+          "yoy_t_2": 4.44,
+          "yoy_t_12": 5.13,
+          "period": "202602"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.4,
+          "mom": 0.26,
+          "mom_t_1": 0.23,
+          "mom_t_2": 0.27,
+          "mom_t_12": 0.7,
+          "yoy": 1.76,
+          "yoy_t_1": 2.2,
+          "yoy_t_2": 2.95,
+          "yoy_t_12": 7.0,
+          "period": "202602"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.36,
+          "mom": 0.3,
+          "mom_t_1": -0.11,
+          "mom_t_2": -0.33,
+          "mom_t_12": 4.44,
+          "yoy": 5.69,
+          "yoy_t_1": 10.06,
+          "yoy_t_2": 6.79,
+          "yoy_t_12": 3.78,
+          "period": "202602"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.5,
+          "mom": 0.13,
+          "mom_t_1": 0.2,
+          "mom_t_2": 0.64,
+          "mom_t_12": 0.44,
+          "yoy": -0.3,
+          "yoy_t_1": 0.01,
+          "yoy_t_2": -0.28,
+          "yoy_t_12": 1.51,
+          "period": "202602"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.68,
+          "mom": 0.16,
+          "mom_t_1": -0.25,
+          "mom_t_2": 0.45,
+          "mom_t_12": 0.0,
+          "yoy": 5.04,
+          "yoy_t_1": 4.88,
+          "yoy_t_2": 4.99,
+          "yoy_t_12": 2.95,
+          "period": "202602"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.44,
+          "mom": 0.74,
+          "mom_t_1": 0.6,
+          "mom_t_2": 0.74,
+          "mom_t_12": 0.61,
+          "yoy": 2.49,
+          "yoy_t_1": 2.36,
+          "yoy_t_2": 3.07,
+          "yoy_t_12": 5.21,
+          "period": "202602"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.68,
+          "mom": 0.59,
+          "mom_t_1": 0.7,
+          "mom_t_2": 0.52,
+          "mom_t_12": 0.49,
+          "yoy": 5.7,
+          "yoy_t_1": 5.59,
+          "yoy_t_2": 5.59,
+          "yoy_t_12": 5.78,
+          "period": "202602"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.33,
+          "mom": 0.33,
+          "mom_t_1": 0.41,
+          "mom_t_2": 0.36,
+          "mom_t_12": 0.13,
+          "yoy": 5.97,
+          "yoy_t_1": 5.76,
+          "yoy_t_2": 5.87,
+          "yoy_t_12": 4.88,
+          "period": "202602"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.03,
+          "mom": 5.21,
+          "mom_t_1": 0.02,
+          "mom_t_2": 0.08,
+          "mom_t_12": 4.7,
+          "yoy": 6.49,
+          "yoy_t_1": 5.97,
+          "yoy_t_2": 6.22,
+          "yoy_t_12": 6.35,
+          "period": "202602"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.58,
+          "mom": 0.15,
+          "mom_t_1": 0.82,
+          "mom_t_2": 0.37,
+          "mom_t_12": 0.17,
+          "yoy": 1.76,
+          "yoy_t_1": 1.78,
+          "yoy_t_2": 0.77,
+          "yoy_t_12": 1.44,
+          "period": "202602"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Cursos regulares",
+            "full_name": "8101.Cursos regulares",
+            "weight": 4.54,
+            "mom": 6.2,
+            "bps": 28.1
+          },
+          {
+            "name": "Ensino fundamental",
+            "full_name": "8101003.Ensino fundamental",
+            "weight": 1.65,
+            "mom": 8.11,
+            "bps": 13.4
+          },
+          {
+            "name": "Ensino superior",
+            "full_name": "8101005.Ensino superior",
+            "weight": 1.65,
+            "mom": 4.28,
+            "bps": 7.1
+          },
+          {
+            "name": "Ensino médio",
+            "full_name": "8101004.Ensino médio",
+            "weight": 0.41,
+            "mom": 8.19,
+            "bps": 3.4
+          },
+          {
+            "name": "Cursos diversos",
+            "full_name": "8104.Cursos diversos",
+            "weight": 0.8,
+            "mom": 3.24,
+            "bps": 2.6
+          },
+          {
+            "name": "Pré-escola",
+            "full_name": "8101002.Pré-escola",
+            "weight": 0.34,
+            "mom": 7.48,
+            "bps": 2.5
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.06,
+            "mom": 25.29,
+            "bps": 1.5
+          },
+          {
+            "name": "Curso de idioma",
+            "full_name": "8104003.Curso de idioma",
+            "weight": 0.28,
+            "mom": 4.45,
+            "bps": 1.2
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.1,
+            "mom": 11.73,
+            "bps": 1.2
+          },
+          {
+            "name": "Atividades físicas",
+            "full_name": "8104006.Atividades físicas",
+            "weight": 0.39,
+            "mom": 2.7,
+            "bps": 1.1
+          }
+        ],
+        "negative": [
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.51,
+            "mom": -3.9,
+            "bps": -2.0
+          },
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 4.0,
+            "mom": -0.33,
+            "bps": -1.3
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.54,
+            "mom": -1.79,
+            "bps": -1.0
+          },
+          {
+            "name": "Camisa/camiseta masculina",
+            "full_name": "4101009.Camisa/camiseta masculina",
+            "weight": 0.67,
+            "mom": -0.66,
+            "bps": -0.4
+          },
+          {
+            "name": "Camisa/camiseta infantil",
+            "full_name": "4103011.Camisa/camiseta infantil",
+            "weight": 0.18,
+            "mom": -2.42,
+            "bps": -0.4
+          },
+          {
+            "name": "Pneu",
+            "full_name": "5102010.Pneu",
+            "weight": 0.22,
+            "mom": -1.66,
+            "bps": -0.4
+          },
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.53,
+            "mom": -0.19,
+            "bps": -0.3
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.1,
+            "mom": -2.47,
+            "bps": -0.2
+          },
+          {
+            "name": "Gás veicular",
+            "full_name": "5104005.Gás veicular",
+            "weight": 0.07,
+            "mom": -3.1,
+            "bps": -0.2
+          },
+          {
+            "name": "Aluguel de veículo",
+            "full_name": "5102051.Aluguel de veículo",
+            "weight": 0.02,
+            "mom": -7.26,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202603": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.88,
+          "mom_t_1": 0.7,
+          "mom_t_2": 0.7,
+          "mom_t_12": 0.48,
+          "yoy": 4.14,
+          "yoy_t_1": 3.81,
+          "yoy_t_2": 3.81,
+          "yoy_t_12": 5.17,
+          "period": "202603"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.31,
+          "mom": 1.56,
+          "mom_t_1": 0.26,
+          "mom_t_2": 0.23,
+          "mom_t_12": 1.17,
+          "yoy": 2.16,
+          "yoy_t_1": 1.76,
+          "yoy_t_2": 2.2,
+          "yoy_t_12": 7.68,
+          "period": "202603"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.3,
+          "mom": 0.22,
+          "mom_t_1": 0.3,
+          "mom_t_2": -0.11,
+          "mom_t_12": 0.24,
+          "yoy": 5.67,
+          "yoy_t_1": 5.69,
+          "yoy_t_2": 10.06,
+          "yoy_t_12": 3.84,
+          "period": "202603"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.48,
+          "mom": 0.51,
+          "mom_t_1": 0.13,
+          "mom_t_2": 0.2,
+          "mom_t_12": 0.13,
+          "yoy": 0.07,
+          "yoy_t_1": -0.3,
+          "yoy_t_2": 0.01,
+          "yoy_t_12": 1.69,
+          "period": "202603"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.65,
+          "mom": 0.46,
+          "mom_t_1": 0.16,
+          "mom_t_2": -0.25,
+          "mom_t_12": 0.59,
+          "yoy": 4.9,
+          "yoy_t_1": 5.04,
+          "yoy_t_2": 4.88,
+          "yoy_t_12": 3.53,
+          "period": "202603"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.45,
+          "mom": 1.64,
+          "mom_t_1": 0.74,
+          "mom_t_2": 0.6,
+          "mom_t_12": 0.46,
+          "yoy": 3.69,
+          "yoy_t_1": 2.49,
+          "yoy_t_2": 2.36,
+          "yoy_t_12": 6.05,
+          "period": "202603"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.66,
+          "mom": 0.42,
+          "mom_t_1": 0.59,
+          "mom_t_2": 0.7,
+          "mom_t_12": 0.43,
+          "yoy": 5.68,
+          "yoy_t_1": 5.7,
+          "yoy_t_2": 5.59,
+          "yoy_t_12": 5.79,
+          "period": "202603"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.29,
+          "mom": 0.65,
+          "mom_t_1": 0.33,
+          "mom_t_2": 0.41,
+          "mom_t_12": 0.7,
+          "yoy": 5.91,
+          "yoy_t_1": 5.97,
+          "yoy_t_2": 5.76,
+          "yoy_t_12": 5.28,
+          "period": "202603"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.3,
+          "mom": 0.02,
+          "mom_t_1": 5.21,
+          "mom_t_2": 0.02,
+          "mom_t_12": 0.1,
+          "yoy": 6.4,
+          "yoy_t_1": 6.49,
+          "yoy_t_2": 5.97,
+          "yoy_t_12": 6.31,
+          "period": "202603"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.55,
+          "mom": 0.19,
+          "mom_t_1": 0.15,
+          "mom_t_2": 0.82,
+          "mom_t_12": 0.24,
+          "yoy": 1.7,
+          "yoy_t_1": 1.76,
+          "yoy_t_2": 1.78,
+          "yoy_t_12": 1.82,
+          "period": "202603"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.62,
+            "mom": 11.74,
+            "bps": 7.3
+          },
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.96,
+            "mom": 0.5,
+            "bps": 2.0
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.49,
+            "mom": 3.95,
+            "bps": 1.9
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.11,
+            "mom": 15.4,
+            "bps": 1.7
+          },
+          {
+            "name": "Plano de telefonia móvel",
+            "full_name": "9101008.Plano de telefonia móvel",
+            "weight": 1.27,
+            "mom": 1.33,
+            "bps": 1.7
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.65,
+            "mom": 1.67,
+            "bps": 1.1
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.08,
+            "mom": 12.56,
+            "bps": 1.0
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.3,
+            "mom": 2.83,
+            "bps": 0.8
+          },
+          {
+            "name": "Refrigerante e água mineral",
+            "full_name": "1114083.Refrigerante e água mineral",
+            "weight": 0.53,
+            "mom": 1.6,
+            "bps": 0.8
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.12,
+            "mom": 0.7,
+            "bps": 0.8
+          }
+        ],
+        "negative": [
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.53,
+            "mom": -3.34,
+            "bps": -1.8
+          },
+          {
+            "name": "Frango inteiro",
+            "full_name": "1110009.Frango inteiro",
+            "weight": 0.37,
+            "mom": -1.33,
+            "bps": -0.5
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.25,
+            "mom": -0.95,
+            "bps": -0.2
+          },
+          {
+            "name": "Ar-condicionado",
+            "full_name": "3201002.Ar-condicionado",
+            "weight": 0.1,
+            "mom": -2.2,
+            "bps": -0.2
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.55,
+            "mom": -0.28,
+            "bps": -0.2
+          },
+          {
+            "name": "Livro não didático",
+            "full_name": "8102008.Livro não didático",
+            "weight": 0.11,
+            "mom": -1.4,
+            "bps": -0.2
+          },
+          {
+            "name": "Pneu",
+            "full_name": "5102010.Pneu",
+            "weight": 0.21,
+            "mom": -0.6,
+            "bps": -0.1
+          },
+          {
+            "name": "Tratamento de animais (clínica)",
+            "full_name": "7201015.Tratamento de animais (clínica)",
+            "weight": 0.27,
+            "mom": -0.36,
+            "bps": -0.1
+          },
+          {
+            "name": "Utensílios de metal",
+            "full_name": "3102007.Utensílios de metal",
+            "weight": 0.14,
+            "mom": -0.49,
+            "bps": -0.1
+          },
+          {
+            "name": "Livro didático",
+            "full_name": "8102007.Livro didático",
+            "weight": 0.37,
+            "mom": -0.18,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202604": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.67,
+          "mom_t_1": 0.88,
+          "mom_t_2": 0.88,
+          "mom_t_12": 0.09,
+          "yoy": 4.39,
+          "yoy_t_1": 4.14,
+          "yoy_t_2": 4.14,
+          "yoy_t_12": 4.68,
+          "period": "202604"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.45,
+          "mom": 1.34,
+          "mom_t_1": 1.56,
+          "mom_t_2": 0.26,
+          "mom_t_12": 0.82,
+          "yoy": 2.69,
+          "yoy_t_1": 2.16,
+          "yoy_t_2": 1.76,
+          "yoy_t_12": 7.81,
+          "period": "202604"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.2,
+          "mom": 0.63,
+          "mom_t_1": 0.22,
+          "mom_t_2": 0.3,
+          "mom_t_12": 0.14,
+          "yoy": 6.19,
+          "yoy_t_1": 5.67,
+          "yoy_t_2": 5.69,
+          "yoy_t_12": 4.0,
+          "period": "202604"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.47,
+          "mom": 0.65,
+          "mom_t_1": 0.51,
+          "mom_t_2": 0.13,
+          "mom_t_12": 0.53,
+          "yoy": 0.2,
+          "yoy_t_1": 0.07,
+          "yoy_t_2": -0.3,
+          "yoy_t_12": 2.49,
+          "period": "202604"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.63,
+          "mom": 0.52,
+          "mom_t_1": 0.46,
+          "mom_t_2": 0.16,
+          "mom_t_12": 1.02,
+          "yoy": 4.38,
+          "yoy_t_1": 4.9,
+          "yoy_t_2": 5.04,
+          "yoy_t_12": 4.01,
+          "period": "202604"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.61,
+          "mom": 0.06,
+          "mom_t_1": 1.64,
+          "mom_t_2": 0.74,
+          "mom_t_12": -0.38,
+          "yoy": 4.15,
+          "yoy_t_1": 3.69,
+          "yoy_t_2": 2.49,
+          "yoy_t_12": 5.49,
+          "period": "202604"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.6,
+          "mom": 1.16,
+          "mom_t_1": 0.42,
+          "mom_t_2": 0.59,
+          "mom_t_12": 1.18,
+          "yoy": 5.66,
+          "yoy_t_1": 5.68,
+          "yoy_t_2": 5.7,
+          "yoy_t_12": 5.81,
+          "period": "202604"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.27,
+          "mom": 0.35,
+          "mom_t_1": 0.65,
+          "mom_t_2": 0.33,
+          "mom_t_12": 0.54,
+          "yoy": 5.71,
+          "yoy_t_1": 5.91,
+          "yoy_t_2": 5.97,
+          "yoy_t_12": 5.74,
+          "period": "202604"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.25,
+          "mom": 0.06,
+          "mom_t_1": 0.02,
+          "mom_t_2": 5.21,
+          "mom_t_12": 0.05,
+          "yoy": 6.41,
+          "yoy_t_1": 6.4,
+          "yoy_t_2": 6.49,
+          "yoy_t_12": 6.31,
+          "period": "202604"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.52,
+          "mom": 0.57,
+          "mom_t_1": 0.19,
+          "mom_t_2": 0.15,
+          "mom_t_12": 0.69,
+          "yoy": 1.59,
+          "yoy_t_1": 1.7,
+          "yoy_t_2": 1.76,
+          "yoy_t_12": 2.03,
+          "period": "202604"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.68,
+            "mom": 13.66,
+            "bps": 9.3
+          },
+          {
+            "name": "Plano de telefonia móvel",
+            "full_name": "9101008.Plano de telefonia móvel",
+            "weight": 1.28,
+            "mom": 0.75,
+            "bps": 1.0
+          },
+          {
+            "name": "Cabeleireiro e barbeiro",
+            "full_name": "7101011.Cabeleireiro e barbeiro",
+            "weight": 1.12,
+            "mom": 0.75,
+            "bps": 0.8
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.4,
+            "mom": 2.0,
+            "bps": 0.8
+          },
+          {
+            "name": "Computador pessoal",
+            "full_name": "3202028.Computador pessoal",
+            "weight": 0.23,
+            "mom": 2.94,
+            "bps": 0.7
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.09,
+            "mom": 6.95,
+            "bps": 0.6
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.54,
+            "mom": 1.13,
+            "bps": 0.6
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.62,
+            "mom": 0.74,
+            "bps": 0.5
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.13,
+            "mom": 3.47,
+            "bps": 0.5
+          },
+          {
+            "name": "Produto para higiene bucal",
+            "full_name": "6301007.Produto para higiene bucal",
+            "weight": 0.28,
+            "mom": 1.27,
+            "bps": 0.4
+          }
+        ],
+        "negative": [
+          {
+            "name": "Frango em pedaços",
+            "full_name": "1110010.Frango em pedaços",
+            "weight": 0.64,
+            "mom": -2.14,
+            "bps": -1.4
+          },
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.94,
+            "mom": -0.18,
+            "bps": -0.7
+          },
+          {
+            "name": "Transporte por aplicativo",
+            "full_name": "5101051.Transporte por aplicativo",
+            "weight": 0.3,
+            "mom": -2.17,
+            "bps": -0.7
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.66,
+            "mom": -0.69,
+            "bps": -0.5
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.51,
+            "mom": -0.86,
+            "bps": -0.4
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.25,
+            "mom": -0.75,
+            "bps": -0.2
+          },
+          {
+            "name": "Produtos óticos",
+            "full_name": "6102.Produtos óticos",
+            "weight": 0.24,
+            "mom": -0.53,
+            "bps": -0.1
+          },
+          {
+            "name": "Óculos de grau",
+            "full_name": "6102012.Óculos de grau",
+            "weight": 0.24,
+            "mom": -0.53,
+            "bps": -0.1
+          },
+          {
+            "name": "Utensílios de metal",
+            "full_name": "3102007.Utensílios de metal",
+            "weight": 0.14,
+            "mom": -0.65,
+            "bps": -0.1
+          },
+          {
+            "name": "Cinema, teatro e concertos",
+            "full_name": "7201266.Cinema, teatro e concertos",
+            "weight": 0.5,
+            "mom": -0.17,
+            "bps": -0.1
+          }
+        ]
+      }
+    },
+    "202605": {
+      "resumo": [
+        {
+          "metric": "Índice Geral",
+          "weight": 100.0,
+          "mom": 0.58,
+          "mom_t_1": 0.67,
+          "mom_t_2": 0.67,
+          "mom_t_12": 0.18,
+          "yoy": 4.72,
+          "yoy_t_1": 4.39,
+          "yoy_t_2": 4.39,
+          "yoy_t_12": 4.46,
+          "period": "202605"
+        },
+        {
+          "metric": "Alimentação e bebidas",
+          "weight": 21.59,
+          "mom": 1.33,
+          "mom_t_1": 1.34,
+          "mom_t_2": 1.56,
+          "mom_t_12": 0.17,
+          "yoy": 3.87,
+          "yoy_t_1": 2.69,
+          "yoy_t_2": 2.16,
+          "yoy_t_12": 7.33,
+          "period": "202605"
+        },
+        {
+          "metric": "Habitação",
+          "weight": 15.19,
+          "mom": 1.22,
+          "mom_t_1": 0.63,
+          "mom_t_2": 0.22,
+          "mom_t_12": 1.19,
+          "yoy": 6.22,
+          "yoy_t_1": 6.19,
+          "yoy_t_2": 5.67,
+          "yoy_t_12": 4.53,
+          "period": "202605"
+        },
+        {
+          "metric": "Artigos de residência",
+          "weight": 3.47,
+          "mom": 0.08,
+          "mom_t_1": 0.65,
+          "mom_t_2": 0.51,
+          "mom_t_12": -0.27,
+          "yoy": 0.54,
+          "yoy_t_1": 0.2,
+          "yoy_t_2": 0.07,
+          "yoy_t_12": 2.77,
+          "period": "202605"
+        },
+        {
+          "metric": "Vestuário",
+          "weight": 4.63,
+          "mom": 0.62,
+          "mom_t_1": 0.52,
+          "mom_t_2": 0.46,
+          "mom_t_12": 0.41,
+          "yoy": 4.6,
+          "yoy_t_1": 4.38,
+          "yoy_t_2": 4.9,
+          "yoy_t_12": 3.92,
+          "period": "202605"
+        },
+        {
+          "metric": "Transportes",
+          "weight": 20.49,
+          "mom": -0.46,
+          "mom_t_1": 0.06,
+          "mom_t_2": 1.64,
+          "mom_t_12": -0.37,
+          "yoy": 4.05,
+          "yoy_t_1": 4.15,
+          "yoy_t_2": 3.69,
+          "yoy_t_12": 4.64,
+          "period": "202605"
+        },
+        {
+          "metric": "Saúde e cuidados pessoais",
+          "weight": 13.67,
+          "mom": 0.9,
+          "mom_t_1": 1.16,
+          "mom_t_2": 0.42,
+          "mom_t_12": 0.54,
+          "yoy": 6.04,
+          "yoy_t_1": 5.66,
+          "yoy_t_2": 5.68,
+          "yoy_t_12": 5.66,
+          "period": "202605"
+        },
+        {
+          "metric": "Despesas pessoais",
+          "weight": 10.24,
+          "mom": 0.41,
+          "mom_t_1": 0.35,
+          "mom_t_2": 0.65,
+          "mom_t_12": 0.35,
+          "yoy": 5.77,
+          "yoy_t_1": 5.71,
+          "yoy_t_2": 5.91,
+          "yoy_t_12": 5.87,
+          "period": "202605"
+        },
+        {
+          "metric": "Educação",
+          "weight": 6.21,
+          "mom": 0.0,
+          "mom_t_1": 0.06,
+          "mom_t_2": 0.02,
+          "mom_t_12": 0.05,
+          "yoy": 6.36,
+          "yoy_t_1": 6.41,
+          "yoy_t_2": 6.4,
+          "yoy_t_12": 6.27,
+          "period": "202605"
+        },
+        {
+          "metric": "Comunicação",
+          "weight": 4.52,
+          "mom": 0.23,
+          "mom_t_1": 0.57,
+          "mom_t_2": 0.19,
+          "mom_t_12": 0.07,
+          "yoy": 1.75,
+          "yoy_t_1": 1.59,
+          "yoy_t_2": 1.7,
+          "yoy_t_12": 1.96,
+          "period": "202605"
+        }
+      ],
+      "destaques": {
+        "positive": [
+          {
+            "name": "Recreação e fumo",
+            "full_name": "72.Recreação e fumo",
+            "weight": 3.91,
+            "mom": 0.36,
+            "bps": 1.4
+          },
+          {
+            "name": "Plano de telefonia móvel",
+            "full_name": "9101008.Plano de telefonia móvel",
+            "weight": 1.28,
+            "mom": 0.94,
+            "bps": 1.2
+          },
+          {
+            "name": "Queijo",
+            "full_name": "1111011.Queijo",
+            "weight": 0.54,
+            "mom": 1.56,
+            "bps": 0.8
+          },
+          {
+            "name": "Feijão - carioca (rajado)",
+            "full_name": "1101073.Feijão - carioca (rajado)",
+            "weight": 0.13,
+            "mom": 6.44,
+            "bps": 0.8
+          },
+          {
+            "name": "Produto para pele",
+            "full_name": "6301006.Produto para pele",
+            "weight": 0.41,
+            "mom": 1.74,
+            "bps": 0.7
+          },
+          {
+            "name": "Leite longa vida",
+            "full_name": "1111004.Leite longa vida",
+            "weight": 0.77,
+            "mom": 0.77,
+            "bps": 0.6
+          },
+          {
+            "name": "Chocolate em barra e bombom",
+            "full_name": "1104023.Chocolate em barra e bombom",
+            "weight": 0.25,
+            "mom": 2.19,
+            "bps": 0.5
+          },
+          {
+            "name": "Hospedagem",
+            "full_name": "7201090.Hospedagem",
+            "weight": 0.65,
+            "mom": 0.82,
+            "bps": 0.5
+          },
+          {
+            "name": "Tratamento de animais (clínica)",
+            "full_name": "7201015.Tratamento de animais (clínica)",
+            "weight": 0.27,
+            "mom": 1.77,
+            "bps": 0.5
+          },
+          {
+            "name": "Mão de obra",
+            "full_name": "2103042.Mão de obra",
+            "weight": 0.62,
+            "mom": 0.74,
+            "bps": 0.5
+          }
+        ],
+        "negative": [
+          {
+            "name": "Automóvel usado",
+            "full_name": "5102020.Automóvel usado",
+            "weight": 1.5,
+            "mom": -0.79,
+            "bps": -1.2
+          },
+          {
+            "name": "Açaí (emulsão)",
+            "full_name": "1114004.Açaí (emulsão)",
+            "weight": 0.09,
+            "mom": -5.19,
+            "bps": -0.5
+          },
+          {
+            "name": "Pacote turístico",
+            "full_name": "7201095.Pacote turístico",
+            "weight": 0.5,
+            "mom": -0.35,
+            "bps": -0.2
+          },
+          {
+            "name": "Aluguel de veículo",
+            "full_name": "5102051.Aluguel de veículo",
+            "weight": 0.02,
+            "mom": -7.42,
+            "bps": -0.1
+          },
+          {
+            "name": "Conserto de bicicleta",
+            "full_name": "3301130.Conserto de bicicleta",
+            "weight": 0.22,
+            "mom": -0.56,
+            "bps": -0.1
+          },
+          {
+            "name": "Peixe - tilápia",
+            "full_name": "1108080.Peixe - tilápia",
+            "weight": 0.04,
+            "mom": -2.16,
+            "bps": -0.1
+          },
+          {
+            "name": "Autoescola",
+            "full_name": "8104005.Autoescola",
+            "weight": 0.05,
+            "mom": -1.72,
+            "bps": -0.1
+          },
+          {
+            "name": "Pneu",
+            "full_name": "5102010.Pneu",
+            "weight": 0.21,
+            "mom": -0.36,
+            "bps": -0.1
+          },
+          {
+            "name": "Sobrancelha",
+            "full_name": "7101144.Sobrancelha",
+            "weight": 0.11,
+            "mom": -0.42,
+            "bps": -0.0
+          },
+          {
+            "name": "Livro não didático",
+            "full_name": "8102008.Livro não didático",
+            "weight": 0.11,
+            "mom": -0.32,
+            "bps": -0.0
+          }
+        ]
+      }
+    }
+  },
+  "general_series": [
+    {
+      "period": "202406",
+      "mom": 0.21,
+      "yoy": 4.23
+    },
+    {
+      "period": "202407",
+      "mom": 0.38,
+      "yoy": 4.5
+    },
+    {
+      "period": "202408",
+      "mom": -0.02,
+      "yoy": 4.24
+    },
+    {
+      "period": "202409",
+      "mom": 0.44,
+      "yoy": 4.42
+    },
+    {
+      "period": "202410",
+      "mom": 0.56,
+      "yoy": 4.76
+    },
+    {
+      "period": "202411",
+      "mom": 0.39,
+      "yoy": 4.87
+    },
+    {
+      "period": "202412",
+      "mom": 0.52,
+      "yoy": 4.83
+    },
+    {
+      "period": "202501",
+      "mom": 0.16,
+      "yoy": 4.56
+    },
+    {
+      "period": "202502",
+      "mom": 1.31,
+      "yoy": 5.06
+    },
+    {
+      "period": "202503",
+      "mom": 0.56,
+      "yoy": 5.48
+    },
+    {
+      "period": "202504",
+      "mom": 0.43,
+      "yoy": 5.53
+    },
+    {
+      "period": "202505",
+      "mom": 0.26,
+      "yoy": 5.32
+    },
+    {
+      "period": "202506",
+      "mom": 0.24,
+      "yoy": 5.35
+    },
+    {
+      "period": "202507",
+      "mom": 0.26,
+      "yoy": 5.23
+    },
+    {
+      "period": "202508",
+      "mom": -0.11,
+      "yoy": 5.13
+    },
+    {
+      "period": "202509",
+      "mom": 0.48,
+      "yoy": 5.17
+    },
+    {
+      "period": "202510",
+      "mom": 0.09,
+      "yoy": 4.68
+    },
+    {
+      "period": "202511",
+      "mom": 0.18,
+      "yoy": 4.46
+    },
+    {
+      "period": "202512",
+      "mom": 0.33,
+      "yoy": 4.26
+    },
+    {
+      "period": "202601",
+      "mom": 0.33,
+      "yoy": 4.44
+    },
+    {
+      "period": "202602",
+      "mom": 0.7,
+      "yoy": 3.81
+    },
+    {
+      "period": "202603",
+      "mom": 0.88,
+      "yoy": 4.14
+    },
+    {
+      "period": "202604",
+      "mom": 0.67,
+      "yoy": 4.39
+    },
+    {
+      "period": "202605",
+      "mom": 0.58,
+      "yoy": 4.72
+    }
+  ],
+  "metadata": {
+    "source": "IBGE SIDRA",
+    "last_update": "2026-07-20T21:02:11.058191",
+    "start_period": "202406",
+    "end_period": "202605"
+  }
+}
