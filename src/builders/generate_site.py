@@ -267,7 +267,7 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         latest_surp = df_surp.sort_values("period").iloc[-1] if not df_surp.empty else {}
         surpresa_charts[cat] = {
             "main": chart_builder.build_surprise_chart(series),
-            "detail": chart_builder.build_surprise_chart(df_surp.tail(36).to_dict("records")),
+            "detail": chart_builder.build_detail_surprise_chart(df_surp.tail(36).to_dict("records")),
             "legend": {
                 "m1": _fmt_bps(latest_surp.get("m1")),
                 "m3": _fmt_bps(latest_surp.get("m3")),
@@ -286,6 +286,9 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         target_text = _target_legend(target, latest.get("yoy"), show_deviation=(cat != "BCB"))
 
         main_chart = chart_builder.build_group_chart(series, title=None)
+        main_detail = chart_builder.build_detail_chart(
+            pd.DataFrame(series).sort_values("period").tail(36).to_dict("records")
+        )
 
         # Legendas dos núcleos usados
         used_nuclei = [n["name"] for n in subnuclei[1:]] if len(subnuclei) > 1 else [n["name"] for n in subnuclei]
@@ -349,6 +352,7 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         grupos_data[cat] = {
             "subnuclei": subnuclei,
             "main_chart": main_chart,
+            "main_detail": main_detail,
             "main_legend": main_legend,
             "seasonal_chart": seasonal_chart,
             "seasonal_detail": mom_detail,

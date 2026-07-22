@@ -14,7 +14,7 @@ from plotly.utils import PlotlyJSONEncoder
 
 # Paleta do protótipo
 COLORS = {
-    "primary": "#0372B2",
+    "primary": "#0072B2",
     "accent": "#56B4E9",
     "green": "#009E73",
     "orange": "#E69F00",
@@ -30,6 +30,33 @@ COLORS = {
 
 def _new_id() -> str:
     return str(uuid.uuid4())
+
+
+def _detail_annotation(text: str = "DETALHE · ÚLT. 36M") -> Dict:
+    """Anotação de rótulo usada nos gráficos de detalhe, no formato do protótipo."""
+    return {
+        "font": {"color": "#64748b", "family": "'Inter', sans-serif", "size": 13},
+        "showarrow": False,
+        "text": f"<b><span style='letter-spacing:0.14em'>{text}</span></b>",
+        "x": 0.0,
+        "xanchor": "left",
+        "xref": "paper",
+        "xshift": -32,
+        "y": 1.0,
+        "yanchor": "bottom",
+        "yref": "paper",
+        "yshift": 28,
+    }
+
+
+def _apply_detail_style(chart: Dict, title: str = "DETALHE · ÚLT. 36M") -> Dict:
+    """Aplica fundo cinza, margem superior e anotação de rótulo de um gráfico de detalhe."""
+    fig = json.loads(chart["json"])
+    fig["layout"]["plot_bgcolor"] = "#F4F6F8"
+    fig["layout"]["margin"]["t"] = 58
+    fig["layout"].pop("title", None)
+    fig["layout"]["annotations"] = fig["layout"].get("annotations", []) + [_detail_annotation(title)]
+    return {"div_id": chart["div_id"], "json": json.dumps(fig)}
 
 
 def _to_json(fig: go.Figure) -> str:
@@ -242,18 +269,14 @@ def build_group_chart(series: List[Dict], title: str = None) -> Dict:
 
 def build_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") -> Dict:
     """Gráfico de detalhe dos últimos 36 meses com fundo #F4F6F8."""
-    chart = build_group_chart(series, title=title)
-    fig = json.loads(chart["json"])
-    fig["layout"]["plot_bgcolor"] = "#F4F6F8"
-    fig["layout"]["margin"]["t"] = 58
-    if "title" not in fig["layout"] or not fig["layout"]["title"]:
-        fig["layout"]["title"] = {
-            "text": title,
-            "font": {"size": 11, "color": "#64748b", "family": "Inter, sans-serif"},
-            "x": 0.5,
-            "xanchor": "center",
-        }
-    return {"div_id": chart["div_id"], "json": json.dumps(fig)}
+    chart = build_group_chart(series, title=None)
+    return _apply_detail_style(chart, title)
+
+
+def build_detail_surprise_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") -> Dict:
+    """Gráfico de surpresa de detalhe (últimos 36 meses) com fundo #F4F6F8."""
+    chart = build_surprise_chart(series)
+    return _apply_detail_style(chart, title)
 
 
 def build_seasonal_chart(months: List[int], current: List[float], previous: List[float],
@@ -346,18 +369,8 @@ def build_detail_comparison_chart(series: List[Dict], label_index: str = "Índic
                                   label_core: str = "Média dos núcleos",
                                   title: str = "DETALHE · ÚLT. 36M") -> Dict:
     """Versão detalhada (últimos 36 meses) da comparação headline vs núcleos."""
-    chart = build_comparison_chart(series, label_index=label_index, label_core=label_core, title=title)
-    fig = json.loads(chart["json"])
-    fig["layout"]["plot_bgcolor"] = "#F4F6F8"
-    fig["layout"]["margin"]["t"] = 58
-    if "title" not in fig["layout"] or not fig["layout"]["title"]:
-        fig["layout"]["title"] = {
-            "text": title,
-            "font": {"size": 11, "color": "#64748b", "family": "Inter, sans-serif"},
-            "x": 0.5,
-            "xanchor": "center",
-        }
-    return {"div_id": chart["div_id"], "json": json.dumps(fig)}
+    chart = build_comparison_chart(series, label_index=label_index, label_core=label_core, title=None)
+    return _apply_detail_style(chart, title)
 
 
 def build_multiline_chart(series_list: List[Dict], title: str = None, meta: float = None) -> Dict:
@@ -386,18 +399,8 @@ def build_multiline_chart(series_list: List[Dict], title: str = None, meta: floa
 def build_detail_multiline_chart(series_list: List[Dict], title: str = "DETALHE · ÚLT. 36M",
                                  meta: float = None) -> Dict:
     """Versão detalhada (últimos 36 meses) do gráfico de múltiplas linhas."""
-    chart = build_multiline_chart(series_list, title=title, meta=meta)
-    fig = json.loads(chart["json"])
-    fig["layout"]["plot_bgcolor"] = "#F4F6F8"
-    fig["layout"]["margin"]["t"] = 58
-    if "title" not in fig["layout"] or not fig["layout"]["title"]:
-        fig["layout"]["title"] = {
-            "text": title,
-            "font": {"size": 11, "color": "#64748b", "family": "Inter, sans-serif"},
-            "x": 0.5,
-            "xanchor": "center",
-        }
-    return {"div_id": chart["div_id"], "json": json.dumps(fig)}
+    chart = build_multiline_chart(series_list, title=None, meta=meta)
+    return _apply_detail_style(chart, title)
 
 
 def build_mom_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") -> Dict:
@@ -416,15 +419,9 @@ def build_mom_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36
         hovertemplate="<b>MoM</b> %{y:.2f}%<extra></extra>",
         showlegend=False,
     ))
-    fig.update_layout(_base_layout(height=320, title=title, margin_top=58))
+    fig.update_layout(_base_layout(height=320, title=None, margin_top=58))
     fig.update_layout(plot_bgcolor="#F4F6F8")
-    if "title" not in fig["layout"] or not fig["layout"]["title"]:
-        fig["layout"]["title"] = {
-            "text": title,
-            "font": {"size": 11, "color": "#64748b", "family": "Inter, sans-serif"},
-            "x": 0.5,
-            "xanchor": "center",
-        }
+    fig.add_annotation(**_detail_annotation(title))
     return {"div_id": _new_id(), "json": _to_json(fig)}
 
 
