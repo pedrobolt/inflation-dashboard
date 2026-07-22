@@ -168,7 +168,7 @@ def delta_str(current: float, previous: float) -> str:
     if abs(d) < 0.01:
         return "–"
     arrow = "↑" if d > 0 else "↓"
-    return f"{arrow} {abs(d):.2f}"
+    return f"{arrow} {d:+.2f}"
 
 
 def _fetch_in_chunks(collector: IBGECollector, start_period: str, end_period: str, chunk_years: int = 2):
