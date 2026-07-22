@@ -21,9 +21,17 @@ def _clean(records: List[Dict]) -> List[Dict]:
     return records
 
 
+def _reindex_monthly(df: pd.DataFrame) -> pd.DataFrame:
+    """Preenche meses ausentes no calendário (ex.: divulgação pulada por shutdown do governo)
+    com NaN, para que .shift()/.rolling() comparem sempre o mês certo, não a posição na lista."""
+    s = df.sort_values("date").set_index("date")
+    full_range = pd.date_range(s.index.min(), s.index.max(), freq="MS")
+    return s.reindex(full_range).rename_axis("date").reset_index()
+
+
 def _index_to_series(df: pd.DataFrame, meta: Optional[float] = US_TARGET) -> List[Dict]:
     """Nível do índice ['date','value'] -> registros com mom/yoy/saar1/saar3/saar6/meta."""
-    s = df.sort_values("date").reset_index(drop=True)
+    s = _reindex_monthly(df)
     s["period"] = s["date"].dt.to_period("M").dt.strftime("%Y%m")
     s["mom"] = (s["value"] / s["value"].shift(1) - 1) * 100
     s["yoy"] = (s["value"] / s["value"].shift(12) - 1) * 100
@@ -38,7 +46,7 @@ def _index_to_series(df: pd.DataFrame, meta: Optional[float] = US_TARGET) -> Lis
 
 def _rate_to_series(df: pd.DataFrame, smooth: int = 0) -> List[Dict]:
     """Série já em taxa (%) -> registros com a taxa na chave 'yoy' (p/ multiline)."""
-    s = df.sort_values("date").reset_index(drop=True)
+    s = _reindex_monthly(df)
     s["period"] = s["date"].dt.to_period("M").dt.strftime("%Y%m")
     s["yoy"] = s["value"].rolling(smooth, min_periods=smooth).mean() if smooth else s["value"]
     return _clean(s[["period", "yoy"]].to_dict("records"))
