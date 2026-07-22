@@ -193,7 +193,7 @@ section {
         {% for row in resumo %}
         <tr class="{% if row.metric == 'Índice Geral' %}lvl0 header{% else %}lvl1 top-sep{% endif %}">
           <td class="label" style="padding-left:{% if row.metric == 'Índice Geral' %}16{% else %}34{% endif %}px">{{ row.metric }}</td>
-          <td class="muted">{{ '%.1f'|format(row.weight) }}</td>
+          <td class="muted">{{ '%.1f'|format(row.weight) if row.weight is not none else '–' }}</td>
           <td class="sep-l muted">{{ '%.2f'|format(row.mom_t_12) if row.mom_t_12 is not none else '–' }}</td>
           <td class="muted">{{ '%.2f'|format(row.mom_t_2) if row.mom_t_2 is not none else '–' }}</td>
           <td class="muted">{{ '%.2f'|format(row.mom_t_1) if row.mom_t_1 is not none else '–' }}</td>
@@ -272,17 +272,12 @@ section {
   <div id="surpresa-{{ cat }}" class="tab-content {% if loop.first %}active{% endif %}">
     <section>
       <div class="title-bar">
-        <h2>IPCA - {{ cat }} | Surpresa mensal em relação ao Focus</h2>
-        <div class="sub">(em bps, Surpresa = realizado(t) − média de 4 projeções Focus para o mês t)</div>
+        <h2>{% if cat == 'IPCA' %}IPCA | Surpresa mensal em relação ao Focus{% else %}IPCA - {{ cat }} | Surpresa mensal em relação ao Focus{% endif %}</h2>
+        <div class="sub">(em bps, Surpresa = realizado(t) − média de 4 projeções Focus para o mês t, capturadas no dia anterior ao IPCA dos meses t, t-1, t-2 e t-3)</div>
       </div>
       <div class="accent-line"></div>
-      <div class="row-70-30">
-        <div>
-          <div id="{{ charts.main.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
-        </div>
-        <div>
-          <div id="{{ charts.detail.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
-        </div>
+      <div>
+        <div id="{{ charts.main.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
       </div>
     </section>
   </div>
@@ -302,7 +297,12 @@ section {
   <div id="grupo-{{ cat }}" class="tab-content {% if loop.first %}active{% endif %}">
     <section>
       <div class="title-bar">
-        <h2>IPCA | Média dos núcleos de {{ cat }}</h2>
+        <h2>
+          IPCA | Média dos núcleos
+          {% if cat == 'BCB' %}do BCB
+          {% elif cat == 'Alimentação' %}de Alimentação no Domicílio
+          {% else %}de {{ cat }}{% endif %}
+        </h2>
         <div class="sub">(variação anualizada)</div>
       </div>
       <div class="accent-line"></div>
@@ -311,39 +311,39 @@ section {
           <div id="{{ data.charts.main.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
         </div>
         <div>
-          <div id="{{ data.charts.detail.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+          <table class="ipca-tbl grupos-tbl">
+            <thead>
+              <tr>
+                <th rowspan="2" class="label">Métrica</th>
+                <th colspan="3" class="kind">1M SAAR</th>
+                <th colspan="3" class="kind sep-l">3M SAAR</th>
+                <th colspan="3" class="kind sep-l">YoY</th>
+              </tr>
+              <tr>
+                <th class="tcol">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
+                <th class="tcol sep-l">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
+                <th class="tcol sep-l">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in data.subnuclei %}
+              <tr class="{% if loop.first %}group{% endif %}">
+                <td class="label">{{ row.name }}</td>
+                <td>{{ '%.2f'|format(row.saar1) if row.saar1 is not none else '–' }}</td>
+                <td class="delta" style="{{ delta_style(row.saar1, row.prev1_saar1) }}">{{ delta_str(row.saar1, row.prev1_saar1) }}</td>
+                <td class="delta" style="{{ delta_style(row.saar1, row.prev12_saar1) }}">{{ delta_str(row.saar1, row.prev12_saar1) }}</td>
+                <td class="sep-l">{{ '%.2f'|format(row.saar3) if row.saar3 is not none else '–' }}</td>
+                <td class="delta" style="{{ delta_style(row.saar3, row.prev1_saar3) }}">{{ delta_str(row.saar3, row.prev1_saar3) }}</td>
+                <td class="delta" style="{{ delta_style(row.saar3, row.prev12_saar3) }}">{{ delta_str(row.saar3, row.prev12_saar3) }}</td>
+                <td class="sep-l">{{ '%.2f'|format(row.yoy) if row.yoy is not none else '–' }}</td>
+                <td class="delta" style="{{ delta_style(row.yoy, row.prev1_yoy) }}">{{ delta_str(row.yoy, row.prev1_yoy) }}</td>
+                <td class="delta" style="{{ delta_style(row.yoy, row.prev12_yoy) }}">{{ delta_str(row.yoy, row.prev12_yoy) }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
-
-      <table class="ipca-tbl grupos-tbl">
-        <thead>
-          <tr>
-            <th rowspan="2" class="label">Métrica</th>
-            <th colspan="3" class="kind">1M SAAR</th>
-            <th colspan="3" class="kind sep-l">3M SAAR</th>
-            <th colspan="3" class="kind sep-l">YoY</th>
-          </tr>
-          <tr>
-            <th class="tcol">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
-            <th class="tcol sep-l">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
-            <th class="tcol sep-l">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="group">
-            <td class="label">{{ cat }}</td>
-            <td>{{ '%.2f'|format(data.latest.saar1) if data.latest.saar1 is not none else '–' }}</td>
-            <td class="delta" style="{{ delta_style(data.latest.saar1, data.prev.saar1) }}">{{ delta_str(data.latest.saar1, data.prev.saar1) }}</td>
-            <td class="delta" style="{{ delta_style(data.latest.saar1, data.prev12.saar1) }}">{{ delta_str(data.latest.saar1, data.prev12.saar1) }}</td>
-            <td class="sep-l">{{ '%.2f'|format(data.latest.saar3) if data.latest.saar3 is not none else '–' }}</td>
-            <td class="delta" style="{{ delta_style(data.latest.saar3, data.prev.saar3) }}">{{ delta_str(data.latest.saar3, data.prev.saar3) }}</td>
-            <td class="delta" style="{{ delta_style(data.latest.saar3, data.prev12.saar3) }}">{{ delta_str(data.latest.saar3, data.prev12.saar3) }}</td>
-            <td class="sep-l">{{ '%.2f'|format(data.latest.yoy) if data.latest.yoy is not none else '–' }}</td>
-            <td class="delta" style="{{ delta_style(data.latest.yoy, data.prev.yoy) }}">{{ delta_str(data.latest.yoy, data.prev.yoy) }}</td>
-            <td class="delta" style="{{ delta_style(data.latest.yoy, data.prev12.yoy) }}">{{ delta_str(data.latest.yoy, data.prev12.yoy) }}</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
   </div>
   {% endfor %}
@@ -385,12 +385,10 @@ function switchSurpresa(comp) { switchSub('tab-surpresa', 'surpresa-', comp); }
 // Render Plotly charts
 {% for cat, charts in surpresa_charts.items() %}
 Plotly.newPlot("{{ charts.main.div_id }}", {{ charts.main.json|safe }}, {});
-Plotly.newPlot("{{ charts.detail.div_id }}", {{ charts.detail.json|safe }}, {});
 {% endfor %}
 
 {% for cat, data in grupos_data.items() %}
 Plotly.newPlot("{{ data.charts.main.div_id }}", {{ data.charts.main.json|safe }}, {});
-Plotly.newPlot("{{ data.charts.detail.div_id }}", {{ data.charts.detail.json|safe }}, {});
 {% endfor %}
 </script>
 </body>

@@ -121,7 +121,7 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         print(f"Aviso: não foi possível carregar projeções Focus: {e}")
         focus_proj = None
 
-    resumo = process_resumo(df_general, df_groups, period=latest_period)
+    resumo = process_resumo(df_general, df_groups, bcb_cores=bcb_cores, period=latest_period)
     destaques = process_destaques(df_groups[df_groups["periodo_codigo"] == latest_period], top_n=10)
     surpresa = process_surpresa(df_general, df_groups, projections=focus_proj)
     grupos = process_grupos(df_general, df_groups, bcb_cores=bcb_cores, period=latest_period)
@@ -137,40 +137,18 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
     # Constrói gráficos de Surpresa
     surpresa_charts = {}
     for cat, series in surpresa.items():
-        full_df = pd.DataFrame(series)
-        detail_df = full_df.tail(36)
         surpresa_charts[cat] = {
             "main": chart_builder.build_surprise_chart(series),
-            "detail": chart_builder.build_detail_chart(detail_df.to_dict("records"), title="DETALHE · ÚLT. 36M"),
         }
 
     # Constrói gráficos de Grupos
     grupos_data = {}
     for cat, data in grupos.items():
         series = data["series"]
-        full_df = pd.DataFrame(series)
-        detail_df = full_df.tail(36)
-
-        # Encontra valores anteriores para tabela
-        latest = data["latest"]
-        prev = {}
-        prev12 = {}
-        p = pd.Period(latest_period, freq="M")
-        prev_period = (p - 1).strftime("%Y%m")
-        prev12_period = (p - 12).strftime("%Y%m")
-        for key in ["saar1", "saar3", "yoy"]:
-            val = full_df[full_df["period"] == prev_period]
-            val12 = full_df[full_df["period"] == prev12_period]
-            prev[key] = float(val[key].iloc[-1]) if not val.empty and pd.notna(val[key].iloc[-1]) else None
-            prev12[key] = float(val12[key].iloc[-1]) if not val12.empty and pd.notna(val12[key].iloc[-1]) else None
-
         grupos_data[cat] = {
-            "latest": latest,
-            "prev": prev,
-            "prev12": prev12,
+            "subnuclei": data["subnuclei"],
             "charts": {
                 "main": chart_builder.build_group_chart(series, title=None),
-                "detail": chart_builder.build_detail_chart(detail_df.to_dict("records"), title="DETALHE · ÚLT. 36M"),
             }
         }
 

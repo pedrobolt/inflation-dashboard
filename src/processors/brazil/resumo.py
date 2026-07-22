@@ -3,7 +3,7 @@ Processador de dados do Resumo do IPCA no formato do protótipo.
 """
 
 import pandas as pd
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 
 # Grupos principais do IPCA (tabela 7060)
@@ -54,6 +54,11 @@ def _is_industrial(code_prefix: str) -> bool:
     """Classifica item como bem industrial pelo prefixo hierárquico."""
     return code_prefix in {"3101", "3102", "3103", "3201", "3202", "4101", "4102", "4103",
                            "4201", "4301", "4401", "6101", "6301", "7202"}
+
+
+def _is_passagem(name: str) -> bool:
+    """Identifica itens de passagem aérea."""
+    return "passagem aérea" in str(name).lower()
 
 
 def _classify_item(code: str, name: str) -> Dict[str, bool]:
@@ -164,7 +169,24 @@ def _lag_value(series_df: pd.DataFrame, period: str, col: str, lag: int) -> floa
     return float(val) if pd.notna(val) else None
 
 
-def process_resumo(df_general: pd.DataFrame, df_groups: pd.DataFrame, period: str = None) -> List[Dict]:
+def _core_yoy_series(core_df: pd.DataFrame, col: str) -> pd.DataFrame:
+    """Calcula YoY de uma série de núcleo a partir do índice acumulado."""
+    df = core_df[["data", col]].copy().rename(columns={col: "mom"})
+    df["periodo"] = df["data"].dt.to_period("M").dt.strftime("%Y%m")
+    df["periodo_codigo"] = df["periodo"]
+    df = df.sort_values("data").reset_index(drop=True)
+    df["index"] = (1 + df["mom"] / 100).cumprod()
+    df["yoy"] = (df["index"] / df["index"].shift(12) - 1) * 100
+    df["yoy"] = df["yoy"].where(df["index"].shift(12).notna())
+    return df[["periodo", "periodo_codigo", "mom", "yoy"]]
+
+
+def process_resumo(
+    df_general: pd.DataFrame,
+    df_groups: pd.DataFrame,
+    bcb_cores: Optional[pd.DataFrame] = None,
+    period: str = None,
+) -> List[Dict]:
     """
     Processa tabela resumo idêntica ao protótipo.
     Retorna lista de dicionários com: metric, weight, mom_t_12, mom_t_2, mom_t_1, mom,
@@ -204,6 +226,9 @@ def process_resumo(df_general: pd.DataFrame, df_groups: pd.DataFrame, period: st
     livres_df = _calc_category_series(df_groups, lambda c, n: _classify_item(c, n)["livre"])
     alim_df = _calc_category_series(df_groups, lambda c, n: _classify_item(c, n)["alimentacao_domicilio"])
     serv_df = _calc_category_series(df_groups, lambda c, n: _classify_item(c, n)["servico"])
+    serv_ex_pass_df = _calc_category_series(
+        df_groups, lambda c, n: _classify_item(c, n)["servico"] and not _is_passagem(n)
+    )
     ind_df = _calc_category_series(df_groups, lambda c, n: _classify_item(c, n)["industrial"])
 
     special_series = {
@@ -213,6 +238,7 @@ def process_resumo(df_general: pd.DataFrame, df_groups: pd.DataFrame, period: st
         "Alimentação no Domicílio": alim_df,
         "Industriais": ind_df,
         "Serviços": serv_df,
+        "Serviços ex-passagem": serv_ex_pass_df,
     }
 
     # Pesos das categorias especiais (soma dos pesos no período alvo, usando folhas)
@@ -242,9 +268,23 @@ def process_resumo(df_general: pd.DataFrame, df_groups: pd.DataFrame, period: st
             mask = df_p.apply(lambda r: _classify_item(r["item_codigo"], r["item"])["industrial"], axis=1)
         elif name == "Serviços":
             mask = df_p.apply(lambda r: _classify_item(r["item_codigo"], r["item"])["servico"], axis=1)
+        elif name == "Serviços ex-passagem":
+            mask = df_p.apply(
+                lambda r: _classify_item(r["item_codigo"], r["item"])["servico"] and not _is_passagem(r["item"]),
+                axis=1,
+            )
         else:
             mask = pd.Series(False, index=df_p.index)
         special_weights[name] = float(df_p.loc[mask, "peso"].sum()) if mask.any() else 0.0
+
+    # Núcleos do BCB (linhas sem peso / sem BPS)
+    core_series: Dict[str, pd.DataFrame] = {}
+    if bcb_cores is not None and not bcb_cores.empty:
+        core_cols = [c for c in ["EX0", "EX3", "MS", "DP", "P55"] if c in bcb_cores.columns]
+        for col in core_cols:
+            core_series[f"IPCA-{col}"] = _core_yoy_series(bcb_cores, col)
+        if "media" in bcb_cores.columns:
+            core_series["Média dos núcleos"] = _core_yoy_series(bcb_cores, "media")
 
     # Ordem das linhas no protótipo
     ordered_metrics = [
@@ -255,26 +295,32 @@ def process_resumo(df_general: pd.DataFrame, df_groups: pd.DataFrame, period: st
         "Alimentação no Domicílio",
         "Industriais",
         "Serviços",
-        "Alimentação e bebidas",
-        "Habitação",
-        "Artigos de residência",
-        "Vestuário",
-        "Transportes",
-        "Saúde e cuidados pessoais",
-        "Despesas pessoais",
-        "Educação",
-        "Comunicação",
+        "Serviços ex-passagem",
+        "Média dos núcleos",
+        "IPCA-EX0",
+        "IPCA-EX3",
+        "IPCA-MS",
+        "IPCA-DP",
+        "IPCA-P55",
     ]
 
     result = []
     for name in ordered_metrics:
-        if name in GROUP_CODES.values():
-            code = [k for k, v in GROUP_CODES.items() if v == name][0]
-            df_item = df_combined[df_combined["item_codigo"] == code].sort_values("periodo").reset_index(drop=True)
-            weight = float(target_weights.get(code, 0.0) if code != "7169" else 100.0)
-        else:
+        is_core = name in core_series
+        is_special = name in special_series
+        is_general = name == "Índice Geral"
+
+        if is_general:
+            df_item = df_combined[df_combined["item_codigo"] == "7169"].sort_values("periodo").reset_index(drop=True)
+            weight = 100.0
+        elif is_special:
             df_item = special_series[name].copy()
             weight = special_weights[name]
+        elif is_core:
+            df_item = core_series[name].copy()
+            weight = None
+        else:
+            continue
 
         if df_item.empty:
             continue
@@ -295,11 +341,11 @@ def process_resumo(df_general: pd.DataFrame, df_groups: pd.DataFrame, period: st
         yoy_t_12 = _lag_value(df_item, period, "yoy", 12)
 
         # BPS no IPCA geral = mom * 100 (para chegar em bps)
-        mom_bps = mom * 100 if mom is not None else None
+        mom_bps = mom * 100 if (mom is not None and weight is not None) else None
 
         result.append({
             "metric": name,
-            "weight": round(weight, 1),
+            "weight": round(weight, 1) if weight is not None else None,
             "mom_t_12": mom_t_12,
             "mom_t_2": mom_t_2,
             "mom_t_1": mom_t_1,

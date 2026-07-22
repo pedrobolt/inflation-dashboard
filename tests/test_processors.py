@@ -27,7 +27,17 @@ def test_process_resumo():
         "peso": [20.0, 20.0, 20.0, 15.0, 15.0, 15.0],
     })
 
-    result = process_resumo(df_general, df_groups, period="202403")
+    bcb_cores = pd.DataFrame({
+        "data": pd.to_datetime(["2024-01-01", "2024-02-01", "2024-03-01"]),
+        "EX0": [0.4, 0.5, 0.6],
+        "EX3": [0.3, 0.4, 0.5],
+        "MS": [0.35, 0.45, 0.55],
+        "DP": [0.45, 0.55, 0.65],
+        "P55": [0.5, 0.6, 0.7],
+        "media": [0.4, 0.5, 0.6],
+    })
+
+    result = process_resumo(df_general, df_groups, bcb_cores=bcb_cores, period="202403")
     assert len(result) > 0
 
     geral = next((r for r in result if r["metric"] == "Índice Geral"), None)
@@ -35,10 +45,9 @@ def test_process_resumo():
     assert geral["mom"] == 0.7
     assert geral["mom_t_1"] == 0.6
 
-    alimentacao = next((r for r in result if r["metric"] == "Alimentação e bebidas"), None)
-    assert alimentacao is not None
-    assert alimentacao["mom"] == 1.2
-    assert alimentacao["weight"] == 20.0
+    # O novo Resumo segue o protótipo: só Índice Geral, categorias especiais e núcleos
+    assert next((r for r in result if r["metric"] == "Alimentação e bebidas"), None) is None
+    assert next((r for r in result if r["metric"] == "IPCA-EX0"), None) is not None
 
 
 def test_process_destaques():

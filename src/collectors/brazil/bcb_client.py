@@ -12,11 +12,13 @@ class BCBClient:
 
     BASE_URL = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.{code}/dados"
 
-    # Códigos conhecidos para núcleos do IPCA
+    # Códigos dos núcleos utilizados no protótipo (novas séries do BCB)
     CORE_CODES = {
-        "EX0": 11426,  # IPCA ex alimentos e energia
-        "EX1": 11427,  # IPCA ex alimentos, energia e monitorados
-        "EX2": 11428,  # IPCA ex alimentos, energia, monitorados e administ
+        "EX0": 11427,   # Núcleo por exclusão EX0
+        "EX3": 27839,   # Núcleo por exclusão EX3
+        "MS": 4466,     # Médias aparadas com suavização
+        "DP": 16122,    # Dupla ponderação
+        "P55": 28750,   # Percentil 55
     }
 
     def __init__(self, timeout: int = 60):
@@ -54,7 +56,7 @@ class BCBClient:
         start_date: str = "01/01/2004",
         end_date: Optional[str] = None,
     ) -> pd.DataFrame:
-        """Busca os três núcleos disponíveis e retorna DataFrame combinado."""
+        """Busca os núcleos do protótipo e retorna DataFrame combinado."""
         if end_date is None:
             end_date = pd.Timestamp.now().strftime("%d/%m/%Y")
 
