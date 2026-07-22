@@ -56,6 +56,7 @@ def process_destaques(df_groups: pd.DataFrame, top_n: int = 10) -> Dict[str, Lis
     def format_item(row):
         full = str(row["item"])
         return {
+            "item_codigo": str(row["item_codigo"]),
             "name": _clean_item_name(full),
             "parent": _clean_item_name(_extract_parent(full)),
             "weight": round(float(row["peso"]), 2),

@@ -38,13 +38,29 @@ _VECTOR_MASK_NAMES = {
     "Alimentação": "Alimentação no domicílio",
 }
 
-# Ajustes da meta para cada categoria (em pp sobre 3,00%)
+# Ajustes da meta para cada categoria (nível atual, usado como âncora para o deslocamento
+# aplicado sobre o histórico real da meta do CMN/BCB)
 _CATEGORY_TARGETS = {
     "BCB": 3.00,
     "Serviços": 4.00,
     "Industriais": 1.25,
     "Alimentação": 3.00,
 }
+
+# Histórico real da meta de inflação do CMN/BCB (centro, % a.a.) por ano-calendário.
+_BCB_TARGET_HISTORY = {
+    2004: 5.50, 2005: 4.50, 2006: 4.50, 2007: 4.50, 2008: 4.50, 2009: 4.50,
+    2010: 4.50, 2011: 4.50, 2012: 4.50, 2013: 4.50, 2014: 4.50, 2015: 4.50,
+    2016: 4.50, 2017: 4.50, 2018: 4.50, 2019: 4.25, 2020: 4.00, 2021: 3.75,
+    2022: 3.50, 2023: 3.25, 2024: 3.00, 2025: 3.00, 2026: 3.00,
+}
+
+
+def _target_for_year(year: int) -> float:
+    if year in _BCB_TARGET_HISTORY:
+        return _BCB_TARGET_HISTORY[year]
+    years = sorted(_BCB_TARGET_HISTORY)
+    return _BCB_TARGET_HISTORY[years[0] if year < years[0] else years[-1]]
 
 
 def _name_has_any(name: str, keywords: List[str]) -> bool:
@@ -147,11 +163,17 @@ def _calc_saar(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _process_official_series(df_mom: pd.DataFrame, meta: float = 3.0) -> pd.DataFrame:
-    """Recebe DataFrame com 'period' e 'mom' e retorna série enriquecida."""
+    """Recebe DataFrame com 'period' e 'mom' e retorna série enriquecida.
+
+    A meta segue o histórico real do CMN/BCB, deslocado pela diferença entre o nível
+    atual da categoria (`meta`) e a meta oficial vigente hoje — categorias sem meta
+    oficial própria (ex.: Serviços, Industriais) acompanham o mesmo formato de degraus.
+    """
     df = df_mom.copy()
     df = df.sort_values("period").reset_index(drop=True)
     df = _calc_saar(_calc_yoy_from_mom(df))
-    df["meta"] = meta
+    offset = meta - _target_for_year(max(_BCB_TARGET_HISTORY))
+    df["meta"] = df["period"].astype(str).str[:4].astype(int).apply(_target_for_year) + offset
     return df
 
 

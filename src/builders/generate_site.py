@@ -190,6 +190,30 @@ def _fetch_in_chunks(collector: IBGECollector, start_period: str, end_period: st
     return df_general, df_groups
 
 
+def _build_destaques_seasonal(destaques: Dict, df_groups: pd.DataFrame) -> Dict:
+    """Gráficos de sazonalidade por subitem para os Top 10 positivos/negativos dos Destaques."""
+    colors = {
+        "positive": {"previous": "#FAB6C1", "current": "#EA243E"},
+        "negative": {"previous": "#C3C7D8", "current": "#445486"},
+    }
+    result = {"positive": [], "negative": []}
+    for kind in ("positive", "negative"):
+        for rank, item in enumerate(destaques.get(kind, []), start=1):
+            hist = df_groups[df_groups["item_codigo"].astype(str) == item["item_codigo"]]
+            hist = hist[["periodo_codigo", "mom"]].rename(columns={"periodo_codigo": "period"})
+            hist = hist.dropna(subset=["mom"]).sort_values("period").to_dict("records")
+            seasonal = chart_builder.calc_seasonality(hist)
+            chart = chart_builder.build_seasonal_chart(
+                months=seasonal["months"], current=seasonal["current"], previous=seasonal["previous"],
+                p10=seasonal["p10"], p90=seasonal["p90"], median=seasonal["median"],
+                current_year=seasonal["current_year"], previous_year=seasonal["previous_year"],
+                label=f"{rank}. {item['name']}",
+                color_previous=colors[kind]["previous"], color_current=colors[kind]["current"],
+            )
+            result[kind].append({"rank": rank, "name": item["name"], "chart": chart})
+    return result
+
+
 def build_data(start_period: str, end_period: str, collector: IBGECollector = None) -> Dict:
     collector = collector or IBGECollector()
     print(f"Buscando dados de {start_period} a {end_period}...")
@@ -241,6 +265,7 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         df_general, df_groups, bcb_cores=bcb_cores, core_weights=core_weights, period=latest_period
     )
     destaques = process_destaques(df_groups[df_groups["periodo_codigo"] == latest_period], top_n=10)
+    destaques_seasonal = _build_destaques_seasonal(destaques, df_groups)
     surpresa = process_surpresa(df_general, df_groups, projections=focus_proj)
     grupos = process_grupos(
         df_general,
@@ -383,6 +408,7 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         "period_label_upper": format_period_label(latest_period).upper(),
         "resumo": resumo,
         "destaques": destaques,
+        "destaques_seasonal": destaques_seasonal,
         "surpresa_categories": list(surpresa.keys()),
         "surpresa_charts": surpresa_charts,
         "grupos_categories": list(grupos.keys()),

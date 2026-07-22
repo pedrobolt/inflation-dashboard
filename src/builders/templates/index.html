@@ -137,7 +137,8 @@ section {
   margin: 4px 0 16px 0; padding: 6px 10px;
 }
 .custom-legend span { display: inline-flex; align-items: center; gap: 6px; }
-.legend-line { display: inline-block; width: 20px; height: 0; border-top: 2px dashed rgba(0,0,0,0.45); }
+.legend-line { display: inline-block; width: 20px; height: 0; border-top: 2px solid rgba(0,0,0,0.45); }
+.legend-line.dashed { border-style: dashed; }
 .legend-box { display: inline-block; width: 14px; height: 10px; background: rgba(0,0,0,0.06); border-radius: 2px; }
 
 @media (max-width: 800px) {
@@ -256,6 +257,29 @@ section {
         </table>
       </div>
     </div>
+
+    <div style="margin-top:40px;"></div>
+    <div class="title-bar">
+      <h2>IPCA | Sazonalidade</h2>
+      <div class="sub">(variação mensal, bruto)</div>
+    </div>
+    <div class="accent-line" style="margin-bottom:16px;"></div>
+    <div class="row-2">
+      <div>
+        {% for item in destaques_seasonal.positive %}
+        <div style="margin-bottom:24px;">
+          <div id="{{ item.chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+        </div>
+        {% endfor %}
+      </div>
+      <div>
+        {% for item in destaques_seasonal.negative %}
+        <div style="margin-bottom:24px;">
+          <div id="{{ item.chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
   </section>
 </div>
 
@@ -285,10 +309,10 @@ section {
         </div>
       </div>
       <div class="custom-legend">
-        <span><b>1M</b> ({{ charts.legend.m1 }})</span>
-        <span><b>3M</b> ({{ charts.legend.m3 }})</span>
-        <span><b>6M</b> ({{ charts.legend.m6 }})</span>
-        <span><b>12M</b> ({{ charts.legend.m12 }})</span>
+        <span><span class="legend-box" style="background:#E5E7EB;"></span><b>1M</b> ({{ charts.legend.m1 }})</span>
+        <span><span class="legend-line" style="border-color:#56B4E9;"></span><b>3M</b> ({{ charts.legend.m3 }})</span>
+        <span><span class="legend-line" style="border-color:#0072B2;"></span><b>6M</b> ({{ charts.legend.m6 }})</span>
+        <span><span class="legend-line" style="border-color:#009E73;"></span><b>12M</b> ({{ charts.legend.m12 }})</span>
       </div>
     </section>
   </div>
@@ -331,7 +355,7 @@ section {
         <span><span class="legend-line" style="border-color:#56B4E9;"></span><b>3M SAAR</b> ({{ '%.2f'|format(data.main_legend.saar3) }}%)</span>
         <span><span class="legend-line" style="border-color:#0072B2;"></span><b>6M SAAR</b> ({{ '%.2f'|format(data.main_legend.saar6) }}%)</span>
         <span><span class="legend-line" style="border-color:#009E73;"></span><b>YoY</b> ({{ '%.2f'|format(data.main_legend.yoy) }}%)</span>
-        <span><span class="legend-line" style="border-color:rgba(204,121,167,0.85);"></span>{{ data.main_legend.target_text }}</span>
+        <span><span class="legend-line dashed" style="border-color:rgba(204,121,167,0.85);"></span>{{ data.main_legend.target_text }}</span>
       </div>
       <table class="ipca-tbl grupos-tbl">
         <thead>
@@ -383,7 +407,7 @@ section {
         </div>
       </div>
       <div class="custom-legend">
-        <span><span class="legend-line" style="border-color:rgba(0,0,0,0.45);"></span>Mediana hist.</span>
+        <span><span class="legend-line dashed" style="border-color:rgba(0,0,0,0.45);"></span>Mediana hist.</span>
         <span><span class="legend-box" style="background:rgba(0,0,0,0.06);"></span>P10–P90</span>
         <span><span class="legend-line" style="border-color:#CC79A7;"></span>{{ data.seasonal_legend.previous_year }}</span>
         <span><span class="legend-line" style="border-color:#0072B2;"></span>{{ data.seasonal_legend.current_year }}</span>
@@ -411,7 +435,7 @@ section {
       <div class="custom-legend">
         <span style="color:{{ data.geral_headline.legend.index.color }}"><span class="legend-line" style="border-color:{{ data.geral_headline.legend.index.color }};"></span>{{ data.geral_headline.legend.index.label }}</span>
         <span style="color:{{ data.geral_headline.legend.core.color }}"><span class="legend-line" style="border-color:{{ data.geral_headline.legend.core.color }};"></span>{{ data.geral_headline.legend.core.label }}</span>
-        <span><span class="legend-line" style="border-color:rgba(0,0,0,0.45);"></span>{{ data.geral_headline.legend.target_text }}</span>
+        <span><span class="legend-line dashed" style="border-color:rgba(0,0,0,0.45);"></span>{{ data.geral_headline.legend.target_text }}</span>
       </div>
 
       <div style="margin-top:40px;"></div>
@@ -437,7 +461,7 @@ section {
         {% for item in data.geral_subnuclei.legend %}
         <span style="color:{{ item.color }}"><span class="legend-line" style="border-color:{{ item.color }};"></span>{{ item.label }}</span>
         {% endfor %}
-        <span><span class="legend-line" style="border-color:rgba(0,0,0,0.45);"></span>{{ data.geral_subnuclei.target_text }}</span>
+        <span><span class="legend-line dashed" style="border-color:rgba(0,0,0,0.45);"></span>{{ data.geral_subnuclei.target_text }}</span>
       </div>
     </section>
   </div>
@@ -479,6 +503,13 @@ function switchSurpresa(comp) { switchSub('tab-surpresa', 'surpresa-', comp); }
 
 // Render Plotly charts
 var PLOTLY_CONFIG = {displayModeBar: false, responsive: true};
+{% for item in destaques_seasonal.positive %}
+Plotly.newPlot("{{ item.chart.div_id }}", {{ item.chart.json|safe }}, PLOTLY_CONFIG);
+{% endfor %}
+{% for item in destaques_seasonal.negative %}
+Plotly.newPlot("{{ item.chart.div_id }}", {{ item.chart.json|safe }}, PLOTLY_CONFIG);
+{% endfor %}
+
 {% for cat, charts in surpresa_charts.items() %}
 Plotly.newPlot("{{ charts.main.div_id }}", {{ charts.main.json|safe }}, PLOTLY_CONFIG);
 Plotly.newPlot("{{ charts.detail.div_id }}", {{ charts.detail.json|safe }}, PLOTLY_CONFIG);

@@ -29,6 +29,10 @@ COLORS = {
 
 MONTHS_ABBR = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
 
+# Marcações de ano no eixo x (Dez/16 de cada ano, rótulo com 2 dígitos), igual ao protótipo
+_YEAR_TICKVALS = [f"{y}-12-16T00:00:00" for y in range(1979, 2030)]
+_YEAR_TICKTEXT = [f"{y % 100:02d}" for y in range(1980, 2031)]
+
 
 def _new_id() -> str:
     return str(uuid.uuid4())
@@ -142,6 +146,8 @@ def _base_layout(height: int = 450, margin_top: int = 18, margin_left: int = 50,
             "spikecolor": "rgba(0,0,0,0.25)",
             "spikemode": "across",
             "hoverformat": "%b/%Y",
+            "tickvals": _YEAR_TICKVALS,
+            "ticktext": _YEAR_TICKTEXT,
         },
         "yaxis": {
             "gridcolor": COLORS["grid_y"],
@@ -288,7 +294,8 @@ def build_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") 
 def build_seasonal_chart(months: List[int], current: List[float], previous: List[float],
                          p10: List[float], p90: List[float], median: List[float],
                          current_year: int = None, previous_year: int = None,
-                         label: str = None) -> Dict:
+                         label: str = None,
+                         color_previous: str = None, color_current: str = None) -> Dict:
     """Gráfico de sazonalidade: faixa P10-P90, mediana, ano anterior e ano corrente."""
     fig = go.Figure()
     fig.add_trace(go.Scatter(
@@ -314,19 +321,21 @@ def build_seasonal_chart(months: List[int], current: List[float], previous: List
         name="Mediana hist.",
         hovertemplate="<b>Mediana hist.</b> %{y:.2f}%<extra></extra>",
     ))
+    color_previous = color_previous or COLORS["pink"]
+    color_current = color_current or COLORS["primary"]
     fig.add_trace(go.Scatter(
         x=months, y=previous,
         mode="lines+markers",
-        line={"color": COLORS["pink"], "width": 1.5},
-        marker={"size": 7, "color": COLORS["pink"], "line": {"color": "white", "width": 1.5}},
+        line={"color": color_previous, "width": 1.5},
+        marker={"size": 7, "color": color_previous, "line": {"color": "white", "width": 1.5}},
         name=f"Ano anterior ({previous_year})" if previous_year else "Ano anterior",
         hovertemplate="<b>Anterior</b> %{y:.2f}%<extra></extra>",
     ))
     fig.add_trace(go.Scatter(
         x=months, y=current,
         mode="lines+markers",
-        line={"color": COLORS["primary"], "width": 2.0},
-        marker={"size": 7, "color": COLORS["primary"], "line": {"color": "white", "width": 1.5}},
+        line={"color": color_current, "width": 2.0},
+        marker={"size": 7, "color": color_current, "line": {"color": "white", "width": 1.5}},
         name=f"Ano corrente ({current_year})" if current_year else "Ano corrente",
         hovertemplate="<b>Corrente</b> %{y:.2f}%<extra></extra>",
     ))
