@@ -1,118 +1,88 @@
 # Inflation Dashboard
 
-Dashboard minimalista de inflação, com dados do IPCA (Brasil) e estrutura pronta para expansão para outros países (CPI dos EUA etc.).
+Painel de inflação **Brasil + Estados Unidos**, atualizado automaticamente e publicado em:
 
-Dados atualizados automaticamente via GitHub Actions e publicados no GitHub Pages.
+**https://pedrobolt.github.io/inflation-dashboard/**
 
-## Funcionalidades
+Site estático gerado por um pipeline em Python: coleta dados de fontes oficiais, processa e renderiza gráficos interativos (Plotly). Sem backend — tudo roda no GitHub Actions e é servido pelo GitHub Pages.
 
-- **Resumo:** variação mensal (MoM) e anual (YoY) do IPCA e dos 9 grupos principais.
-- **Destaques:** subitens com maior contribuição positiva e negativa em pontos-base (bps).
-- **Dinâmico:** seletor de mês/ano para navegar no histórico.
-- **Gráfico:** evolução histórica do IPCA mensal e acumulado em 12 meses.
+## O que o painel mostra
 
-## Tecnologias
+### 🇧🇷 Brasil (IPCA)
 
-- Python (ETL)
-- IBGE SIDRA (dados do IPCA)
-- GitHub Actions (atualização automática)
-- GitHub Pages (hospedagem)
-- Plotly.js (gráficos interativos)
+| Aba | Conteúdo |
+|-----|----------|
+| **Resumo** | Tabela com heatmap: MoM e YoY do índice geral, categorias (Livres, Administrados, Serviços, Industriais, Alimentação) e núcleos do BCB (EX0, EX3, MS, DP, P55) |
+| **Destaques** | Top 10 contribuições positivas e negativas em bps (peso × MoM) + sazonalidade de cada subitem |
+| **Surpresa** | Realizado vs. projeções Focus, em bps (1M, 3M, 6M, 12M), por categoria |
+| **Por Grupos** | SAAR 1M/3M/6M vs. YoY por grupo de núcleos, sazonalidade, headline vs. média dos núcleos e sub-núcleos individuais |
+
+Fontes: IBGE SIDRA (IPCA e subitens), BCB SGS (núcleos e categorias oficiais), BCB Focus (projeções), planilha de vetores de agregação do BCB (pesos).
+
+### 🇺🇸 Estados Unidos (CPI)
+
+| Aba | Conteúdo |
+|-----|----------|
+| **Resumo** | Momentum do core CPI (SAAR 1M/3M/6M vs. YoY) e comparação CPI vs. PCE (a meta de 2% do Fed é sobre o PCE) |
+| **Composição** | Os "três baldes" que o Fed acompanha: core goods, shelter e supercore, mais food e energy |
+| **Shelter** | CPI Shelter vs. aluguel de mercado (Zillow ZORI) — o ZORI antecipa o CPI Shelter em ~12 meses |
+| **Expectativas** | Breakevens de TIPS (5A e 5A5A forward), Michigan, e amplitude via median/trimmed-mean/sticky CPI |
+
+Fontes: FRED (St. Louis Fed) e Zillow Research (CSV público).
+
+## Como rodar localmente
+
+```bash
+git clone https://github.com/pedrobolt/inflation-dashboard.git
+cd inflation-dashboard
+pip install -r requirements.txt
+```
+
+Para o painel dos EUA, crie uma chave gratuita do FRED em
+https://fred.stlouisfed.org/docs/api/api_key.html e salve na raiz do projeto:
+
+```bash
+echo "FRED_API_KEY=sua_chave_aqui" > .env
+```
+
+(Sem a chave o build funciona normalmente, publicando só o painel Brasil.)
+
+Gere o site e sirva localmente:
+
+```bash
+python -m src.builders.generate_site
+cd site && python -m http.server 8000
+```
+
+Abra http://localhost:8000.
+
+Testes:
+
+```bash
+python tests/test_processors.py
+```
+
+## Atualização automática
+
+O GitHub Actions roda o pipeline nos dias **10 e 13 de cada mês** (quando IBGE e BLS já divulgaram os índices do mês anterior) e faz o deploy no GitHub Pages. Também dá para disparar manualmente em **Actions → Update Dashboard Data → Run workflow**.
+
+Para o painel EUA no deploy, cadastre a chave em **Settings → Secrets and variables → Actions** como `FRED_API_KEY`.
 
 ## Estrutura
 
 ```
-inflation-dashboard/
-├── src/
-│   ├── collectors/brazil/   # Coleta de dados do IBGE
-│   ├── processors/brazil/   # Processamento de Resumo e Destaques
-│   ├── builders/            # Geração do site estático
-│   └── builders/templates/  # Template HTML
-├── site/                    # Site gerado (publicado no GitHub Pages)
-│   ├── index.html
-│   ├── css/
-│   ├── js/
-│   └── data/brazil/
-├── .github/workflows/       # Automação
-├── tests/
-├── requirements.txt
-├── pyproject.toml
-└── README.md
+src/
+├── collectors/
+│   ├── brazil/     # IBGE SIDRA, BCB SGS, Focus, vetores de agregação
+│   └── us/         # FRED, Zillow ZORI
+├── processors/
+│   ├── brazil/     # Resumo, Destaques, Surpresa, Grupos + geradores de gráfico
+│   └── us/         # Painel EUA (reusa os geradores de gráfico)
+└── builders/       # Orquestração e template HTML (Jinja2)
+site/               # Site gerado (publicado no Pages)
+.github/workflows/  # Automação (cron + deploy)
+tests/              # Testes dos processadores
 ```
-
-## Como rodar localmente
-
-1. Clone o repositório:
-
-```bash
-git clone https://github.com/seu-usuario/inflation-dashboard.git
-cd inflation-dashboard
-```
-
-2. Crie um ambiente virtual (opcional, mas recomendado):
-
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# ou
-venv\Scripts\activate     # Windows
-```
-
-3. Instale as dependências:
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Execute o pipeline:
-
-```bash
-python -m src.builders.generate_site
-```
-
-5. Sirva o site localmente:
-
-```bash
-cd site
-python -m http.server 8000
-```
-
-6. Abra http://localhost:8000 no navegador.
-
-## Como publicar no GitHub Pages
-
-1. Crie um repositório público no GitHub.
-2. Envie o código:
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/seu-usuario/inflation-dashboard.git
-git push -u origin main
-```
-
-3. No GitHub, vá em **Settings > Pages**.
-4. Em **Source**, selecione **GitHub Actions**.
-5. O workflow `.github/workflows/update_data.yml` já está configurado para fazer o deploy automaticamente.
-
-## Atualização automática
-
-O GitHub Actions executa o pipeline nos dias **10 e 13 de cada mês**, quando o IBGE já divulgou o IPCA do mês anterior. Também é possível disparar manualmente em **Actions > Update Dashboard Data > Run workflow**.
-
-O workflow:
-1. Instala as dependências.
-2. Executa `python -m src.builders.generate_site`.
-3. Faz o deploy da pasta `site/` para o GitHub Pages.
-
-## Próximos passos (roadmap)
-
-- [ ] Surpresa do IPCA vs. projeções Focus (BCB)
-- [ ] Núcleos de inflação (BCB)
-- [ ] CPI dos EUA
-- [ ] Comparativo Brasil vs. EUA
-- [ ] Tema escuro
 
 ## Licença
 
