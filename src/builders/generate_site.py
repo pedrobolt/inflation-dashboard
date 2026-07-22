@@ -70,23 +70,23 @@ def _nucleos_used_text(cat: str, names: List[str]) -> str:
 
 def _subnucleo_color(i: int) -> str:
     colors = [
+        chart_builder.COLORS["orange"],
+        chart_builder.COLORS["accent"],
         chart_builder.COLORS["primary"],
         chart_builder.COLORS["green"],
-        chart_builder.COLORS["orange"],
         chart_builder.COLORS["pink"],
-        chart_builder.COLORS["dark_grey"],
     ]
     return colors[i % len(colors)]
 
 
 def _merge_comparison_series(headline: List[Dict], core: List[Dict]) -> List[Dict]:
-    """Combina série headline (índice/categoria) e série núcleo em uma única série."""
+    """Combina série headline (índice/categoria) e série núcleo em uma única série (YoY e 3M SAAR)."""
     hl = pd.DataFrame(headline)
     cr = pd.DataFrame(core)
     if hl.empty or cr.empty:
         return []
-    hl = hl[["period", "yoy"]].rename(columns={"yoy": "index"})
-    cr = cr[["period", "yoy", "meta"]].rename(columns={"yoy": "core"})
+    hl = hl[["period", "yoy", "saar3"]].rename(columns={"yoy": "index_yoy", "saar3": "index_saar3"})
+    cr = cr[["period", "yoy", "saar3", "meta"]].rename(columns={"yoy": "core_yoy", "saar3": "core_saar3"})
     merged = hl.merge(cr, on="period", how="outer").sort_values("period")
     return merged.to_dict("records")
 
@@ -285,7 +285,7 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         target = latest.get("target", 3.0)
         target_text = _target_legend(target, latest.get("yoy"), show_deviation=(cat != "BCB"))
 
-        main_chart = chart_builder.build_group_chart(series, title=None)
+        main_chart = chart_builder.build_group_chart(series)
         main_detail = chart_builder.build_detail_chart(
             pd.DataFrame(series).sort_values("period").tail(36).to_dict("records")
         )
@@ -302,46 +302,62 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
             "target_text": target_text,
         }
 
-        # Sazonalidade
-        seasonal = chart_builder.calc_seasonality(series)
-        seasonal_chart = chart_builder.build_seasonal_chart(
-            months=seasonal["months"],
-            current=seasonal["current"],
-            previous=seasonal["previous"],
-            p10=seasonal["p10"],
-            p90=seasonal["p90"],
-            median=seasonal["median"],
-            title=None,
-        )
-        mom_detail = chart_builder.build_mom_detail_chart(series)
-
-        # Geral: headline vs média dos núcleos
-        headline_series = data.get("headline_series", [])
-        comparison_series = _merge_comparison_series(headline_series, series)
         label_index = "Índice geral" if cat == "BCB" else _category_display(cat)
         label_core = subnuclei[0]["name"] if subnuclei else f"Média dos núcleos de {cat}"
+
+        # Sazonalidade: índice geral (headline) lado a lado com a média dos núcleos
+        headline_series = data.get("headline_series", [])
+        seasonal_index_calc = chart_builder.calc_seasonality(headline_series)
+        seasonal_core_calc = chart_builder.calc_seasonality(series)
+        seasonal_index_chart = chart_builder.build_seasonal_chart(
+            months=seasonal_index_calc["months"], current=seasonal_index_calc["current"],
+            previous=seasonal_index_calc["previous"], p10=seasonal_index_calc["p10"],
+            p90=seasonal_index_calc["p90"], median=seasonal_index_calc["median"],
+            current_year=seasonal_index_calc["current_year"], previous_year=seasonal_index_calc["previous_year"],
+            label=label_index,
+        )
+        seasonal_core_chart = chart_builder.build_seasonal_chart(
+            months=seasonal_core_calc["months"], current=seasonal_core_calc["current"],
+            previous=seasonal_core_calc["previous"], p10=seasonal_core_calc["p10"],
+            p90=seasonal_core_calc["p90"], median=seasonal_core_calc["median"],
+            current_year=seasonal_core_calc["current_year"], previous_year=seasonal_core_calc["previous_year"],
+            label=label_core,
+        )
+        seasonal_legend = {
+            "previous_year": seasonal_core_calc["previous_year"],
+            "current_year": seasonal_core_calc["current_year"],
+        }
+
+        # Geral: headline vs média dos núcleos (3M SAAR e YoY lado a lado)
+        comparison_series = _merge_comparison_series(headline_series, series)
         geral_headline = {
-            "chart": chart_builder.build_comparison_chart(
-                comparison_series, label_index=label_index, label_core=label_core, title=None
+            "saar3": chart_builder.build_comparison_chart(
+                comparison_series, label_index=label_index, label_core=label_core,
+                metric="saar3", label="Variação 3M SAAR",
             ),
-            "detail": chart_builder.build_detail_comparison_chart(
-                comparison_series, label_index=label_index, label_core=label_core
+            "yoy": chart_builder.build_comparison_chart(
+                comparison_series, label_index=label_index, label_core=label_core,
+                metric="yoy", label="Variação YoY",
             ),
             "legend": {
-                "index": {"label": label_index, "color": chart_builder.COLORS["pink"]},
-                "core": {"label": label_core, "color": chart_builder.COLORS["primary"]},
+                "index": {"label": label_index, "color": chart_builder.COLORS["accent"]},
+                "core": {"label": label_core, "color": chart_builder.COLORS["pink"]},
                 "target_text": target_text,
             },
         }
 
-        # Geral: sub-núcleos individuais
+        # Geral: sub-núcleos individuais (3M SAAR e YoY lado a lado)
         individual_series = [
             {"name": n["name"], "series": n["series"]}
             for n in subnuclei[1:]
         ]
         geral_subnuclei = {
-            "chart": chart_builder.build_multiline_chart(individual_series, title=None, meta=target),
-            "detail": chart_builder.build_detail_multiline_chart(individual_series, title="DETALHE · ÚLT. 36M", meta=target),
+            "saar3": chart_builder.build_multiline_chart(
+                individual_series, metric="saar3", meta=target, label="Variação 3M SAAR"
+            ),
+            "yoy": chart_builder.build_multiline_chart(
+                individual_series, metric="yoy", meta=target, label="Variação YoY"
+            ),
             "legend": [
                 {"label": n["name"], "color": _subnucleo_color(i)}
                 for i, n in enumerate(subnuclei[1:])
@@ -354,8 +370,9 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
             "main_chart": main_chart,
             "main_detail": main_detail,
             "main_legend": main_legend,
-            "seasonal_chart": seasonal_chart,
-            "seasonal_detail": mom_detail,
+            "seasonal_index_chart": seasonal_index_chart,
+            "seasonal_core_chart": seasonal_core_chart,
+            "seasonal_legend": seasonal_legend,
             "geral_headline": geral_headline,
             "geral_subnuclei": geral_subnuclei,
         }

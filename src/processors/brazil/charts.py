@@ -27,13 +27,16 @@ COLORS = {
     "zero_line": "rgba(0,0,0,0.18)",
 }
 
+MONTHS_ABBR = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
+
 
 def _new_id() -> str:
     return str(uuid.uuid4())
 
 
-def _detail_annotation(text: str = "DETALHE · ÚLT. 36M") -> Dict:
-    """Anotação de rótulo usada nos gráficos de detalhe, no formato do protótipo."""
+def _label_annotation(text: str) -> Dict:
+    """Anotação de rótulo no canto superior esquerdo, no formato do protótipo (usada em
+    gráficos de detalhe 'DETALHE · ÚLT. 36M' e nos rótulos de métrica/série dos pares lado a lado)."""
     return {
         "font": {"color": "#64748b", "family": "'Inter', sans-serif", "size": 13},
         "showarrow": False,
@@ -53,9 +56,9 @@ def _apply_detail_style(chart: Dict, title: str = "DETALHE · ÚLT. 36M") -> Dic
     """Aplica fundo cinza, margem superior e anotação de rótulo de um gráfico de detalhe."""
     fig = json.loads(chart["json"])
     fig["layout"]["plot_bgcolor"] = "#F4F6F8"
+    fig["layout"]["paper_bgcolor"] = "#F4F6F8"
     fig["layout"]["margin"]["t"] = 58
-    fig["layout"].pop("title", None)
-    fig["layout"]["annotations"] = fig["layout"].get("annotations", []) + [_detail_annotation(title)]
+    fig["layout"]["annotations"] = fig["layout"].get("annotations", []) + [_label_annotation(title)]
     return {"div_id": chart["div_id"], "json": json.dumps(fig)}
 
 
@@ -117,39 +120,46 @@ def _parse_period(period_code: str) -> pd.Timestamp:
     return pd.to_datetime(period_code, format="%Y%m")
 
 
-def _base_layout(height: int = 450, title: str = None, margin_top: int = 18) -> Dict:
+def _base_layout(height: int = 450, margin_top: int = 18, margin_left: int = 50,
+                 margin_bottom: int = 40, margin_right: int = 30,
+                 y_rangemode: Optional[str] = None) -> Dict:
     layout = {
-        "font": {"family": "'Source Sans 3', sans-serif", "color": COLORS["text"]},
-        "paper_bgcolor": "rgba(0,0,0,0)",
+        "font": {"family": "'Source Sans 3', sans-serif", "color": COLORS["text"], "size": 12},
+        "paper_bgcolor": "rgba(250,250,250,0.5)",
         "plot_bgcolor": "rgba(250,250,250,0.5)",
         "height": height,
-        "margin": {"t": margin_top, "b": 40, "l": 50, "r": 30},
+        "margin": {"t": margin_top, "b": margin_bottom, "l": margin_left, "r": margin_right},
         "showlegend": False,
+        "hovermode": "x unified",
         "xaxis": {
             "gridcolor": COLORS["grid"],
             "zeroline": False,
-            "showline": True,
-            "linecolor": COLORS["grid_y"],
-            "tickfont": {"size": 11, "color": COLORS["dark_grey"], "family": "Inter, sans-serif"},
+            "showgrid": True,
+            "tickfont": {"size": 13, "color": COLORS["dark_grey"], "family": "'Inter', sans-serif"},
+            "showspikes": True,
+            "spikethickness": 1,
+            "spikedash": "dot",
+            "spikecolor": "rgba(0,0,0,0.25)",
+            "spikemode": "across",
+            "hoverformat": "%b/%Y",
         },
         "yaxis": {
             "gridcolor": COLORS["grid_y"],
             "zeroline": False,
-            "showline": True,
-            "linecolor": COLORS["grid_y"],
-            "tickfont": {"size": 11, "color": COLORS["dark_grey"], "family": "Inter, sans-serif"},
+            "tickfont": {"size": 13, "color": COLORS["dark_grey"], "family": "'Inter', sans-serif"},
             "ticksuffix": "%",
             "tickformat": ".1f",
             "hoverformat": ".2f",
         },
         "hoverlabel": {
-            "bgcolor": "rgba(255,255,255,0.85)",
+            "bgcolor": "rgba(255,255,255,0.72)",
             "bordercolor": "rgba(0,0,0,0.10)",
             "font": {"family": "'Source Sans 3', sans-serif", "size": 12},
+            "align": "left",
         },
         "shapes": [{
             "type": "line",
-            "xref": "paper",
+            "xref": "x domain",
             "x0": 0,
             "x1": 1,
             "yref": "y",
@@ -158,13 +168,8 @@ def _base_layout(height: int = 450, title: str = None, margin_top: int = 18) -> 
             "line": {"color": COLORS["zero_line"], "width": 1},
         }],
     }
-    if title:
-        layout["title"] = {
-            "text": title,
-            "font": {"size": 11, "color": "#64748b", "family": "Inter, sans-serif"},
-            "x": 0,
-            "xanchor": "left",
-        }
+    if y_rangemode:
+        layout["yaxis"]["rangemode"] = y_rangemode
     return layout
 
 
@@ -181,14 +186,14 @@ def build_general_history_chart(series: List[Dict]) -> Dict:
         x=df["date"], y=df["mom"],
         mode="lines",
         name="MoM",
-        line={"color": COLORS["accent"], "width": 2},
+        line={"color": COLORS["accent"], "width": 1.8},
         hovertemplate="<b>MoM</b> %{y:.2f}%<extra></extra>",
     ))
     fig.add_trace(go.Scatter(
         x=df["date"], y=df["yoy"],
         mode="lines",
         name="YoY",
-        line={"color": COLORS["green"], "width": 2},
+        line={"color": COLORS["green"], "width": 2.5},
         hovertemplate="<b>YoY</b> %{y:.2f}%<extra></extra>",
     ))
     fig.update_layout(_base_layout(height=420, margin_top=18))
@@ -211,66 +216,20 @@ def build_surprise_chart(series: List[Dict]) -> Dict:
         opacity=0.85,
         hovertemplate="<b>1M</b> %{y:.0f}<extra></extra>",
     ))
-    for col, color, label in [("m3", COLORS["accent"], "3M"),
-                              ("m6", COLORS["primary"], "6M"),
-                              ("m12", COLORS["green"], "12M")]:
+    for col, color, width, label in [("m3", COLORS["accent"], 1.8, "3M"),
+                                     ("m6", COLORS["primary"], 2.2, "6M"),
+                                     ("m12", COLORS["green"], 2.5, "12M")]:
         if col in df.columns:
             fig.add_trace(go.Scatter(
                 x=df["date"], y=df[col],
                 mode="lines",
                 name=label,
-                line={"color": color, "width": 2},
+                line={"color": color, "width": width},
                 hovertemplate=f"<b>{label}</b> %{{y:.0f}}<extra></extra>",
             ))
-    fig.update_layout(_base_layout(height=450, margin_top=18))
+    fig.update_layout(_base_layout(height=450, margin_top=18, margin_left=40, y_rangemode="tozero"))
     fig.update_layout(yaxis={"ticksuffix": "", "tickformat": ".0f", "hoverformat": ".0f"})
     return {"div_id": _new_id(), "json": _to_json(fig)}
-
-
-def build_group_chart(series: List[Dict], title: str = None) -> Dict:
-    """Gráfico de núcleos (1M SAAR, 3M SAAR, 6M SAAR, YoY)."""
-    df = pd.DataFrame(series)
-    if df.empty:
-        return {"div_id": _new_id(), "json": _to_json(go.Figure())}
-    df = df.sort_values("period")
-    df["date"] = df["period"].apply(lambda x: _parse_period(str(x)))
-
-    fig = go.Figure()
-    # meta BCB tracejada
-    if "meta" in df.columns and df["meta"].notna().any():
-        fig.add_trace(go.Scatter(
-            x=df["date"], y=df["meta"],
-            mode="lines",
-            name="Meta BCB",
-            line={"color": "rgba(204,121,167,0.30)", "dash": "dot", "width": 1.4},
-            hoverinfo="skip",
-        ))
-    fig.add_trace(go.Bar(
-        x=df["date"], y=df.get("saar1", df.get("mom", [])),
-        name="1M SAAR",
-        marker_color=COLORS["grey"],
-        opacity=0.85,
-        hovertemplate="<b>1M SAAR</b> %{y:.2f}%<extra></extra>",
-    ))
-    for col, color, label in [("saar3", COLORS["accent"], "3M SAAR"),
-                              ("saar6", COLORS["primary"], "6M SAAR"),
-                              ("yoy", COLORS["green"], "YoY")]:
-        if col in df.columns:
-            fig.add_trace(go.Scatter(
-                x=df["date"], y=df[col],
-                mode="lines",
-                name=label,
-                line={"color": color, "width": 2},
-                hovertemplate=f"<b>{label}</b> %{{y:.2f}}%<extra></extra>",
-            ))
-    fig.update_layout(_base_layout(height=450, title=title, margin_top=18))
-    return {"div_id": _new_id(), "json": _to_json(fig)}
-
-
-def build_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") -> Dict:
-    """Gráfico de detalhe dos últimos 36 meses com fundo #F4F6F8."""
-    chart = build_group_chart(series, title=None)
-    return _apply_detail_style(chart, title)
 
 
 def build_detail_surprise_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") -> Dict:
@@ -279,9 +238,57 @@ def build_detail_surprise_chart(series: List[Dict], title: str = "DETALHE · ÚL
     return _apply_detail_style(chart, title)
 
 
+def build_group_chart(series: List[Dict]) -> Dict:
+    """Gráfico de núcleos (1M SAAR, 3M SAAR, 6M SAAR, YoY)."""
+    df = pd.DataFrame(series)
+    if df.empty:
+        return {"div_id": _new_id(), "json": _to_json(go.Figure())}
+    df = df.sort_values("period")
+    df["date"] = df["period"].apply(lambda x: _parse_period(str(x)))
+
+    fig = go.Figure()
+    # meta BCB tracejada (linha em degraus)
+    if "meta" in df.columns and df["meta"].notna().any():
+        fig.add_trace(go.Scatter(
+            x=df["date"], y=df["meta"],
+            mode="lines",
+            line_shape="hv",
+            name="Meta BCB",
+            line={"color": "rgba(204,121,167,0.85)", "dash": "dash", "width": 1.4},
+            hovertemplate="<b>Meta BCB</b> %{y:.2f}%<extra></extra>",
+        ))
+    fig.add_trace(go.Bar(
+        x=df["date"], y=df.get("saar1", df.get("mom", [])),
+        name="1M SAAR",
+        marker_color=COLORS["grey"],
+        opacity=0.85,
+        hovertemplate="<b>1M SAAR</b> %{y:.2f}%<extra></extra>",
+    ))
+    for col, color, width, label in [("saar3", COLORS["accent"], 1.8, "3M SAAR"),
+                                     ("saar6", COLORS["primary"], 2.2, "6M SAAR"),
+                                     ("yoy", COLORS["green"], 2.5, "YoY")]:
+        if col in df.columns:
+            fig.add_trace(go.Scatter(
+                x=df["date"], y=df[col],
+                mode="lines",
+                name=label,
+                line={"color": color, "width": width},
+                hovertemplate=f"<b>{label}</b> %{{y:.2f}}%<extra></extra>",
+            ))
+    fig.update_layout(_base_layout(height=450, margin_top=18, margin_left=55, y_rangemode="tozero"))
+    return {"div_id": _new_id(), "json": _to_json(fig)}
+
+
+def build_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") -> Dict:
+    """Gráfico de detalhe dos últimos 36 meses com fundo #F4F6F8."""
+    chart = build_group_chart(series)
+    return _apply_detail_style(chart, title)
+
+
 def build_seasonal_chart(months: List[int], current: List[float], previous: List[float],
                          p10: List[float], p90: List[float], median: List[float],
-                         title: str = None) -> Dict:
+                         current_year: int = None, previous_year: int = None,
+                         label: str = None) -> Dict:
     """Gráfico de sazonalidade: faixa P10-P90, mediana, ano anterior e ano corrente."""
     fig = go.Figure()
     fig.add_trace(go.Scatter(
@@ -303,125 +310,121 @@ def build_seasonal_chart(months: List[int], current: List[float], previous: List
     fig.add_trace(go.Scatter(
         x=months, y=median,
         mode="lines",
-        line={"color": "rgba(0,0,0,0.45)", "dash": "dot", "width": 1.4},
-        name="Mediana",
-        hovertemplate="<b>Mediana</b> %{y:.2f}%<extra></extra>",
+        line={"color": "rgba(0,0,0,0.45)", "dash": "dash", "width": 1.4},
+        name="Mediana hist.",
+        hovertemplate="<b>Mediana hist.</b> %{y:.2f}%<extra></extra>",
     ))
     fig.add_trace(go.Scatter(
         x=months, y=previous,
         mode="lines+markers",
-        line={"color": "#FAB6C1", "width": 1.5},
-        marker={"size": 5, "color": "#FAB6C1"},
-        name="Anterior",
+        line={"color": COLORS["pink"], "width": 1.5},
+        marker={"size": 7, "color": COLORS["pink"], "line": {"color": "white", "width": 1.5}},
+        name=f"Ano anterior ({previous_year})" if previous_year else "Ano anterior",
         hovertemplate="<b>Anterior</b> %{y:.2f}%<extra></extra>",
     ))
     fig.add_trace(go.Scatter(
         x=months, y=current,
         mode="lines+markers",
-        line={"color": "#EA243E", "width": 2},
-        marker={"size": 5, "color": "#EA243E"},
-        name="Corrente",
+        line={"color": COLORS["primary"], "width": 2.0},
+        marker={"size": 7, "color": COLORS["primary"], "line": {"color": "white", "width": 1.5}},
+        name=f"Ano corrente ({current_year})" if current_year else "Ano corrente",
         hovertemplate="<b>Corrente</b> %{y:.2f}%<extra></extra>",
     ))
-    fig.update_layout(_base_layout(height=320, title=title, margin_top=52))
+    layout = _base_layout(height=450, margin_top=52, margin_left=42, margin_bottom=22, margin_right=10)
+    layout["xaxis"].update({
+        "tickmode": "array",
+        "tickvals": list(range(1, 13)),
+        "ticktext": MONTHS_ABBR,
+        "range": [0.5, 12.5],
+    })
+    if label:
+        layout["annotations"] = [_label_annotation(label.upper())]
+    fig.update_layout(layout)
     return {"div_id": _new_id(), "json": _to_json(fig)}
 
 
 def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral",
-                           label_core: str = "Média dos núcleos", title: str = None) -> Dict:
-    """Gráfico de comparação headline vs média dos núcleos (YoY)."""
+                           label_core: str = "Média dos núcleos", metric: str = "yoy",
+                           label: str = None) -> Dict:
+    """Gráfico de comparação headline vs média dos núcleos (YoY ou 3M SAAR)."""
     df = pd.DataFrame(series)
     if df.empty:
         return {"div_id": _new_id(), "json": _to_json(go.Figure())}
     df = df.sort_values("period")
     df["date"] = df["period"].apply(lambda x: _parse_period(str(x)))
 
+    index_col = f"index_{metric}"
+    core_col = f"core_{metric}"
+
     fig = go.Figure()
-    if "index" in df.columns:
-        fig.add_trace(go.Scatter(
-            x=df["date"], y=df["index"],
-            mode="lines",
-            name=label_index,
-            line={"color": COLORS["pink"], "width": 1.5},
-            hovertemplate=f"<b>{label_index}</b> %{{y:.2f}}%<extra></extra>",
-        ))
-    if "core" in df.columns:
-        fig.add_trace(go.Scatter(
-            x=df["date"], y=df["core"],
-            mode="lines",
-            name=label_core,
-            line={"color": COLORS["primary"], "width": 2},
-            hovertemplate=f"<b>{label_core}</b> %{{y:.2f}}%<extra></extra>",
-        ))
     if "meta" in df.columns and df["meta"].notna().any():
         fig.add_trace(go.Scatter(
             x=df["date"], y=df["meta"],
             mode="lines",
+            line_shape="hv",
             name="Meta BCB",
-            line={"color": "rgba(204,121,167,0.30)", "dash": "dot", "width": 1.4},
-            hoverinfo="skip",
+            line={"color": "rgba(0,0,0,0.45)", "dash": "dash", "width": 1.4},
+            hovertemplate="<b>Meta BCB</b> %{y:.2f}%<extra></extra>",
         ))
-    fig.update_layout(_base_layout(height=320, title=title, margin_top=52))
+    if index_col in df.columns:
+        fig.add_trace(go.Scatter(
+            x=df["date"], y=df[index_col],
+            mode="lines",
+            name=label_index,
+            line={"color": COLORS["accent"], "width": 1.8},
+            hovertemplate=f"<b>{label_index}</b> %{{y:.2f}}%<extra></extra>",
+        ))
+    if core_col in df.columns:
+        fig.add_trace(go.Scatter(
+            x=df["date"], y=df[core_col],
+            mode="lines",
+            name=label_core,
+            line={"color": COLORS["pink"], "width": 2.5},
+            hovertemplate=f"<b>{label_core}</b> %{{y:.2f}}%<extra></extra>",
+        ))
+    layout = _base_layout(height=450, margin_top=52, margin_left=35, margin_bottom=40, margin_right=20,
+                          y_rangemode="tozero")
+    if label:
+        layout["annotations"] = [_label_annotation(label.upper())]
+    fig.update_layout(layout)
     return {"div_id": _new_id(), "json": _to_json(fig)}
 
 
-def build_detail_comparison_chart(series: List[Dict], label_index: str = "Índice geral",
-                                  label_core: str = "Média dos núcleos",
-                                  title: str = "DETALHE · ÚLT. 36M") -> Dict:
-    """Versão detalhada (últimos 36 meses) da comparação headline vs núcleos."""
-    chart = build_comparison_chart(series, label_index=label_index, label_core=label_core, title=None)
-    return _apply_detail_style(chart, title)
-
-
-def build_multiline_chart(series_list: List[Dict], title: str = None, meta: float = None) -> Dict:
-    """Gráfico com múltiplas séries de linha (sub-núcleos individuais, YoY)."""
-    colors = [COLORS["primary"], COLORS["green"], COLORS["orange"], COLORS["pink"], COLORS["dark_grey"]]
+def build_multiline_chart(series_list: List[Dict], metric: str = "yoy", meta: float = None,
+                          label: str = None) -> Dict:
+    """Gráfico com múltiplas séries de linha (sub-núcleos individuais, YoY ou 3M SAAR)."""
+    colors = [COLORS["orange"], COLORS["accent"], COLORS["primary"], COLORS["green"], COLORS["pink"]]
     fig = go.Figure()
+    if meta is not None:
+        all_dates = sorted({p["period"] for item in series_list for p in item["series"]})
+        if all_dates:
+            meta_dates = [_parse_period(p) for p in all_dates]
+            fig.add_trace(go.Scatter(
+                x=meta_dates, y=[meta] * len(meta_dates),
+                mode="lines",
+                line_shape="hv",
+                name="Meta BCB",
+                line={"color": "rgba(0,0,0,0.45)", "dash": "dash", "width": 1.4},
+                hovertemplate="<b>Meta BCB</b> %{y:.2f}%<extra></extra>",
+            ))
     for i, item in enumerate(series_list):
         df = pd.DataFrame(item["series"]).sort_values("period")
-        if df.empty:
+        if df.empty or metric not in df.columns:
             continue
         df["date"] = df["period"].apply(lambda x: _parse_period(str(x)))
         color = colors[i % len(colors)]
         fig.add_trace(go.Scatter(
-            x=df["date"], y=df["yoy"],
+            x=df["date"], y=df[metric],
             mode="lines",
             name=item["name"],
             line={"color": color, "width": 1.8},
             hovertemplate=f"<b>{item['name']}</b> %{{y:.2f}}%<extra></extra>",
         ))
-    if meta is not None:
-        fig.add_hline(y=meta, line={"color": "rgba(204,121,167,0.30)", "dash": "dot", "width": 1.4})
-    fig.update_layout(_base_layout(height=320, title=title, margin_top=52))
-    return {"div_id": _new_id(), "json": _to_json(fig)}
-
-
-def build_detail_multiline_chart(series_list: List[Dict], title: str = "DETALHE · ÚLT. 36M",
-                                 meta: float = None) -> Dict:
-    """Versão detalhada (últimos 36 meses) do gráfico de múltiplas linhas."""
-    chart = build_multiline_chart(series_list, title=None, meta=meta)
-    return _apply_detail_style(chart, title)
-
-
-def build_mom_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") -> Dict:
-    """Gráfico de barras da variação mensal bruta (MoM) dos últimos 36 meses."""
-    df = pd.DataFrame(series)
-    if df.empty:
-        return {"div_id": _new_id(), "json": _to_json(go.Figure())}
-    df = df.sort_values("period").tail(36).reset_index(drop=True)
-    df["date"] = df["period"].apply(lambda x: _parse_period(str(x)))
-
-    fig = go.Figure()
-    fig.add_trace(go.Bar(
-        x=df["date"], y=df["mom"],
-        marker_color=COLORS["accent"],
-        opacity=0.85,
-        hovertemplate="<b>MoM</b> %{y:.2f}%<extra></extra>",
-        showlegend=False,
-    ))
-    fig.update_layout(_base_layout(height=320, title=None, margin_top=58))
-    fig.update_layout(plot_bgcolor="#F4F6F8")
-    fig.add_annotation(**_detail_annotation(title))
+    layout = _base_layout(height=450, margin_top=52, margin_left=35, margin_bottom=40, margin_right=20,
+                          y_rangemode="tozero")
+    if label:
+        layout["annotations"] = [_label_annotation(label.upper())]
+    fig.update_layout(layout)
     return {"div_id": _new_id(), "json": _to_json(fig)}
 
 

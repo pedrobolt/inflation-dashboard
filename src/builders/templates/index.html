@@ -331,34 +331,37 @@ section {
         <span><span class="legend-line" style="border-color:#56B4E9;"></span><b>3M SAAR</b> ({{ '%.2f'|format(data.main_legend.saar3) }}%)</span>
         <span><span class="legend-line" style="border-color:#0072B2;"></span><b>6M SAAR</b> ({{ '%.2f'|format(data.main_legend.saar6) }}%)</span>
         <span><span class="legend-line" style="border-color:#009E73;"></span><b>YoY</b> ({{ '%.2f'|format(data.main_legend.yoy) }}%)</span>
-        <span><span class="legend-line" style="border-color:rgba(204,121,167,0.30); border-style:dotted;"></span>{{ data.main_legend.target_text }}</span>
+        <span><span class="legend-line" style="border-color:rgba(204,121,167,0.85);"></span>{{ data.main_legend.target_text }}</span>
       </div>
       <table class="ipca-tbl grupos-tbl">
         <thead>
           <tr>
             <th rowspan="2" class="label">Métrica</th>
-            <th colspan="3" class="kind">1M SAAR</th>
-            <th colspan="3" class="kind sep-l">3M SAAR</th>
-            <th colspan="3" class="kind sep-l">YoY</th>
+            <th colspan="4" class="kind sep-l">1M SAAR</th>
+            <th colspan="4" class="kind sep-l">3M SAAR</th>
+            <th colspan="4" class="kind sep-l">YoY</th>
           </tr>
           <tr>
-            <th class="tcol">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
-            <th class="tcol sep-l">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
-            <th class="tcol sep-l">Atual</th><th class="tcol">Δ1M</th><th class="tcol">Δ12M</th>
+            <th class="tcol sep-l">{{ period_label }}</th><th class="tcol">Δ1M</th><th class="tcol">Δ3M</th><th class="tcol">Δ12M</th>
+            <th class="tcol sep-l">{{ period_label }}</th><th class="tcol">Δ1M</th><th class="tcol">Δ3M</th><th class="tcol">Δ12M</th>
+            <th class="tcol sep-l">{{ period_label }}</th><th class="tcol">Δ1M</th><th class="tcol">Δ3M</th><th class="tcol">Δ12M</th>
           </tr>
         </thead>
         <tbody>
           {% for row in data.subnuclei %}
           <tr class="{% if loop.first %}group{% endif %}">
             <td class="label">{{ row.name }}</td>
-            <td>{{ '%.2f'|format(row.saar1) if row.saar1 is not none else '–' }}</td>
+            <td class="sep-l">{{ '%.2f'|format(row.saar1) if row.saar1 is not none else '–' }}</td>
             <td class="delta" style="{{ delta_style(row.saar1, row.prev1_saar1) }}">{{ delta_str(row.saar1, row.prev1_saar1) }}</td>
+            <td class="delta" style="{{ delta_style(row.saar1, row.prev3_saar1) }}">{{ delta_str(row.saar1, row.prev3_saar1) }}</td>
             <td class="delta" style="{{ delta_style(row.saar1, row.prev12_saar1) }}">{{ delta_str(row.saar1, row.prev12_saar1) }}</td>
             <td class="sep-l">{{ '%.2f'|format(row.saar3) if row.saar3 is not none else '–' }}</td>
             <td class="delta" style="{{ delta_style(row.saar3, row.prev1_saar3) }}">{{ delta_str(row.saar3, row.prev1_saar3) }}</td>
+            <td class="delta" style="{{ delta_style(row.saar3, row.prev3_saar3) }}">{{ delta_str(row.saar3, row.prev3_saar3) }}</td>
             <td class="delta" style="{{ delta_style(row.saar3, row.prev12_saar3) }}">{{ delta_str(row.saar3, row.prev12_saar3) }}</td>
             <td class="sep-l">{{ '%.2f'|format(row.yoy) if row.yoy is not none else '–' }}</td>
             <td class="delta" style="{{ delta_style(row.yoy, row.prev1_yoy) }}">{{ delta_str(row.yoy, row.prev1_yoy) }}</td>
+            <td class="delta" style="{{ delta_style(row.yoy, row.prev3_yoy) }}">{{ delta_str(row.yoy, row.prev3_yoy) }}</td>
             <td class="delta" style="{{ delta_style(row.yoy, row.prev12_yoy) }}">{{ delta_str(row.yoy, row.prev12_yoy) }}</td>
           </tr>
           {% endfor %}
@@ -373,17 +376,17 @@ section {
       <div class="accent-line" style="margin-bottom:16px;"></div>
       <div class="row-2">
         <div>
-          <div id="{{ data.seasonal_chart.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+          <div id="{{ data.seasonal_index_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
         </div>
         <div>
-          <div id="{{ data.seasonal_detail.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+          <div id="{{ data.seasonal_core_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
         </div>
       </div>
       <div class="custom-legend">
-        <span><span class="legend-line" style="border-color:rgba(0,0,0,0.45); border-style:dotted;"></span>Mediana (2017–19, 2023–25)</span>
+        <span><span class="legend-line" style="border-color:rgba(0,0,0,0.45);"></span>Mediana hist.</span>
         <span><span class="legend-box" style="background:rgba(0,0,0,0.06);"></span>P10–P90</span>
-        <span><span class="legend-line" style="border-color:#FAB6C1;"></span>2025</span>
-        <span><span class="legend-line" style="border-color:#EA243E;"></span>2026</span>
+        <span><span class="legend-line" style="border-color:#CC79A7;"></span>{{ data.seasonal_legend.previous_year }}</span>
+        <span><span class="legend-line" style="border-color:#0072B2;"></span>{{ data.seasonal_legend.current_year }}</span>
       </div>
 
       <div style="margin-top:40px;"></div>
@@ -399,16 +402,16 @@ section {
       <div class="accent-line" style="margin-bottom:16px;"></div>
       <div class="row-2">
         <div>
-          <div id="{{ data.geral_headline.chart.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+          <div id="{{ data.geral_headline.saar3.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
         </div>
         <div>
-          <div id="{{ data.geral_headline.detail.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+          <div id="{{ data.geral_headline.yoy.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
         </div>
       </div>
       <div class="custom-legend">
         <span style="color:{{ data.geral_headline.legend.index.color }}"><span class="legend-line" style="border-color:{{ data.geral_headline.legend.index.color }};"></span>{{ data.geral_headline.legend.index.label }}</span>
         <span style="color:{{ data.geral_headline.legend.core.color }}"><span class="legend-line" style="border-color:{{ data.geral_headline.legend.core.color }};"></span>{{ data.geral_headline.legend.core.label }}</span>
-        <span><span class="legend-line" style="border-color:rgba(204,121,167,0.30); border-style:dotted;"></span>{{ data.geral_headline.legend.target_text }}</span>
+        <span><span class="legend-line" style="border-color:rgba(0,0,0,0.45);"></span>{{ data.geral_headline.legend.target_text }}</span>
       </div>
 
       <div style="margin-top:40px;"></div>
@@ -424,17 +427,17 @@ section {
       <div class="accent-line" style="margin-bottom:16px;"></div>
       <div class="row-2">
         <div>
-          <div id="{{ data.geral_subnuclei.chart.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+          <div id="{{ data.geral_subnuclei.saar3.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
         </div>
         <div>
-          <div id="{{ data.geral_subnuclei.detail.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+          <div id="{{ data.geral_subnuclei.yoy.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
         </div>
       </div>
       <div class="custom-legend">
         {% for item in data.geral_subnuclei.legend %}
         <span style="color:{{ item.color }}"><span class="legend-line" style="border-color:{{ item.color }};"></span>{{ item.label }}</span>
         {% endfor %}
-        <span><span class="legend-line" style="border-color:rgba(204,121,167,0.30); border-style:dotted;"></span>{{ data.geral_subnuclei.target_text }}</span>
+        <span><span class="legend-line" style="border-color:rgba(0,0,0,0.45);"></span>{{ data.geral_subnuclei.target_text }}</span>
       </div>
     </section>
   </div>
@@ -475,19 +478,21 @@ function switchGrupo(cat) { switchSub('tab-grupos', 'grupo-', cat); }
 function switchSurpresa(comp) { switchSub('tab-surpresa', 'surpresa-', comp); }
 
 // Render Plotly charts
+var PLOTLY_CONFIG = {displayModeBar: false, responsive: true};
 {% for cat, charts in surpresa_charts.items() %}
-Plotly.newPlot("{{ charts.main.div_id }}", {{ charts.main.json|safe }}, {});
-Plotly.newPlot("{{ charts.detail.div_id }}", {{ charts.detail.json|safe }}, {});
+Plotly.newPlot("{{ charts.main.div_id }}", {{ charts.main.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ charts.detail.div_id }}", {{ charts.detail.json|safe }}, PLOTLY_CONFIG);
 {% endfor %}
 
 {% for cat, data in grupos_data.items() %}
-Plotly.newPlot("{{ data.main_chart.div_id }}", {{ data.main_chart.json|safe }}, {});
-Plotly.newPlot("{{ data.seasonal_chart.div_id }}", {{ data.seasonal_chart.json|safe }}, {});
-Plotly.newPlot("{{ data.seasonal_detail.div_id }}", {{ data.seasonal_detail.json|safe }}, {});
-Plotly.newPlot("{{ data.geral_headline.chart.div_id }}", {{ data.geral_headline.chart.json|safe }}, {});
-Plotly.newPlot("{{ data.geral_headline.detail.div_id }}", {{ data.geral_headline.detail.json|safe }}, {});
-Plotly.newPlot("{{ data.geral_subnuclei.chart.div_id }}", {{ data.geral_subnuclei.chart.json|safe }}, {});
-Plotly.newPlot("{{ data.geral_subnuclei.detail.div_id }}", {{ data.geral_subnuclei.detail.json|safe }}, {});
+Plotly.newPlot("{{ data.main_chart.div_id }}", {{ data.main_chart.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ data.main_detail.div_id }}", {{ data.main_detail.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ data.seasonal_index_chart.div_id }}", {{ data.seasonal_index_chart.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ data.seasonal_core_chart.div_id }}", {{ data.seasonal_core_chart.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ data.geral_headline.saar3.div_id }}", {{ data.geral_headline.saar3.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ data.geral_headline.yoy.div_id }}", {{ data.geral_headline.yoy.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ data.geral_subnuclei.saar3.div_id }}", {{ data.geral_subnuclei.saar3.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ data.geral_subnuclei.yoy.div_id }}", {{ data.geral_subnuclei.yoy.json|safe }}, PLOTLY_CONFIG);
 {% endfor %}
 </script>
 </body>

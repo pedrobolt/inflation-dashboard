@@ -166,9 +166,9 @@ def _clean_records(records: List[Dict]) -> List[Dict]:
 
 
 def _subnucleo_series(df: pd.DataFrame) -> List[Dict]:
-    """Série mensal de mom/yoy para um sub-núcleo."""
+    """Série mensal de mom/yoy/saar3 para um sub-núcleo."""
     df = _calc_saar(_calc_yoy_from_mom(df.sort_values("period").copy()))
-    return _clean_records(df[["period", "mom", "yoy"]].to_dict("records"))
+    return _clean_records(df[["period", "mom", "yoy", "saar3"]].to_dict("records"))
 
 
 def _subnucleo_row(df: pd.DataFrame, period: str, name: str) -> Optional[Dict]:
