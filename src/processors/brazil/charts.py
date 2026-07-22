@@ -6,6 +6,7 @@ import json
 import uuid
 from typing import Dict, List, Optional
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.utils import PlotlyJSONEncoder
@@ -303,8 +304,9 @@ def build_seasonal_chart(months: List[int], current: List[float], previous: List
     return {"div_id": _new_id(), "json": _to_json(fig)}
 
 
-def build_comparison_chart(series: List[Dict], title: str = None) -> Dict:
-    """Gráfico de comparação de dois índices (lado a lado)."""
+def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral",
+                           label_core: str = "Média dos núcleos", title: str = None) -> Dict:
+    """Gráfico de comparação headline vs média dos núcleos (YoY)."""
     df = pd.DataFrame(series)
     if df.empty:
         return {"div_id": _new_id(), "json": _to_json(go.Figure())}
@@ -312,23 +314,170 @@ def build_comparison_chart(series: List[Dict], title: str = None) -> Dict:
     df["date"] = df["period"].apply(lambda x: _parse_period(str(x)))
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(
-        x=df["date"], y=df.get("index", df.get("mom", [])),
-        mode="lines",
-        name="Índice geral",
-        line={"color": COLORS["pink"], "width": 1.5},
-        hovertemplate="<b>Índice</b> %{y:.2f}%<extra></extra>",
-    ))
+    if "index" in df.columns:
+        fig.add_trace(go.Scatter(
+            x=df["date"], y=df["index"],
+            mode="lines",
+            name=label_index,
+            line={"color": COLORS["pink"], "width": 1.5},
+            hovertemplate=f"<b>{label_index}</b> %{{y:.2f}}%<extra></extra>",
+        ))
     if "core" in df.columns:
         fig.add_trace(go.Scatter(
             x=df["date"], y=df["core"],
             mode="lines",
-            name="Média BCB",
+            name=label_core,
             line={"color": COLORS["primary"], "width": 2},
-            hovertemplate="<b>Média BCB</b> %{y:.2f}%<extra></extra>",
+            hovertemplate=f"<b>{label_core}</b> %{{y:.2f}}%<extra></extra>",
+        ))
+    if "meta" in df.columns and df["meta"].notna().any():
+        fig.add_trace(go.Scatter(
+            x=df["date"], y=df["meta"],
+            mode="lines",
+            name="Meta BCB",
+            line={"color": "rgba(204,121,167,0.30)", "dash": "dot", "width": 1.4},
+            hoverinfo="skip",
         ))
     fig.update_layout(_base_layout(height=320, title=title, margin_top=52))
     return {"div_id": _new_id(), "json": _to_json(fig)}
+
+
+def build_detail_comparison_chart(series: List[Dict], label_index: str = "Índice geral",
+                                  label_core: str = "Média dos núcleos",
+                                  title: str = "DETALHE · ÚLT. 36M") -> Dict:
+    """Versão detalhada (últimos 36 meses) da comparação headline vs núcleos."""
+    chart = build_comparison_chart(series, label_index=label_index, label_core=label_core, title=title)
+    fig = json.loads(chart["json"])
+    fig["layout"]["plot_bgcolor"] = "#F4F6F8"
+    fig["layout"]["margin"]["t"] = 58
+    if "title" not in fig["layout"] or not fig["layout"]["title"]:
+        fig["layout"]["title"] = {
+            "text": title,
+            "font": {"size": 11, "color": "#64748b", "family": "Inter, sans-serif"},
+            "x": 0.5,
+            "xanchor": "center",
+        }
+    return {"div_id": chart["div_id"], "json": json.dumps(fig)}
+
+
+def build_multiline_chart(series_list: List[Dict], title: str = None, meta: float = None) -> Dict:
+    """Gráfico com múltiplas séries de linha (sub-núcleos individuais, YoY)."""
+    colors = [COLORS["primary"], COLORS["green"], COLORS["orange"], COLORS["pink"], COLORS["dark_grey"]]
+    fig = go.Figure()
+    for i, item in enumerate(series_list):
+        df = pd.DataFrame(item["series"]).sort_values("period")
+        if df.empty:
+            continue
+        df["date"] = df["period"].apply(lambda x: _parse_period(str(x)))
+        color = colors[i % len(colors)]
+        fig.add_trace(go.Scatter(
+            x=df["date"], y=df["yoy"],
+            mode="lines",
+            name=item["name"],
+            line={"color": color, "width": 1.8},
+            hovertemplate=f"<b>{item['name']}</b> %{{y:.2f}}%<extra></extra>",
+        ))
+    if meta is not None:
+        fig.add_hline(y=meta, line={"color": "rgba(204,121,167,0.30)", "dash": "dot", "width": 1.4})
+    fig.update_layout(_base_layout(height=320, title=title, margin_top=52))
+    return {"div_id": _new_id(), "json": _to_json(fig)}
+
+
+def build_detail_multiline_chart(series_list: List[Dict], title: str = "DETALHE · ÚLT. 36M",
+                                 meta: float = None) -> Dict:
+    """Versão detalhada (últimos 36 meses) do gráfico de múltiplas linhas."""
+    chart = build_multiline_chart(series_list, title=title, meta=meta)
+    fig = json.loads(chart["json"])
+    fig["layout"]["plot_bgcolor"] = "#F4F6F8"
+    fig["layout"]["margin"]["t"] = 58
+    if "title" not in fig["layout"] or not fig["layout"]["title"]:
+        fig["layout"]["title"] = {
+            "text": title,
+            "font": {"size": 11, "color": "#64748b", "family": "Inter, sans-serif"},
+            "x": 0.5,
+            "xanchor": "center",
+        }
+    return {"div_id": chart["div_id"], "json": json.dumps(fig)}
+
+
+def build_mom_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M") -> Dict:
+    """Gráfico de barras da variação mensal bruta (MoM) dos últimos 36 meses."""
+    df = pd.DataFrame(series)
+    if df.empty:
+        return {"div_id": _new_id(), "json": _to_json(go.Figure())}
+    df = df.sort_values("period").tail(36).reset_index(drop=True)
+    df["date"] = df["period"].apply(lambda x: _parse_period(str(x)))
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=df["date"], y=df["mom"],
+        marker_color=COLORS["accent"],
+        opacity=0.85,
+        hovertemplate="<b>MoM</b> %{y:.2f}%<extra></extra>",
+        showlegend=False,
+    ))
+    fig.update_layout(_base_layout(height=320, title=title, margin_top=58))
+    fig.update_layout(plot_bgcolor="#F4F6F8")
+    if "title" not in fig["layout"] or not fig["layout"]["title"]:
+        fig["layout"]["title"] = {
+            "text": title,
+            "font": {"size": 11, "color": "#64748b", "family": "Inter, sans-serif"},
+            "x": 0.5,
+            "xanchor": "center",
+        }
+    return {"div_id": _new_id(), "json": _to_json(fig)}
+
+
+def calc_seasonality(series: List[Dict]) -> Dict:
+    """
+    Calcula padrão sazonal mensal a partir de uma série de MoM.
+
+    Retorna mediana, P10 e P90 de anos de referência (excluindo o ano corrente)
+    e os valores do ano corrente e do ano anterior.
+    """
+    df = pd.DataFrame(series)
+    if df.empty:
+        return {"months": [], "median": [], "p10": [], "p90": [],
+                "current": [], "previous": [], "current_year": None, "previous_year": None}
+    df = df.dropna(subset=["period", "mom"]).copy()
+    df["period"] = df["period"].astype(str)
+    df["date"] = df["period"].apply(lambda x: _parse_period(x))
+    df["year"] = df["date"].dt.year
+    df["month"] = df["date"].dt.month
+
+    latest_year = int(df["year"].max())
+    previous_year = latest_year - 1
+    ref_years = [y for y in df["year"].unique() if y != latest_year]
+
+    months = list(range(1, 13))
+    median, p10, p90, current, previous = [], [], [], [], []
+    for m in months:
+        ref_vals = df[(df["month"] == m) & (df["year"].isin(ref_years))]["mom"].tolist()
+        if len(ref_vals) > 0:
+            median.append(float(np.median(ref_vals)))
+            p10.append(float(np.percentile(ref_vals, 10)))
+            p90.append(float(np.percentile(ref_vals, 90)))
+        else:
+            median.append(None)
+            p10.append(None)
+            p90.append(None)
+
+        cur_row = df[(df["month"] == m) & (df["year"] == latest_year)]
+        current.append(float(cur_row["mom"].iloc[-1]) if not cur_row.empty else None)
+
+        prev_row = df[(df["month"] == m) & (df["year"] == previous_year)]
+        previous.append(float(prev_row["mom"].iloc[-1]) if not prev_row.empty else None)
+
+    return {
+        "months": months,
+        "median": median,
+        "p10": p10,
+        "p90": p90,
+        "current": current,
+        "previous": previous,
+        "current_year": latest_year,
+        "previous_year": previous_year,
+    }
 
 
 def calc_moving_averages(series_df: pd.DataFrame, col: str = "mom") -> pd.DataFrame:

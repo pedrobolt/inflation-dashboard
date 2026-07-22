@@ -6,6 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import pandas as pd
 from processors.brazil.resumo import process_resumo
 from processors.brazil.destaques import process_destaques
+from processors.brazil.grupos import process_grupos
 
 
 def test_process_resumo():
@@ -67,7 +68,73 @@ def test_process_destaques():
     assert result["negative"][0]["bps"] == -8.0  # 1.0 * -8.0
 
 
+def test_process_grupos():
+    periods = pd.date_range("2023-01-01", periods=24, freq="MS")
+    period_codes = [d.strftime("%Y%m") for d in periods]
+    df_general = pd.DataFrame({
+        "periodo": periods,
+        "periodo_codigo": period_codes,
+        "mom": [0.5 + 0.01 * i for i in range(24)],
+        "yoy": [4.0 + 0.05 * i for i in range(24)],
+    })
+
+    # Itens folha para cada uma das três categorias (códigos compatíveis com _classify_item)
+    items = [
+        ("3301001.Serviço A", "33010", 1.0),
+        ("3101001.Industrial A", "31010", 1.0),
+        ("1102001.Alimento A", "11020", 1.0),
+    ]
+    rows = []
+    for p, c in zip(periods, period_codes):
+        for name, code, weight in items:
+            rows.append({
+                "periodo": p,
+                "periodo_codigo": c,
+                "item": name,
+                "item_codigo": code,
+                "mom": 0.4,
+                "yoy": 3.5,
+                "peso": weight,
+            })
+    df_groups = pd.DataFrame(rows)
+
+    bcb_cores = pd.DataFrame({
+        "data": periods,
+        "EX0": [0.4] * 24,
+        "EX3": [0.45] * 24,
+        "MS": [0.42] * 24,
+        "DP": [0.43] * 24,
+        "P55": [0.44] * 24,
+        "media": [0.43] * 24,
+    })
+    bcb_categories = pd.DataFrame({
+        "data": periods,
+        "Serviços": [0.5] * 24,
+        "Industriais": [0.4] * 24,
+        "Alimentação": [0.6] * 24,
+    })
+
+    result = process_grupos(
+        df_general, df_groups,
+        bcb_cores=bcb_cores,
+        bcb_categories=bcb_categories,
+        bcb_subnuclei=None,
+        bcb_vectors=None,
+        period="202412",
+    )
+
+    assert "BCB" in result
+    assert "Serviços" in result
+    assert "Industriais" in result
+    assert "Alimentação" in result
+    for cat, data in result.items():
+        assert len(data["series"]) > 0
+        assert len(data["subnuclei"]) > 0
+        assert "latest" in data
+
+
 if __name__ == "__main__":
     test_process_resumo()
     test_process_destaques()
+    test_process_grupos()
     print("Todos os testes passaram.")

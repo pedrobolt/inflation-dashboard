@@ -21,6 +21,20 @@ class BCBClient:
         "P55": 28750,   # Percentil 55
     }
 
+    # Códigos oficiais de recortes analíticos do IPCA
+    CATEGORY_CODES = {
+        "Serviços": 10844,
+        "Industriais": 27863,
+        "Alimentação": 27864,
+    }
+
+    # Sub-núcleos oficiais do BCB
+    SUBNUCLEI_CODES = {
+        "EX2": 27838,
+        "EX3 Serviços": 29683,
+        "EX3 Industriais": 29684,
+    }
+
     def __init__(self, timeout: int = 60):
         self.timeout = timeout
         self.session = requests.Session()
@@ -80,6 +94,50 @@ class BCBClient:
         core_cols = [c for c in self.CORE_CODES.keys() if c in merged.columns]
         merged["media"] = merged[core_cols].mean(axis=1)
         return merged
+
+    def fetch_ipca_categories(
+        self,
+        start_date: str = "01/01/2004",
+        end_date: Optional[str] = None,
+    ) -> pd.DataFrame:
+        """Busca séries oficiais dos recortes Serviços, Industriais e Alimentação."""
+        if end_date is None:
+            end_date = pd.Timestamp.now().strftime("%d/%m/%Y")
+        parts = []
+        for name, code in self.CATEGORY_CODES.items():
+            df = self.fetch_series(code, start_date, end_date)
+            if df.empty:
+                continue
+            df = df.rename(columns={"valor": name})
+            parts.append(df[["data", name]])
+        if not parts:
+            return pd.DataFrame(columns=["data"])
+        merged = parts[0]
+        for df in parts[1:]:
+            merged = merged.merge(df, on="data", how="outer")
+        return merged.sort_values("data")
+
+    def fetch_ipca_subnuclei(
+        self,
+        start_date: str = "01/01/2004",
+        end_date: Optional[str] = None,
+    ) -> pd.DataFrame:
+        """Busca sub-núcleos oficiais (EX2, EX3 Serviços, EX3 Industriais)."""
+        if end_date is None:
+            end_date = pd.Timestamp.now().strftime("%d/%m/%Y")
+        parts = []
+        for name, code in self.SUBNUCLEI_CODES.items():
+            df = self.fetch_series(code, start_date, end_date)
+            if df.empty:
+                continue
+            df = df.rename(columns={"valor": name})
+            parts.append(df[["data", name]])
+        if not parts:
+            return pd.DataFrame(columns=["data"])
+        merged = parts[0]
+        for df in parts[1:]:
+            merged = merged.merge(df, on="data", how="outer")
+        return merged.sort_values("data")
 
     @staticmethod
     def period_to_bcb_date(period_code: str) -> str:

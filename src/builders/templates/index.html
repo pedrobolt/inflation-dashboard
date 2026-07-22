@@ -276,9 +276,19 @@ section {
         <div class="sub">(em bps, Surpresa = realizado(t) − média de 4 projeções Focus para o mês t, capturadas no dia anterior ao IPCA dos meses t, t-1, t-2 e t-3)</div>
       </div>
       <div class="accent-line"></div>
-      <div>
-        <div id="{{ charts.main.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      <div class="row-70-30">
+        <div>
+          <div id="{{ charts.main.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+          <div class="custom-legend">
+            <span><b>1M</b> ({{ charts.legend.m1 }})</span>
+            <span><b>3M</b> ({{ charts.legend.m3 }})</span>
+            <span><b>6M</b> ({{ charts.legend.m6 }})</span>
+            <span><b>12M</b> ({{ charts.legend.m12 }})</span>
+          </div>
+        </div>
+        <div></div>
       </div>
+      <div id="{{ charts.detail.div_id }}" class="plotly-graph-div" style="height:320px; width:100%; margin-top:24px;"></div>
     </section>
   </div>
   {% endfor %}
@@ -308,7 +318,15 @@ section {
       <div class="accent-line"></div>
       <div class="row-70-30">
         <div>
-          <div id="{{ data.charts.main.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+          <div id="{{ data.main_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+          <div class="custom-legend">
+            <span style="font-weight:600;">Núcleos usados = {{ data.main_legend.nucleos_text }}</span>
+            <span><span class="legend-box" style="background:#E5E7EB;"></span><b>1M SAAR</b> ({{ '%.2f'|format(data.main_legend.saar1) }}%)</span>
+            <span><span class="legend-line" style="border-color:#56B4E9;"></span><b>3M SAAR</b> ({{ '%.2f'|format(data.main_legend.saar3) }}%)</span>
+            <span><span class="legend-line" style="border-color:#0372B2;"></span><b>6M SAAR</b> ({{ '%.2f'|format(data.main_legend.saar6) }}%)</span>
+            <span><span class="legend-line" style="border-color:#009E73;"></span><b>YoY</b> ({{ '%.2f'|format(data.main_legend.yoy) }}%)</span>
+            <span><span class="legend-line" style="border-color:rgba(204,121,167,0.30); border-style:dotted;"></span>{{ data.main_legend.target_text }}</span>
+          </div>
         </div>
         <div>
           <table class="ipca-tbl grupos-tbl">
@@ -343,6 +361,78 @@ section {
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div style="margin-top:40px;"></div>
+      <div class="title-bar">
+        <h2>IPCA | Sazonalidade</h2>
+        <div class="sub">(variação mensal, bruto)</div>
+      </div>
+      <div class="accent-line" style="margin-bottom:16px;"></div>
+      <div class="row-2">
+        <div>
+          <div id="{{ data.seasonal_chart.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+        </div>
+        <div>
+          <div id="{{ data.seasonal_detail.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+        </div>
+      </div>
+      <div class="custom-legend">
+        <span><span class="legend-line" style="border-color:rgba(0,0,0,0.45); border-style:dotted;"></span>Mediana (2017–19, 2023–25)</span>
+        <span><span class="legend-box" style="background:rgba(0,0,0,0.06);"></span>P10–P90</span>
+        <span><span class="legend-line" style="border-color:#FAB6C1;"></span>2025</span>
+        <span><span class="legend-line" style="border-color:#EA243E;"></span>2026</span>
+      </div>
+
+      <div style="margin-top:40px;"></div>
+      <div class="title-bar">
+        <h2>
+          IPCA |
+          {% if cat == 'BCB' %}Geral
+          {% elif cat == 'Alimentação' %}Alimentação no Domicílio
+          {% else %}{{ cat }}{% endif %}
+        </h2>
+        <div class="sub">(headline vs média dos núcleos)</div>
+      </div>
+      <div class="accent-line" style="margin-bottom:16px;"></div>
+      <div class="row-2">
+        <div>
+          <div id="{{ data.geral_headline.chart.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+        </div>
+        <div>
+          <div id="{{ data.geral_headline.detail.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+        </div>
+      </div>
+      <div class="custom-legend">
+        <span style="color:{{ data.geral_headline.legend.index.color }}"><span class="legend-line" style="border-color:{{ data.geral_headline.legend.index.color }};"></span>{{ data.geral_headline.legend.index.label }}</span>
+        <span style="color:{{ data.geral_headline.legend.core.color }}"><span class="legend-line" style="border-color:{{ data.geral_headline.legend.core.color }};"></span>{{ data.geral_headline.legend.core.label }}</span>
+        <span><span class="legend-line" style="border-color:rgba(204,121,167,0.30); border-style:dotted;"></span>{{ data.geral_headline.legend.target_text }}</span>
+      </div>
+
+      <div style="margin-top:40px;"></div>
+      <div class="title-bar">
+        <h2>
+          IPCA |
+          {% if cat == 'BCB' %}Geral
+          {% elif cat == 'Alimentação' %}Alimentação no Domicílio
+          {% else %}{{ cat }}{% endif %}
+        </h2>
+        <div class="sub">(sub-núcleos individuais)</div>
+      </div>
+      <div class="accent-line" style="margin-bottom:16px;"></div>
+      <div class="row-2">
+        <div>
+          <div id="{{ data.geral_subnuclei.chart.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+        </div>
+        <div>
+          <div id="{{ data.geral_subnuclei.detail.div_id }}" class="plotly-graph-div" style="height:320px; width:100%;"></div>
+        </div>
+      </div>
+      <div class="custom-legend">
+        {% for item in data.geral_subnuclei.legend %}
+        <span style="color:{{ item.color }}"><span class="legend-line" style="border-color:{{ item.color }};"></span>{{ item.label }}</span>
+        {% endfor %}
+        <span><span class="legend-line" style="border-color:rgba(204,121,167,0.30); border-style:dotted;"></span>{{ data.geral_subnuclei.target_text }}</span>
       </div>
     </section>
   </div>
@@ -385,10 +475,17 @@ function switchSurpresa(comp) { switchSub('tab-surpresa', 'surpresa-', comp); }
 // Render Plotly charts
 {% for cat, charts in surpresa_charts.items() %}
 Plotly.newPlot("{{ charts.main.div_id }}", {{ charts.main.json|safe }}, {});
+Plotly.newPlot("{{ charts.detail.div_id }}", {{ charts.detail.json|safe }}, {});
 {% endfor %}
 
 {% for cat, data in grupos_data.items() %}
-Plotly.newPlot("{{ data.charts.main.div_id }}", {{ data.charts.main.json|safe }}, {});
+Plotly.newPlot("{{ data.main_chart.div_id }}", {{ data.main_chart.json|safe }}, {});
+Plotly.newPlot("{{ data.seasonal_chart.div_id }}", {{ data.seasonal_chart.json|safe }}, {});
+Plotly.newPlot("{{ data.seasonal_detail.div_id }}", {{ data.seasonal_detail.json|safe }}, {});
+Plotly.newPlot("{{ data.geral_headline.chart.div_id }}", {{ data.geral_headline.chart.json|safe }}, {});
+Plotly.newPlot("{{ data.geral_headline.detail.div_id }}", {{ data.geral_headline.detail.json|safe }}, {});
+Plotly.newPlot("{{ data.geral_subnuclei.chart.div_id }}", {{ data.geral_subnuclei.chart.json|safe }}, {});
+Plotly.newPlot("{{ data.geral_subnuclei.detail.div_id }}", {{ data.geral_subnuclei.detail.json|safe }}, {});
 {% endfor %}
 </script>
 </body>

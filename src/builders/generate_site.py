@@ -12,6 +12,7 @@ import pandas as pd
 
 from ..collectors.brazil.ibge_client import IBGECollector, get_latest_available_period
 from ..collectors.brazil.bcb_client import BCBClient
+from ..collectors.brazil.bcb_vectors import BCBVectors
 from ..collectors.brazil.focus_client import FocusClient
 from ..processors.brazil.resumo import process_resumo, format_period_label
 from ..processors.brazil.destaques import process_destaques
@@ -24,6 +25,70 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SITE_DIR = PROJECT_ROOT / "site"
 DATA_DIR = SITE_DIR / "data" / "brazil"
 TEMPLATE_DIR = PROJECT_ROOT / "src" / "builders" / "templates"
+
+
+def _fmt_bps(v) -> str:
+    if v is None or (isinstance(v, float) and pd.isna(v)):
+        return "–"
+    return f"{int(round(float(v))):+d}"
+
+
+def _category_display(cat: str) -> str:
+    return {"Alimentação": "Alimentação no domicílio"}.get(cat, cat)
+
+
+def _target_legend(target: float, yoy: float, show_deviation: bool = True) -> str:
+    if not show_deviation or yoy is None or (isinstance(yoy, float) and pd.isna(yoy)):
+        return f"Meta BCB ({target:.2f}%)"
+    diff = yoy - target
+    sign = "+" if diff >= 0 else "−"
+    return f"Meta BCB {sign}{abs(diff):.2f}pp ({target:.2f}%)"
+
+
+def _short_nucleo_label(name: str, cat: str) -> str:
+    short = name
+    for prefix in ["Serviços ", "Industriais ", "Alimentação ", "IPCA-"]:
+        if short.startswith(prefix):
+            short = short[len(prefix):]
+    short = short.replace("MS (20-80)", "MS").replace("MS (23-83)", "MS")
+    if short.lower().startswith("ex-"):
+        short = short[0].upper() + short[1:]
+    if cat == "Industriais" and "ex-etanol" in short.lower():
+        short = "Ex-etanol, fumo & cosméticos"
+    return short
+
+
+def _nucleos_used_text(cat: str, names: List[str]) -> str:
+    if cat == "BCB":
+        labels = ["EX0", "EX3", "MS", "DP", "P55"]
+    else:
+        labels = [_short_nucleo_label(n, cat) for n in names]
+    if len(labels) > 1:
+        return ", ".join(labels[:-1]) + " e " + labels[-1]
+    return labels[0] if labels else ""
+
+
+def _subnucleo_color(i: int) -> str:
+    colors = [
+        chart_builder.COLORS["primary"],
+        chart_builder.COLORS["green"],
+        chart_builder.COLORS["orange"],
+        chart_builder.COLORS["pink"],
+        chart_builder.COLORS["dark_grey"],
+    ]
+    return colors[i % len(colors)]
+
+
+def _merge_comparison_series(headline: List[Dict], core: List[Dict]) -> List[Dict]:
+    """Combina série headline (índice/categoria) e série núcleo em uma única série."""
+    hl = pd.DataFrame(headline)
+    cr = pd.DataFrame(core)
+    if hl.empty or cr.empty:
+        return []
+    hl = hl[["period", "yoy"]].rename(columns={"yoy": "index"})
+    cr = cr[["period", "yoy", "meta"]].rename(columns={"yoy": "core"})
+    merged = hl.merge(cr, on="period", how="outer").sort_values("period")
+    return merged.to_dict("records")
 
 
 # Paletas de cores para o heatmap do Resumo (mesmas do protótipo)
@@ -141,9 +206,15 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         end_bcb = pd.to_datetime(end_period, format="%Y%m").strftime("%d/%m/%Y")
         bcb_cores = bcb_client.fetch_ipca_cores(start_date=start_bcb, end_date=end_bcb)
         print(f"Núcleos carregados: {len(bcb_cores)} registros")
+        bcb_categories = bcb_client.fetch_ipca_categories(start_date=start_bcb, end_date=end_bcb)
+        print(f"Categorias oficiais carregadas: {len(bcb_categories)} registros")
+        bcb_subnuclei = bcb_client.fetch_ipca_subnuclei(start_date=start_bcb, end_date=end_bcb)
+        print(f"Sub-núcleos oficiais carregados: {len(bcb_subnuclei)} registros")
     except Exception as e:
-        print(f"Aviso: não foi possível carregar núcleos do BCB: {e}")
+        print(f"Aviso: não foi possível carregar dados do BCB: {e}")
         bcb_cores = None
+        bcb_categories = None
+        bcb_subnuclei = None
 
     # Busca projeções Focus
     print("Buscando projeções Focus...")
@@ -157,10 +228,29 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
         print(f"Aviso: não foi possível carregar projeções Focus: {e}")
         focus_proj = None
 
-    resumo = process_resumo(df_general, df_groups, bcb_cores=bcb_cores, period=latest_period)
+    # Vetores oficiais de agregação (pesos das séries analíticas)
+    bcb_vectors = BCBVectors()
+    try:
+        core_weights = bcb_vectors.weights(df_groups, latest_period)
+        print(f"Pesos oficiais calculados: { {k: round(v, 1) for k, v in core_weights.items() if k in ('EX0', 'EX3')} }")
+    except Exception as e:
+        print(f"Aviso: não foi possível carregar vetores de agregação: {e}")
+        core_weights = {}
+
+    resumo = process_resumo(
+        df_general, df_groups, bcb_cores=bcb_cores, core_weights=core_weights, period=latest_period
+    )
     destaques = process_destaques(df_groups[df_groups["periodo_codigo"] == latest_period], top_n=10)
     surpresa = process_surpresa(df_general, df_groups, projections=focus_proj)
-    grupos = process_grupos(df_general, df_groups, bcb_cores=bcb_cores, period=latest_period)
+    grupos = process_grupos(
+        df_general,
+        df_groups,
+        bcb_cores=bcb_cores,
+        bcb_categories=bcb_categories,
+        bcb_subnuclei=bcb_subnuclei,
+        bcb_vectors=bcb_vectors,
+        period=latest_period,
+    )
 
     general_series = (
         df_general[["periodo_codigo", "mom", "yoy"]]
@@ -173,19 +263,97 @@ def build_data(start_period: str, end_period: str, collector: IBGECollector = No
     # Constrói gráficos de Surpresa
     surpresa_charts = {}
     for cat, series in surpresa.items():
+        df_surp = pd.DataFrame(series)
+        latest_surp = df_surp.sort_values("period").iloc[-1] if not df_surp.empty else {}
         surpresa_charts[cat] = {
             "main": chart_builder.build_surprise_chart(series),
+            "detail": chart_builder.build_surprise_chart(df_surp.tail(36).to_dict("records")),
+            "legend": {
+                "m1": _fmt_bps(latest_surp.get("m1")),
+                "m3": _fmt_bps(latest_surp.get("m3")),
+                "m6": _fmt_bps(latest_surp.get("m6")),
+                "m12": _fmt_bps(latest_surp.get("m12")),
+            },
         }
 
     # Constrói gráficos de Grupos
     grupos_data = {}
     for cat, data in grupos.items():
         series = data["series"]
+        subnuclei = data["subnuclei"]
+        latest = data["latest"]
+        target = latest.get("target", 3.0)
+        target_text = _target_legend(target, latest.get("yoy"), show_deviation=(cat != "BCB"))
+
+        main_chart = chart_builder.build_group_chart(series, title=None)
+
+        # Legendas dos núcleos usados
+        used_nuclei = [n["name"] for n in subnuclei[1:]] if len(subnuclei) > 1 else [n["name"] for n in subnuclei]
+        nucleos_text = _nucleos_used_text(cat, used_nuclei)
+        main_legend = {
+            "nucleos_text": nucleos_text,
+            "saar1": latest.get("saar1"),
+            "saar3": latest.get("saar3"),
+            "saar6": latest.get("saar6"),
+            "yoy": latest.get("yoy"),
+            "target_text": target_text,
+        }
+
+        # Sazonalidade
+        seasonal = chart_builder.calc_seasonality(series)
+        seasonal_chart = chart_builder.build_seasonal_chart(
+            months=seasonal["months"],
+            current=seasonal["current"],
+            previous=seasonal["previous"],
+            p10=seasonal["p10"],
+            p90=seasonal["p90"],
+            median=seasonal["median"],
+            title=None,
+        )
+        mom_detail = chart_builder.build_mom_detail_chart(series)
+
+        # Geral: headline vs média dos núcleos
+        headline_series = data.get("headline_series", [])
+        comparison_series = _merge_comparison_series(headline_series, series)
+        label_index = "Índice geral" if cat == "BCB" else _category_display(cat)
+        label_core = subnuclei[0]["name"] if subnuclei else f"Média dos núcleos de {cat}"
+        geral_headline = {
+            "chart": chart_builder.build_comparison_chart(
+                comparison_series, label_index=label_index, label_core=label_core, title=None
+            ),
+            "detail": chart_builder.build_detail_comparison_chart(
+                comparison_series, label_index=label_index, label_core=label_core
+            ),
+            "legend": {
+                "index": {"label": label_index, "color": chart_builder.COLORS["pink"]},
+                "core": {"label": label_core, "color": chart_builder.COLORS["primary"]},
+                "target_text": target_text,
+            },
+        }
+
+        # Geral: sub-núcleos individuais
+        individual_series = [
+            {"name": n["name"], "series": n["series"]}
+            for n in subnuclei[1:]
+        ]
+        geral_subnuclei = {
+            "chart": chart_builder.build_multiline_chart(individual_series, title=None, meta=target),
+            "detail": chart_builder.build_detail_multiline_chart(individual_series, title="DETALHE · ÚLT. 36M", meta=target),
+            "legend": [
+                {"label": n["name"], "color": _subnucleo_color(i)}
+                for i, n in enumerate(subnuclei[1:])
+            ],
+            "target_text": target_text,
+        }
+
         grupos_data[cat] = {
-            "subnuclei": data["subnuclei"],
-            "charts": {
-                "main": chart_builder.build_group_chart(series, title=None),
-            }
+            "subnuclei": subnuclei,
+            "main_chart": main_chart,
+            "main_legend": main_legend,
+            "seasonal_chart": seasonal_chart,
+            "seasonal_detail": mom_detail,
+            "geral_headline": geral_headline,
+            "geral_subnuclei": geral_subnuclei,
         }
 
     return {

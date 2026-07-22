@@ -185,6 +185,7 @@ def process_resumo(
     df_general: pd.DataFrame,
     df_groups: pd.DataFrame,
     bcb_cores: Optional[pd.DataFrame] = None,
+    core_weights: Optional[Dict[str, float]] = None,
     period: str = None,
 ) -> List[Dict]:
     """
@@ -318,7 +319,9 @@ def process_resumo(
             weight = special_weights[name]
         elif is_core:
             df_item = core_series[name].copy()
-            weight = None
+            # Peso oficial para EX0 e EX3; os demais núcleos não têm peso simples no IPCA
+            core_key = name.replace("IPCA-", "")
+            weight = core_weights.get(core_key) if core_weights else None
         else:
             continue
 
