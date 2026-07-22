@@ -369,4 +369,7 @@ def process_grupos(
             }
         }
 
-    return result
+    # Ordem das abas: BCB, Serviços, Industriais, Alimentação (igual ao protótipo)
+    ordered = {k: result[k] for k in ["BCB", "Serviços", "Industriais", "Alimentação"] if k in result}
+    ordered.update({k: v for k, v in result.items() if k not in ordered})
+    return ordered

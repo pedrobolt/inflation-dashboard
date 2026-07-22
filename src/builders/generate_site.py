@@ -26,25 +26,61 @@ DATA_DIR = SITE_DIR / "data" / "brazil"
 TEMPLATE_DIR = PROJECT_ROOT / "src" / "builders" / "templates"
 
 
-def bps_style(value: float) -> str:
-    """Gera estilo de fundo para células BPS."""
+# Paletas de cores para o heatmap do Resumo (mesmas do protótipo)
+_LOW_COLOR = (139, 154, 194)
+_CENTER_COLOR = (226, 228, 235)
+_HIGH_COLOR = (255, 139, 143)
+_BPS_START = (246, 242, 244)
+
+
+def _interpolate(c1: tuple, c2: tuple, t: float) -> tuple:
+    """Interpolação linear entre duas cores RGB."""
+    t = max(0.0, min(1.0, t))
+    return tuple(int(c1[i] + (c2[i] - c1[i]) * t) for i in range(3))
+
+
+def _heatmap_style(value: float, cap: float = 8.0) -> str:
+    """Gera estilo de fundo para células YoY (divergente, centrado em 2.5%)."""
     if value is None:
         return ""
-    v = abs(value)
-    alpha = round(min(0.45, 0.05 + v / 30), 3)
+    if value <= 0:
+        color = _LOW_COLOR
+    elif value < 2.5:
+        color = _interpolate(_LOW_COLOR, _CENTER_COLOR, value / 2.5)
+    elif value < cap:
+        color = _interpolate(_CENTER_COLOR, _HIGH_COLOR, (value - 2.5) / (cap - 2.5))
+    else:
+        color = _HIGH_COLOR
+    return f"background:rgb{color};color:#1c1c1c"
+
+
+def _bps_style(value: float, cap: float = 70.0) -> str:
+    """Gera estilo de fundo para células BPS (sequencial vermelho/azul)."""
+    if value is None:
+        return ""
     if value >= 0:
-        return f"background:rgba(255,139,143,{alpha});color:#1c1c1c"
-    return f"background:rgba(139,154,194,{alpha});color:#1c1c1c"
+        color = _interpolate(_BPS_START, _HIGH_COLOR, min(value, cap) / cap)
+    else:
+        color = _interpolate(_BPS_START, _LOW_COLOR, min(abs(value), cap) / cap)
+    return f"background:rgb{color};color:#1c1c1c"
 
 
-def heatmap_style(value: float) -> str:
-    """Gera estilo de fundo para células YoY."""
-    if value is None:
-        return ""
-    # normaliza entre 0 e 8%
-    v = max(0, min(abs(value), 8))
-    alpha = round(v / 10, 3)
-    return f"background:rgba(255,139,143,{alpha});color:#1c1c1c"
+def _resumo_row_class(metric: str) -> str:
+    """Classe da linha na tabela Resumo, conforme protótipo."""
+    if metric in ("Índice Geral", "Média dos núcleos"):
+        return "lvl0 header" if metric == "Índice Geral" else "lvl0"
+    return "lvl1 top-sep"
+
+
+def _resumo_padding(metric: str) -> int:
+    """Indentação da célula de métrica na tabela Resumo."""
+    if metric in ("Índice Geral", "Média dos núcleos"):
+        return 16
+    if metric in ("Administrados", "Livres") or metric.startswith("IPCA-"):
+        return 34
+    if metric in ("Serviços ex-passagem",):
+        return 70
+    return 52
 
 
 def delta_style(current: float, previous: float) -> str:
@@ -183,6 +219,19 @@ def build_static_site(data: Dict) -> None:
     SITE_DIR.mkdir(parents=True, exist_ok=True)
     from jinja2 import Environment, FileSystemLoader
 
+    # Caps dinâmicos baseados nos dados do Resumo para manter o contraste do heatmap
+    bps_values = [r["mom_bps"] for r in data["resumo"] if r.get("mom_bps") is not None]
+    bps_cap = max(70.0, max(abs(v) for v in bps_values) if bps_values else 70.0)
+
+    # O protótipo usa uma escala fixa de -1% a +8% para YoY
+    yoy_cap = 8.0
+
+    def bps_style(value: float) -> str:
+        return _bps_style(value, cap=bps_cap)
+
+    def heatmap_style(value: float) -> str:
+        return _heatmap_style(value, cap=yoy_cap)
+
     env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
     env.filters["bps_style"] = bps_style
     env.filters["heatmap_style"] = heatmap_style
@@ -190,6 +239,8 @@ def build_static_site(data: Dict) -> None:
     env.globals["heatmap_style"] = heatmap_style
     env.globals["delta_style"] = delta_style
     env.globals["delta_str"] = delta_str
+    env.globals["resumo_row_class"] = _resumo_row_class
+    env.globals["resumo_padding"] = _resumo_padding
 
     template = env.get_template("index.html")
     html = template.render(**data)
