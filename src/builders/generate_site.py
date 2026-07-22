@@ -14,6 +14,9 @@ from ..collectors.brazil.ibge_client import IBGECollector, get_latest_available_
 from ..collectors.brazil.bcb_client import BCBClient
 from ..collectors.brazil.bcb_vectors import BCBVectors
 from ..collectors.brazil.focus_client import FocusClient
+from ..collectors.us.fred_client import FREDClient
+from ..collectors.us.zillow_client import ZillowClient
+from ..processors.us.panel import process_us, US_TARGET
 from ..processors.brazil.resumo import process_resumo, format_period_label
 from ..processors.brazil.destaques import process_destaques
 from ..processors.brazil.surpresa import process_surpresa
@@ -211,6 +214,73 @@ def _build_destaques_seasonal(destaques: Dict, df_groups: pd.DataFrame) -> Dict:
                 color_previous=colors[kind]["previous"], color_current=colors[kind]["current"],
             )
             result[kind].append({"rank": rank, "name": item["name"], "chart": chart})
+    return result
+
+
+def build_us_data() -> Dict:
+    """Busca, processa e monta os gráficos do painel dos EUA (FRED + Zillow)."""
+    print("Buscando séries do FRED...")
+    fred = FREDClient().fetch_all()
+    print(f"Séries FRED carregadas: {len(fred)}")
+    try:
+        zori = ZillowClient().fetch_us_zori()
+        print(f"Zillow ZORI carregado: {len(zori)} observações")
+    except Exception as e:
+        print(f"Aviso: não foi possível carregar o ZORI: {e}")
+        zori = None
+
+    us = process_us(fred, zori)
+    tail36 = us["momentum"][-36:]
+
+    comp_colors = [_subnucleo_color(i) for i in range(len(us["composicao"]))]
+    expect_colors = [_subnucleo_color(i) for i in range(len(us["expectativas"]))]
+    ampl_colors = [_subnucleo_color(i) for i in range(len(us["amplitude"]))]
+
+    result = {
+        "period_label": format_period_label(us["latest_period"]),
+        "momentum_chart": chart_builder.build_group_chart(us["momentum"]),
+        "momentum_detail": chart_builder.build_detail_chart(tail36),
+        "momentum_latest": us["momentum_latest"],
+        "cpi_pce_headline_chart": chart_builder.build_comparison_chart(
+            us["cpi_vs_pce_headline"], label_index="CPI", label_core="PCE",
+            metric="yoy", label="Headline YoY"),
+        "cpi_pce_core_chart": chart_builder.build_comparison_chart(
+            us["cpi_vs_pce_core"], label_index="Core CPI", label_core="Core PCE",
+            metric="yoy", label="Núcleo YoY"),
+        "cpi_pce_latest": us["cpi_pce_latest"],
+        # ponytail: SAAR só com os 3 baldes do Fed — food/energy oscilam ±150% e esmagam a escala
+        "comp_saar3": chart_builder.build_multiline_chart(
+            us["composicao"][:3], metric="saar3", meta=US_TARGET, label="Variação 3M SAAR · três baldes"),
+        "comp_yoy": chart_builder.build_multiline_chart(
+            us["composicao"], metric="yoy", meta=US_TARGET, label="Variação YoY"),
+        "comp_legend": [
+            {"label": row["name"], "color": comp_colors[i], "yoy": row["yoy"]}
+            for i, row in enumerate(us["composicao_latest"])
+        ],
+        "expect_chart": chart_builder.build_multiline_chart(
+            us["expectativas"], metric="yoy", meta=US_TARGET),
+        "expect_legend": [
+            {"label": row["name"], "color": expect_colors[i], "value": row["value"]}
+            for i, row in enumerate(us["expectativas_latest"])
+        ],
+        "ampl_chart": chart_builder.build_multiline_chart(
+            us["amplitude"], metric="yoy", meta=US_TARGET),
+        "ampl_legend": [
+            {"label": row["name"], "color": ampl_colors[i], "value": row["value"]}
+            for i, row in enumerate(us["amplitude_latest"])
+        ],
+        "shelter": None,
+    }
+    if us["shelter_cmp"]:
+        result["shelter"] = {
+            "saar3_chart": chart_builder.build_comparison_chart(
+                us["shelter_cmp"], label_index="Zillow ZORI", label_core="CPI Shelter",
+                metric="saar3", label="Variação 3M SAAR"),
+            "yoy_chart": chart_builder.build_comparison_chart(
+                us["shelter_cmp"], label_index="Zillow ZORI", label_core="CPI Shelter",
+                metric="yoy", label="Variação YoY"),
+            "latest": us["shelter_latest"],
+        }
     return result
 
 
@@ -472,6 +542,11 @@ def main():
     start_period = start_dt.strftime("%Y%m")
 
     data = build_data(start_period, end_period)
+    try:
+        data["us_data"] = build_us_data()
+    except Exception as e:
+        print(f"Aviso: painel EUA não gerado: {e}")
+        data["us_data"] = None
     save_data(data)
     build_static_site(data)
     print("Build concluído.")

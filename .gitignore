@@ -44,3 +44,6 @@ data/bcb_vectors.xlsx
 
 # Logs
 *.log
+
+# Segredos locais
+.env

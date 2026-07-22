@@ -7,6 +7,7 @@ import pandas as pd
 from processors.brazil.resumo import process_resumo
 from processors.brazil.destaques import process_destaques
 from processors.brazil.grupos import process_grupos
+from processors.us.panel import process_us
 
 
 def test_process_resumo():
@@ -133,8 +134,35 @@ def test_process_grupos():
         assert "latest" in data
 
 
+def test_process_us():
+    dates = pd.date_range("2023-01-01", periods=30, freq="MS")
+    # Índice crescendo 0,3% a.m. -> YoY ~3,66%, SAAR ~3,66%
+    level = pd.DataFrame({"date": dates, "value": [100 * 1.003 ** i for i in range(30)]})
+    rate = pd.DataFrame({"date": dates, "value": [2.5] * 30})
+
+    fred = {name: level.copy() for name in [
+        "cpi_headline", "cpi_core", "pce_headline", "pce_core",
+        "cpi_core_goods", "cpi_shelter", "cpi_supercore", "cpi_food", "cpi_energy",
+    ]}
+    fred.update({name: rate.copy() for name in [
+        "median_cpi", "trimmed_cpi", "sticky_cpi",
+        "breakeven_5y", "breakeven_5y5y", "michigan_1y",
+    ]})
+    zori = level.copy()
+
+    result = process_us(fred, zori)
+    last_yoy = result["momentum_latest"]["yoy"]
+    assert last_yoy is not None and abs(last_yoy - 3.66) < 0.05
+    assert result["momentum_latest"]["saar3"] is not None
+    assert len(result["composicao"]) == 5
+    assert result["shelter_cmp"], "shelter_cmp vazio com ZORI presente"
+    assert result["cpi_pce_latest"]["cpi"] == result["cpi_pce_latest"]["pce"]
+    assert result["amplitude_latest"][0]["value"] == 2.5
+
+
 if __name__ == "__main__":
     test_process_resumo()
     test_process_destaques()
     test_process_grupos()
+    test_process_us()
     print("Todos os testes passaram.")

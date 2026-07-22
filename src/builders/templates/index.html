@@ -41,6 +41,8 @@ section {
 .seg-bar.secondary button.active:hover { background: #4AA3D6; color: #fff; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
+.country-content { display: none; }
+.country-content.active { display: block; }
 .sub-selector { margin-bottom: 16px; }
 .title-bar {
   border-left: 7px solid #0072B2; padding: 2px 0 2px 14px; margin-bottom: 4px;
@@ -153,6 +155,16 @@ section {
 <body>
 <div class="page">
 
+{% if us_data %}
+<div style="margin-bottom:8px;">
+  <div class="seg-bar primary country">
+    <button class="active" onclick="switchCountry('br')">Brasil</button>
+    <button onclick="switchCountry('us')">Estados Unidos</button>
+  </div>
+</div>
+{% endif %}
+
+<div id="country-br" class="country-content active">
 <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:8px;">
   <div class="seg-bar primary">
     <button class="active" onclick="switchTab('resumo')">Resumo</button>
@@ -468,6 +480,154 @@ section {
   {% endfor %}
 </div>
 
+</div><!-- /country-br -->
+
+{% if us_data %}
+<!-- ESTADOS UNIDOS -->
+<div id="country-us" class="country-content">
+<div style="display:flex;align-items:baseline;gap:16px;margin-bottom:8px;">
+  <div class="seg-bar primary">
+    <button class="active" onclick="switchUsTab('resumo')">Resumo</button>
+    <button onclick="switchUsTab('composicao')">Composição</button>
+    <button onclick="switchUsTab('shelter')">Shelter</button>
+    <button onclick="switchUsTab('expectativas')">Expectativas</button>
+  </div>
+</div>
+
+<!-- US RESUMO -->
+<div id="ustab-resumo" class="tab-content active">
+  <section>
+    <div class="title-bar">
+      <h2>CPI | Momentum do núcleo · {{ us_data.period_label }}</h2>
+      <div class="sub">(CPI ex alimentos e energia, variação anualizada, dados dessazonalizados)</div>
+    </div>
+    <div class="accent-line"></div>
+    <div class="row-70-30">
+      <div>
+        <div id="{{ us_data.momentum_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      </div>
+      <div>
+        <div id="{{ us_data.momentum_detail.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      </div>
+    </div>
+    <div class="custom-legend">
+      <span><span class="legend-box" style="background:#E5E7EB;"></span><b>1M SAAR</b> ({{ '%.2f'|format(us_data.momentum_latest.saar1) }}%)</span>
+      <span><span class="legend-line" style="border-color:#56B4E9;"></span><b>3M SAAR</b> ({{ '%.2f'|format(us_data.momentum_latest.saar3) }}%)</span>
+      <span><span class="legend-line" style="border-color:#0072B2;"></span><b>6M SAAR</b> ({{ '%.2f'|format(us_data.momentum_latest.saar6) }}%)</span>
+      <span><span class="legend-line" style="border-color:#009E73;"></span><b>YoY</b> ({{ '%.2f'|format(us_data.momentum_latest.yoy) }}%)</span>
+      <span><span class="legend-line dashed" style="border-color:rgba(204,121,167,0.85);"></span>Meta Fed (2.00%)</span>
+    </div>
+
+    <div style="margin-top:40px;"></div>
+    <div class="title-bar">
+      <h2>CPI vs PCE</h2>
+      <div class="sub">(a meta de 2% do Fed é sobre o PCE; o CPI corre ~0,3pp acima na média histórica)</div>
+    </div>
+    <div class="accent-line" style="margin-bottom:16px;"></div>
+    <div class="row-2">
+      <div>
+        <div id="{{ us_data.cpi_pce_headline_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      </div>
+      <div>
+        <div id="{{ us_data.cpi_pce_core_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      </div>
+    </div>
+    <div class="custom-legend">
+      <span style="color:#56B4E9"><span class="legend-line" style="border-color:#56B4E9;"></span>CPI ({{ '%.2f'|format(us_data.cpi_pce_latest.cpi) }}% | núcleo {{ '%.2f'|format(us_data.cpi_pce_latest.cpi_core) }}%)</span>
+      <span style="color:#CC79A7"><span class="legend-line" style="border-color:#CC79A7;"></span>PCE ({{ '%.2f'|format(us_data.cpi_pce_latest.pce) }}% | núcleo {{ '%.2f'|format(us_data.cpi_pce_latest.pce_core) }}%)</span>
+      <span><span class="legend-line dashed" style="border-color:rgba(0,0,0,0.45);"></span>Meta Fed (2.00%)</span>
+    </div>
+  </section>
+</div>
+
+<!-- US COMPOSIÇÃO -->
+<div id="ustab-composicao" class="tab-content">
+  <section>
+    <div class="title-bar">
+      <h2>CPI | Composição · {{ us_data.period_label }}</h2>
+      <div class="sub">(a decomposição que o Fed acompanha: core goods, shelter e supercore, mais food e energy)</div>
+    </div>
+    <div class="accent-line" style="margin-bottom:16px;"></div>
+    <div class="row-2">
+      <div>
+        <div id="{{ us_data.comp_saar3.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      </div>
+      <div>
+        <div id="{{ us_data.comp_yoy.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      </div>
+    </div>
+    <div class="custom-legend">
+      {% for item in us_data.comp_legend %}
+      <span style="color:{{ item.color }}"><span class="legend-line" style="border-color:{{ item.color }};"></span>{{ item.label }} ({{ '%.2f'|format(item.yoy) if item.yoy is not none else '–' }}%)</span>
+      {% endfor %}
+      <span><span class="legend-line dashed" style="border-color:rgba(0,0,0,0.45);"></span>Meta Fed (2.00%)</span>
+    </div>
+  </section>
+</div>
+
+<!-- US SHELTER -->
+<div id="ustab-shelter" class="tab-content">
+  <section>
+    <div class="title-bar">
+      <h2>CPI | Shelter vs aluguel de mercado</h2>
+      <div class="sub">(o CPI Shelter segue o aluguel de contratos novos — ZORI — com ~12 meses de defasagem; o ZORI de hoje antecipa o CPI de amanhã)</div>
+    </div>
+    <div class="accent-line" style="margin-bottom:16px;"></div>
+    {% if us_data.shelter %}
+    <div class="row-2">
+      <div>
+        <div id="{{ us_data.shelter.saar3_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      </div>
+      <div>
+        <div id="{{ us_data.shelter.yoy_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+      </div>
+    </div>
+    <div class="custom-legend">
+      <span style="color:#56B4E9"><span class="legend-line" style="border-color:#56B4E9;"></span>Zillow ZORI ({{ '%.2f'|format(us_data.shelter.latest.zori) }}%)</span>
+      <span style="color:#CC79A7"><span class="legend-line" style="border-color:#CC79A7;"></span>CPI Shelter ({{ '%.2f'|format(us_data.shelter.latest.cpi_shelter) }}%)</span>
+      <span><span class="legend-line dashed" style="border-color:rgba(0,0,0,0.45);"></span>Meta Fed (2.00%)</span>
+    </div>
+    {% else %}
+    <div style="color:#94a3b8; font-style:italic; padding:24px 0;">Dados do Zillow indisponíveis neste build.</div>
+    {% endif %}
+  </section>
+</div>
+
+<!-- US EXPECTATIVAS -->
+<div id="ustab-expectativas" class="tab-content">
+  <section>
+    <div class="title-bar">
+      <h2>Expectativas de inflação</h2>
+      <div class="sub">(mercado — breakevens de TIPS — e famílias — Michigan; ancoragem é o que o Fed mais olha)</div>
+    </div>
+    <div class="accent-line" style="margin-bottom:16px;"></div>
+    <div id="{{ us_data.expect_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+    <div class="custom-legend">
+      {% for item in us_data.expect_legend %}
+      <span style="color:{{ item.color }}"><span class="legend-line" style="border-color:{{ item.color }};"></span>{{ item.label }} ({{ '%.2f'|format(item.value) if item.value is not none else '–' }}%)</span>
+      {% endfor %}
+      <span><span class="legend-line dashed" style="border-color:rgba(0,0,0,0.45);"></span>Meta Fed (2.00%)</span>
+    </div>
+
+    <div style="margin-top:40px;"></div>
+    <div class="title-bar">
+      <h2>CPI | Amplitude</h2>
+      <div class="sub">(inflação generalizada ou concentrada? median, trimmed-mean e sticky vs núcleo)</div>
+    </div>
+    <div class="accent-line" style="margin-bottom:16px;"></div>
+    <div id="{{ us_data.ampl_chart.div_id }}" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+    <div class="custom-legend">
+      {% for item in us_data.ampl_legend %}
+      <span style="color:{{ item.color }}"><span class="legend-line" style="border-color:{{ item.color }};"></span>{{ item.label }} ({{ '%.2f'|format(item.value) if item.value is not none else '–' }}%)</span>
+      {% endfor %}
+      <span><span class="legend-line dashed" style="border-color:rgba(0,0,0,0.45);"></span>Meta Fed (2.00%)</span>
+    </div>
+  </section>
+</div>
+
+</div><!-- /country-us -->
+{% endif %}
+
 </div>
 
 <script>
@@ -478,17 +638,38 @@ function resizePlots(container) {
     });
   });
 }
+function switchCountry(c) {
+  document.querySelectorAll('.country-content').forEach(el => el.classList.remove('active'));
+  var country = document.getElementById('country-' + c);
+  country.classList.add('active');
+  document.querySelectorAll('.seg-bar.country button').forEach(btn => btn.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  var tab = country.querySelector(':scope > .tab-content.active');
+  if (tab) {
+    resizePlots(tab);
+    var inner = tab.querySelector('.tab-content.active');
+    if (inner) resizePlots(inner);
+  }
+}
 function switchTab(id) {
-  document.querySelectorAll('.page > .tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('#country-br > .tab-content').forEach(el => el.classList.remove('active'));
   var tab = document.getElementById('tab-' + id);
   tab.classList.add('active');
-  document.querySelectorAll('.seg-bar.primary button').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('#country-br .seg-bar.primary button').forEach(btn => btn.classList.remove('active'));
   event.currentTarget.classList.add('active');
   resizePlots(tab);
   if (id === 'grupos' || id === 'surpresa') {
     var active = tab.querySelector('.tab-content.active');
     if (active) resizePlots(active);
   }
+}
+function switchUsTab(id) {
+  document.querySelectorAll('#country-us > .tab-content').forEach(el => el.classList.remove('active'));
+  var tab = document.getElementById('ustab-' + id);
+  tab.classList.add('active');
+  document.querySelectorAll('#country-us .seg-bar.primary button').forEach(btn => btn.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  resizePlots(tab);
 }
 function switchSub(parentId, prefix, id) {
   document.querySelectorAll('#' + parentId + ' .tab-content').forEach(el => el.classList.remove('active'));
@@ -525,6 +706,21 @@ Plotly.newPlot("{{ data.geral_headline.yoy.div_id }}", {{ data.geral_headline.yo
 Plotly.newPlot("{{ data.geral_subnuclei.saar3.div_id }}", {{ data.geral_subnuclei.saar3.json|safe }}, PLOTLY_CONFIG);
 Plotly.newPlot("{{ data.geral_subnuclei.yoy.div_id }}", {{ data.geral_subnuclei.yoy.json|safe }}, PLOTLY_CONFIG);
 {% endfor %}
+
+{% if us_data %}
+Plotly.newPlot("{{ us_data.momentum_chart.div_id }}", {{ us_data.momentum_chart.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ us_data.momentum_detail.div_id }}", {{ us_data.momentum_detail.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ us_data.cpi_pce_headline_chart.div_id }}", {{ us_data.cpi_pce_headline_chart.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ us_data.cpi_pce_core_chart.div_id }}", {{ us_data.cpi_pce_core_chart.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ us_data.comp_saar3.div_id }}", {{ us_data.comp_saar3.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ us_data.comp_yoy.div_id }}", {{ us_data.comp_yoy.json|safe }}, PLOTLY_CONFIG);
+{% if us_data.shelter %}
+Plotly.newPlot("{{ us_data.shelter.saar3_chart.div_id }}", {{ us_data.shelter.saar3_chart.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ us_data.shelter.yoy_chart.div_id }}", {{ us_data.shelter.yoy_chart.json|safe }}, PLOTLY_CONFIG);
+{% endif %}
+Plotly.newPlot("{{ us_data.expect_chart.div_id }}", {{ us_data.expect_chart.json|safe }}, PLOTLY_CONFIG);
+Plotly.newPlot("{{ us_data.ampl_chart.div_id }}", {{ us_data.ampl_chart.json|safe }}, PLOTLY_CONFIG);
+{% endif %}
 </script>
 </body>
 </html>

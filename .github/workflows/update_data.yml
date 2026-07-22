@@ -35,6 +35,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build site
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
           python -m src.builders.generate_site
 
