@@ -54,8 +54,6 @@ python -m src.builders.generate_site
 cd site && python -m http.server 8000
 ```
 
-Abra http://localhost:8000.
-
 Testes:
 
 ```bash
