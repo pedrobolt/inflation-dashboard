@@ -66,8 +66,6 @@ python tests/test_processors.py
 
 O GitHub Actions roda o pipeline nos dias **10 e 13 de cada mês** (quando IBGE e BLS já divulgaram os índices do mês anterior) e faz o deploy no GitHub Pages. Também dá para disparar manualmente em **Actions → Update Dashboard Data → Run workflow**.
 
-Para o painel EUA no deploy, cadastre a chave em **Settings → Secrets and variables → Actions** como `FRED_API_KEY`.
-
 ## Estrutura
 
 ```
