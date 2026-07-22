@@ -4,7 +4,8 @@ on:
   schedule:
     # Roda às 15h UTC (12h BRT) nos dias 10 e 13 de cada mês,
     # quando o IBGE normalmente já divulgou o IPCA do mês anterior.
-    - cron: '0 15 10,13 * *'
+    # Dia 17 cobre o Zillow ZORI, que costuma sair por volta do dia 16.
+    - cron: '0 15 10,13,17 * *'
   workflow_dispatch:
 
 permissions:
