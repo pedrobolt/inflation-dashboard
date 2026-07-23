@@ -102,7 +102,11 @@ class IBGECollector:
         # (ex: Índice Geral = 100.00, Alimentação e bebidas = 21.95)
         return df_pivot
 def get_latest_available_period() -> str:
-    """Retorna o último mês disponível aproximado (IPCA divulgado com defasagem)."""
-    today = pd.Timestamp.now()
-    candidate = today - pd.DateOffset(months=2)
-    return candidate.strftime("%Y%m")
+    """Consulta o SIDRA pelo último período com o IPCA geral já divulgado."""
+    client = SidraClient()
+    df = client.fetch_to_dataframe("1737", "n1/all/v/63/p/last 1")
+    if df.empty:
+        # Fallback só se a API estiver fora do ar: aproxima pela defasagem típica de divulgação.
+        today = pd.Timestamp.now()
+        return (today - pd.DateOffset(months=2)).strftime("%Y%m")
+    return str(df.iloc[-1]["D3C"])
