@@ -249,7 +249,7 @@ def build_detail_surprise_chart(series: List[Dict], title: str = "DETALHE · ÚL
 
 
 def build_group_chart(series: List[Dict], hovermode: str = "x unified",
-                      hoverdistance: Optional[int] = None) -> Dict:
+                      hoverdistance: Optional[int] = None, meta_label: str = "Meta BCB") -> Dict:
     """Gráfico de núcleos (1M SAAR, 3M SAAR, 6M SAAR, YoY)."""
     df = pd.DataFrame(series)
     if df.empty:
@@ -264,9 +264,9 @@ def build_group_chart(series: List[Dict], hovermode: str = "x unified",
             x=df["date"], y=df["meta"],
             mode="lines",
             line_shape="hv",
-            name="Meta BCB",
+            name=meta_label,
             line={"color": "rgba(204,121,167,0.85)", "dash": "dash", "width": 1.4},
-            hovertemplate="<b>Meta BCB</b> %{y:.2f}%<extra></extra>",
+            hovertemplate=f"<b>{meta_label}</b> %{{y:.2f}}%<extra></extra>",
         ))
     fig.add_trace(go.Bar(
         x=df["date"], y=df.get("saar1", df.get("mom", [])),
@@ -293,9 +293,10 @@ def build_group_chart(series: List[Dict], hovermode: str = "x unified",
 
 def build_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M",
                        hovermode: str = "x unified",
-                       hoverdistance: Optional[int] = None) -> Dict:
+                       hoverdistance: Optional[int] = None, meta_label: str = "Meta BCB") -> Dict:
     """Gráfico de detalhe dos últimos 36 meses com fundo #F4F6F8."""
-    chart = build_group_chart(series, hovermode=hovermode, hoverdistance=hoverdistance)
+    chart = build_group_chart(series, hovermode=hovermode, hoverdistance=hoverdistance,
+                              meta_label=meta_label)
     return _apply_detail_style(chart, title)
 
 
@@ -363,7 +364,7 @@ def build_seasonal_chart(months: List[int], current: List[float], previous: List
 def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral",
                            label_core: str = "Média dos núcleos", metric: str = "yoy",
                            label: str = None, hovermode: str = "x unified",
-                           hoverdistance: Optional[int] = None) -> Dict:
+                           hoverdistance: Optional[int] = None, meta_label: str = "Meta BCB") -> Dict:
     """Gráfico de comparação headline vs média dos núcleos (YoY ou 3M SAAR)."""
     df = pd.DataFrame(series)
     if df.empty:
@@ -380,9 +381,9 @@ def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral
             x=df["date"], y=df["meta"],
             mode="lines",
             line_shape="hv",
-            name="Meta BCB",
+            name=meta_label,
             line={"color": "rgba(0,0,0,0.45)", "dash": "dash", "width": 1.4},
-            hovertemplate="<b>Meta BCB</b> %{y:.2f}%<extra></extra>",
+            hovertemplate=f"<b>{meta_label}</b> %{{y:.2f}}%<extra></extra>",
         ))
     if index_col in df.columns:
         fig.add_trace(go.Scatter(
@@ -410,7 +411,7 @@ def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral
 
 def build_multiline_chart(series_list: List[Dict], metric: str = "yoy", meta: float = None,
                           label: str = None, hovermode: str = "x unified",
-                          hoverdistance: Optional[int] = None) -> Dict:
+                          hoverdistance: Optional[int] = None, meta_label: str = "Meta BCB") -> Dict:
     """Gráfico com múltiplas séries de linha (sub-núcleos individuais, YoY ou 3M SAAR)."""
     colors = [COLORS["orange"], COLORS["accent"], COLORS["primary"], COLORS["green"], COLORS["pink"]]
     fig = go.Figure()
@@ -422,9 +423,9 @@ def build_multiline_chart(series_list: List[Dict], metric: str = "yoy", meta: fl
                 x=meta_dates, y=[meta] * len(meta_dates),
                 mode="lines",
                 line_shape="hv",
-                name="Meta BCB",
+                name=meta_label,
                 line={"color": "rgba(0,0,0,0.45)", "dash": "dash", "width": 1.4},
-                hovertemplate="<b>Meta BCB</b> %{y:.2f}%<extra></extra>",
+                hovertemplate=f"<b>{meta_label}</b> %{{y:.2f}}%<extra></extra>",
             ))
     for i, item in enumerate(series_list):
         df = pd.DataFrame(item["series"]).sort_values("period")

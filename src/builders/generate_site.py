@@ -245,38 +245,40 @@ def build_us_data() -> Dict:
     result = {
         "period_label": format_period_label(us["latest_period"]),
         "momentum_chart": chart_builder.build_group_chart(us["momentum"], hovermode=us_hover,
-                                                           hoverdistance=us_hoverdist),
+                                                           hoverdistance=us_hoverdist, meta_label="Meta Fed"),
         "momentum_detail": chart_builder.build_detail_chart(tail36, hovermode=us_hover,
-                                                             hoverdistance=us_hoverdist),
+                                                             hoverdistance=us_hoverdist, meta_label="Meta Fed"),
         "momentum_latest": us["momentum_latest"],
         "cpi_pce_headline_chart": chart_builder.build_comparison_chart(
             us["cpi_vs_pce_headline"], label_index="CPI", label_core="PCE",
-            metric="yoy", label="Headline YoY", hovermode=us_hover, hoverdistance=us_hoverdist),
+            metric="yoy", label="Headline YoY", hovermode=us_hover, hoverdistance=us_hoverdist,
+            meta_label="Meta Fed"),
         "cpi_pce_core_chart": chart_builder.build_comparison_chart(
             us["cpi_vs_pce_core"], label_index="Core CPI", label_core="Core PCE",
-            metric="yoy", label="Núcleo YoY", hovermode=us_hover, hoverdistance=us_hoverdist),
+            metric="yoy", label="Núcleo YoY", hovermode=us_hover, hoverdistance=us_hoverdist,
+            meta_label="Meta Fed"),
         "cpi_pce_latest": us["cpi_pce_latest"],
         # ponytail: SAAR só com os 3 baldes do Fed — food/energy oscilam ±150% e esmagam a escala
         "comp_saar3": chart_builder.build_multiline_chart(
             us["composicao"][:3], metric="saar3", meta=US_TARGET, label="Variação 3M SAAR · três baldes",
-            hovermode=us_hover, hoverdistance=us_hoverdist),
+            hovermode=us_hover, hoverdistance=us_hoverdist, meta_label="Meta Fed"),
         "comp_yoy": chart_builder.build_multiline_chart(
             us["composicao"], metric="yoy", meta=US_TARGET, label="Variação YoY",
-            hovermode=us_hover, hoverdistance=us_hoverdist),
+            hovermode=us_hover, hoverdistance=us_hoverdist, meta_label="Meta Fed"),
         "comp_legend": [
             {"label": row["name"], "color": comp_colors[i], "yoy": row["yoy"]}
             for i, row in enumerate(us["composicao_latest"])
         ],
         "expect_chart": chart_builder.build_multiline_chart(
             us["expectativas"], metric="yoy", meta=US_TARGET, hovermode=us_hover,
-            hoverdistance=us_hoverdist),
+            hoverdistance=us_hoverdist, meta_label="Meta Fed"),
         "expect_legend": [
             {"label": row["name"], "color": expect_colors[i], "value": row["value"]}
             for i, row in enumerate(us["expectativas_latest"])
         ],
         "ampl_chart": chart_builder.build_multiline_chart(
             us["amplitude"], metric="yoy", meta=US_TARGET, hovermode=us_hover,
-            hoverdistance=us_hoverdist),
+            hoverdistance=us_hoverdist, meta_label="Meta Fed"),
         "ampl_legend": [
             {"label": row["name"], "color": ampl_colors[i], "value": row["value"]}
             for i, row in enumerate(us["amplitude_latest"])
@@ -287,10 +289,12 @@ def build_us_data() -> Dict:
         result["shelter"] = {
             "saar3_chart": chart_builder.build_comparison_chart(
                 us["shelter_cmp"], label_index="Zillow ZORI", label_core="CPI Shelter",
-                metric="saar3", label="Variação 3M SAAR", hovermode=us_hover, hoverdistance=us_hoverdist),
+                metric="saar3", label="Variação 3M SAAR", hovermode=us_hover, hoverdistance=us_hoverdist,
+                meta_label="Meta Fed"),
             "yoy_chart": chart_builder.build_comparison_chart(
                 us["shelter_cmp"], label_index="Zillow ZORI", label_core="CPI Shelter",
-                metric="yoy", label="Variação YoY", hovermode=us_hover, hoverdistance=us_hoverdist),
+                metric="yoy", label="Variação YoY", hovermode=us_hover, hoverdistance=us_hoverdist,
+                meta_label="Meta Fed"),
             "latest": us["shelter_latest"],
         }
     return result
