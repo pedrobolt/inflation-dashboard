@@ -636,15 +636,13 @@ section {
 // com layout obsoleto na primeira pintura.
 var PLOTS = {};
 function resizePlots(container) {
-  requestAnimationFrame(function() {
-    container.querySelectorAll('.plotly-graph-div').forEach(function(p) {
-      if (p.offsetParent === null) return; // ainda oculto (sub-aba inativa): inicializa quando aparecer
-      if (!p._fullLayout && PLOTS[p.id]) {
-        Plotly.newPlot(p.id, PLOTS[p.id], PLOTLY_CONFIG);
-      } else if (p._fullLayout) {
-        Plotly.Plots.resize(p);
-      }
-    });
+  container.querySelectorAll('.plotly-graph-div').forEach(function(p) {
+    if (p.offsetParent === null) return; // ainda oculto (sub-aba inativa): inicializa quando aparecer
+    if (!p._fullLayout && PLOTS[p.id]) {
+      Plotly.newPlot(p.id, PLOTS[p.id], PLOTLY_CONFIG);
+    } else if (p._fullLayout) {
+      Plotly.Plots.resize(p);
+    }
   });
 }
 function switchCountry(c) {
