@@ -127,7 +127,8 @@ def _parse_period(period_code: str) -> pd.Timestamp:
 def _base_layout(height: int = 450, margin_top: int = 18, margin_left: int = 50,
                  margin_bottom: int = 40, margin_right: int = 30,
                  y_rangemode: Optional[str] = None,
-                 hovermode: str = "x unified") -> Dict:
+                 hovermode: str = "x unified",
+                 hoverdistance: Optional[int] = None) -> Dict:
     layout = {
         "font": {"family": "'Source Sans 3', sans-serif", "color": COLORS["text"], "size": 12},
         "paper_bgcolor": "rgba(250,250,250,0.5)",
@@ -177,6 +178,8 @@ def _base_layout(height: int = 450, margin_top: int = 18, margin_left: int = 50,
     }
     if y_rangemode:
         layout["yaxis"]["rangemode"] = y_rangemode
+    if hoverdistance is not None:
+        layout["hoverdistance"] = hoverdistance
     return layout
 
 
@@ -245,7 +248,8 @@ def build_detail_surprise_chart(series: List[Dict], title: str = "DETALHE · ÚL
     return _apply_detail_style(chart, title)
 
 
-def build_group_chart(series: List[Dict], hovermode: str = "x unified") -> Dict:
+def build_group_chart(series: List[Dict], hovermode: str = "x unified",
+                      hoverdistance: Optional[int] = None) -> Dict:
     """Gráfico de núcleos (1M SAAR, 3M SAAR, 6M SAAR, YoY)."""
     df = pd.DataFrame(series)
     if df.empty:
@@ -283,14 +287,15 @@ def build_group_chart(series: List[Dict], hovermode: str = "x unified") -> Dict:
                 hovertemplate=f"<b>{label}</b> %{{y:.2f}}%<extra></extra>",
             ))
     fig.update_layout(_base_layout(height=450, margin_top=18, margin_left=55, y_rangemode="tozero",
-                               hovermode=hovermode))
+                               hovermode=hovermode, hoverdistance=hoverdistance))
     return {"div_id": _new_id(), "json": _to_json(fig)}
 
 
 def build_detail_chart(series: List[Dict], title: str = "DETALHE · ÚLT. 36M",
-                       hovermode: str = "x unified") -> Dict:
+                       hovermode: str = "x unified",
+                       hoverdistance: Optional[int] = None) -> Dict:
     """Gráfico de detalhe dos últimos 36 meses com fundo #F4F6F8."""
-    chart = build_group_chart(series, hovermode=hovermode)
+    chart = build_group_chart(series, hovermode=hovermode, hoverdistance=hoverdistance)
     return _apply_detail_style(chart, title)
 
 
@@ -357,7 +362,8 @@ def build_seasonal_chart(months: List[int], current: List[float], previous: List
 
 def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral",
                            label_core: str = "Média dos núcleos", metric: str = "yoy",
-                           label: str = None, hovermode: str = "x unified") -> Dict:
+                           label: str = None, hovermode: str = "x unified",
+                           hoverdistance: Optional[int] = None) -> Dict:
     """Gráfico de comparação headline vs média dos núcleos (YoY ou 3M SAAR)."""
     df = pd.DataFrame(series)
     if df.empty:
@@ -395,7 +401,7 @@ def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral
             hovertemplate=f"<b>{label_core}</b> %{{y:.2f}}%<extra></extra>",
         ))
     layout = _base_layout(height=450, margin_top=52, margin_left=35, margin_bottom=40, margin_right=20,
-                          y_rangemode="tozero", hovermode=hovermode)
+                          y_rangemode="tozero", hovermode=hovermode, hoverdistance=hoverdistance)
     if label:
         layout["annotations"] = [_label_annotation(label.upper())]
     fig.update_layout(layout)
@@ -403,7 +409,8 @@ def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral
 
 
 def build_multiline_chart(series_list: List[Dict], metric: str = "yoy", meta: float = None,
-                          label: str = None, hovermode: str = "x unified") -> Dict:
+                          label: str = None, hovermode: str = "x unified",
+                          hoverdistance: Optional[int] = None) -> Dict:
     """Gráfico com múltiplas séries de linha (sub-núcleos individuais, YoY ou 3M SAAR)."""
     colors = [COLORS["orange"], COLORS["accent"], COLORS["primary"], COLORS["green"], COLORS["pink"]]
     fig = go.Figure()
@@ -433,7 +440,7 @@ def build_multiline_chart(series_list: List[Dict], metric: str = "yoy", meta: fl
             hovertemplate=f"<b>{item['name']}</b> %{{y:.2f}}%<extra></extra>",
         ))
     layout = _base_layout(height=450, margin_top=52, margin_left=35, margin_bottom=40, margin_right=20,
-                          y_rangemode="tozero", hovermode=hovermode)
+                          y_rangemode="tozero", hovermode=hovermode, hoverdistance=hoverdistance)
     if label:
         layout["annotations"] = [_label_annotation(label.upper())]
     fig.update_layout(layout)
