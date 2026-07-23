@@ -375,13 +375,16 @@ def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral
             line={"color": "rgba(0,0,0,0.45)", "dash": "dash", "width": 1.4},
             hovertemplate="<b>Meta BCB</b> %{y:.2f}%<extra></extra>",
         ))
+    # hovertemplate inclui o mês do próprio ponto: com séries de defasagens diferentes
+    # (ex.: CPI tem o mês corrente, PCE não), o hover unificado encaixa o ponto válido
+    # mais próximo sob o cabeçalho do mês do cursor — o sufixo evita leitura errada.
     if index_col in df.columns:
         fig.add_trace(go.Scatter(
             x=df["date"], y=df[index_col],
             mode="lines",
             name=label_index,
             line={"color": COLORS["accent"], "width": 1.8},
-            hovertemplate=f"<b>{label_index}</b> %{{y:.2f}}%<extra></extra>",
+            hovertemplate=f"<b>{label_index}</b> %{{y:.2f}}% · %{{x|%b/%y}}<extra></extra>",
         ))
     if core_col in df.columns:
         fig.add_trace(go.Scatter(
@@ -389,7 +392,7 @@ def build_comparison_chart(series: List[Dict], label_index: str = "Índice geral
             mode="lines",
             name=label_core,
             line={"color": COLORS["pink"], "width": 2.5},
-            hovertemplate=f"<b>{label_core}</b> %{{y:.2f}}%<extra></extra>",
+            hovertemplate=f"<b>{label_core}</b> %{{y:.2f}}% · %{{x|%b/%y}}<extra></extra>",
         ))
     layout = _base_layout(height=450, margin_top=52, margin_left=35, margin_bottom=40, margin_right=20,
                           y_rangemode="tozero")
@@ -427,7 +430,7 @@ def build_multiline_chart(series_list: List[Dict], metric: str = "yoy", meta: fl
             mode="lines",
             name=item["name"],
             line={"color": color, "width": 1.8},
-            hovertemplate=f"<b>{item['name']}</b> %{{y:.2f}}%<extra></extra>",
+            hovertemplate=f"<b>{item['name']}</b> %{{y:.2f}}% · %{{x|%b/%y}}<extra></extra>",
         ))
     layout = _base_layout(height=450, margin_top=52, margin_left=35, margin_bottom=40, margin_right=20,
                           y_rangemode="tozero")
