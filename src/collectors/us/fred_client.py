@@ -11,6 +11,8 @@ from typing import Dict, Optional
 
 import pandas as pd
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
@@ -59,6 +61,25 @@ class FREDClient:
         self.timeout = timeout
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": "inflation-dashboard/0.1.0"})
+
+        # O FRED ocasionalmente responde 429/5xx de forma transitória. Sem retry,
+        # uma única falha em uma série derruba todo o painel dos EUA. Mantemos o
+        # comportamento atual do site (fallback para Brasil se a fonte realmente
+        # falhar), mas toleramos indisponibilidades curtas antes de desistir.
+        retry = Retry(
+            total=4,
+            connect=4,
+            read=4,
+            status=4,
+            backoff_factor=1.0,
+            status_forcelist=(429, 500, 502, 503, 504),
+            allowed_methods=frozenset({"GET"}),
+            respect_retry_after_header=True,
+            raise_on_status=True,
+        )
+        adapter = HTTPAdapter(max_retries=retry)
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
 
     def fetch_series(self, series_id: str, start_date: str = "2004-01-01") -> pd.DataFrame:
         """Busca uma série; retorna DataFrame com colunas ['date', 'value']."""
