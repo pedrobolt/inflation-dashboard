@@ -2,10 +2,10 @@ name: Update Dashboard Data
 
 on:
   schedule:
-    # Roda às 15h UTC (12h BRT) nos dias 10 e 13 de cada mês,
-    # quando o IBGE normalmente já divulgou o IPCA do mês anterior.
+    # Roda às 15h UTC (12h BRT) entre os dias 9 e 13 para capturar
+    # variações no calendário mensal de divulgação do IPCA pelo IBGE.
     # Dia 17 cobre o Zillow ZORI, que costuma sair por volta do dia 16.
-    - cron: '0 15 10,13,17 * *'
+    - cron: '0 15 9-13,17 * *'
   workflow_dispatch:
 
 permissions:
