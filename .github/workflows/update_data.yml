@@ -17,7 +17,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -63,7 +63,11 @@ jobs:
                   "Dados críticos do BCB ausentes/incompletos; deploy bloqueado para preservar a versão válida anterior."
               )
 
-          print(f"Validação OK: período {data.get('period')} com {len(subnuclei)} séries de núcleos BCB.")
+          latest_period = (bcb.get("latest") or {}).get("period") or bcb.get("period")
+          print(
+              f"Validação OK: IPCA {data.get('period')}; núcleos BCB {latest_period}; "
+              f"{len(subnuclei)} séries carregadas."
+          )
           PY
 
       - name: Upload artifact
