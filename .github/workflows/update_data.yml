@@ -1,6 +1,8 @@
 name: Update Dashboard Data
 
 on:
+  push:
+    branches: [main]
   schedule:
     # Roda às 15h UTC (12h BRT) entre os dias 9 e 13 para capturar
     # variações no calendário mensal de divulgação do IPCA pelo IBGE.
