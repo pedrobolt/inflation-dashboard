@@ -43,6 +43,29 @@ jobs:
         run: |
           python -m src.builders.generate_site
 
+      - name: Validate critical Brazil data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("site/data/brazil/latest.json")
+          if not path.exists():
+              raise SystemExit("latest.json não foi gerado")
+
+          data = json.loads(path.read_text(encoding="utf-8"))
+          grupos = data.get("grupos_data") or {}
+          bcb = grupos.get("BCB") or {}
+          subnuclei = bcb.get("subnuclei") or []
+
+          if len(subnuclei) < 2:
+              raise SystemExit(
+                  "Dados críticos do BCB ausentes/incompletos; deploy bloqueado para preservar a versão válida anterior."
+              )
+
+          print(f"Validação OK: período {data.get('period')} com {len(subnuclei)} séries de núcleos BCB.")
+          PY
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
