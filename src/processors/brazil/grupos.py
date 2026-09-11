@@ -194,14 +194,24 @@ def _subnucleo_series(df: pd.DataFrame) -> List[Dict]:
 
 
 def _subnucleo_row(df: pd.DataFrame, period: str, name: str) -> Optional[Dict]:
-    """Monta uma linha da tabela lateral de sub-núcleos."""
+    """Monta uma linha da tabela lateral de sub-núcleos.
+
+    Se a série oficial ainda não tiver o mês do IPCA corrente, usa o último mês
+    efetivamente disponível até o período solicitado e registra esse período na linha.
+    """
     df = _calc_saar(_calc_yoy_from_mom(df))
-    prev_period = (pd.Period(period, freq="M") - 1).strftime("%Y%m")
-    prev3_period = (pd.Period(period, freq="M") - 3).strftime("%Y%m")
-    prev12_period = (pd.Period(period, freq="M") - 12).strftime("%Y%m")
+    period = str(period)
+    available = df[df["period"].astype(str) <= period]["period"].astype(str)
+    if available.empty:
+        return None
+    effective_period = period if (df["period"].astype(str) == period).any() else available.max()
+
+    prev_period = (pd.Period(effective_period, freq="M") - 1).strftime("%Y%m")
+    prev3_period = (pd.Period(effective_period, freq="M") - 3).strftime("%Y%m")
+    prev12_period = (pd.Period(effective_period, freq="M") - 12).strftime("%Y%m")
 
     def get_val(p, col):
-        row = df[df["period"] == p]
+        row = df[df["period"].astype(str) == str(p)]
         if row.empty:
             return None
         v = row[col].iloc[-1]
@@ -210,7 +220,7 @@ def _subnucleo_row(df: pd.DataFrame, period: str, name: str) -> Optional[Dict]:
     def get_row_values(p):
         return {k: get_val(p, k) for k in ["saar1", "saar3", "yoy"]}
 
-    latest = get_row_values(period)
+    latest = get_row_values(effective_period)
     prev1 = get_row_values(prev_period)
     prev3 = get_row_values(prev3_period)
     prev12 = get_row_values(prev12_period)
@@ -219,6 +229,8 @@ def _subnucleo_row(df: pd.DataFrame, period: str, name: str) -> Optional[Dict]:
 
     return {
         "name": name,
+        "period": effective_period,
+        "is_lagged": effective_period != period,
         "saar1": latest["saar1"],
         "saar3": latest["saar3"],
         "yoy": latest["yoy"],
@@ -474,10 +486,14 @@ def process_grupos(
     Categorias:
       - BCB: núcleos do BCB (média EX0/EX3/MS/DP/P55)
       - Serviços, Industriais, Alimentação: séries oficiais do SGS + sub-núcleos
+
+    A categoria BCB pode ter defasagem de divulgação em relação ao IPCA. Nesse caso,
+    usa o último período oficial disponível sem carregar valores para o mês corrente.
     """
     df_general = df_general.sort_values("periodo_codigo").copy()
     if period is None:
         period = str(df_general["periodo_codigo"].max())
+    period = str(period)
 
     masks = None
     if bcb_vectors is not None:
@@ -488,10 +504,14 @@ def process_grupos(
 
     # Categoria BCB - oficial ou fallback para IPCA geral
     categories = {}
+    bcb_effective_period = period
     if bcb_cores is not None and not bcb_cores.empty and "media" in bcb_cores.columns:
         bcb_df = bcb_cores[["data", "media"]].copy()
         bcb_df["period"] = bcb_df["data"].dt.to_period("M").dt.strftime("%Y%m")
         bcb_df = bcb_df.rename(columns={"media": "mom"}).sort_values("period").reset_index(drop=True)
+        available_bcb = bcb_df[bcb_df["period"].astype(str) <= period]["period"].astype(str)
+        if not available_bcb.empty:
+            bcb_effective_period = available_bcb.max()
         categories["BCB"] = bcb_df
 
     # Categorias oficiais do SGS - com fallback para agregação dos itens do IBGE
@@ -515,9 +535,11 @@ def process_grupos(
 
     result = {}
     for name in ["BCB", "Serviços", "Industriais", "Alimentação"]:
+        effective_period = period
         if name == "BCB":
             if "BCB" in categories:
-                subnuclei = _bcb_subnuclei(bcb_cores, period)
+                effective_period = bcb_effective_period
+                subnuclei = _bcb_subnuclei(bcb_cores, effective_period)
                 main_df = categories["BCB"]
             else:
                 # Fallback: IPCA geral sem sub-núcleos
@@ -539,16 +561,20 @@ def process_grupos(
         headline_df = _headline_series(name, df_general, bcb_categories)
         headline_df = _process_official_series(headline_df, meta=target) if not headline_df.empty else headline_df
 
-        last = main_df[main_df["period"] == period]
+        last = main_df[main_df["period"].astype(str) == effective_period]
         if last.empty:
             continue
         last = last.iloc[-1]
 
         result[name] = {
+            "period": effective_period,
+            "is_lagged": effective_period != period,
             "series": _clean_records(main_df[["period", "mom", "yoy", "saar1", "saar3", "saar6", "meta"]].to_dict("records")),
             "subnuclei": subnuclei,
             "headline_series": _clean_records(headline_df[["period", "mom", "yoy", "saar1", "saar3", "saar6", "meta"]].to_dict("records")) if not headline_df.empty else [],
             "latest": {
+                "period": effective_period,
+                "is_lagged": effective_period != period,
                 "saar1": float(last["saar1"]) if pd.notna(last["saar1"]) else None,
                 "saar3": float(last["saar3"]) if pd.notna(last["saar3"]) else None,
                 "saar6": float(last["saar6"]) if pd.notna(last["saar6"]) else None,
