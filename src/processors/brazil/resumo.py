@@ -192,6 +192,10 @@ def process_resumo(
     Processa tabela resumo idêntica ao protótipo.
     Retorna lista de dicionários com: metric, weight, mom_t_12, mom_t_2, mom_t_1, mom,
     mom_bps, yoy_t_12, yoy_t_2, yoy_t_1, yoy.
+
+    Séries do BCB podem ser divulgadas depois do IPCA. Nesses casos, as linhas de
+    núcleos usam o último período oficial disponível até o mês-alvo, sem carregar
+    artificialmente o valor para o mês seguinte.
     """
     df_general = df_general.copy()
     df_general["item_codigo"] = "7169"
@@ -212,6 +216,7 @@ def process_resumo(
 
     if period is None:
         period = str(df_combined["periodo_codigo"].max())
+    period = str(period)
 
     # Pesos no período alvo (para grupos principais)
     target_weights = (
@@ -328,7 +333,22 @@ def process_resumo(
         if df_item.empty:
             continue
 
-        idx_target = df_item[df_item["periodo_codigo"] == period].index
+        effective_period = period
+        idx_target = df_item[df_item["periodo_codigo"].astype(str) == effective_period].index
+
+        # Os núcleos do SGS costumam sair depois do IPCA. Mantém a linha usando o
+        # último dado oficial disponível até o período do painel, em vez de escondê-la.
+        if len(idx_target) == 0 and is_core:
+            available = df_item[
+                df_item["periodo_codigo"].astype(str) <= period
+            ]["periodo_codigo"].astype(str)
+            if available.empty:
+                continue
+            effective_period = available.max()
+            idx_target = df_item[
+                df_item["periodo_codigo"].astype(str) == effective_period
+            ].index
+
         if len(idx_target) == 0:
             continue
         idx = idx_target[0]
@@ -336,18 +356,20 @@ def process_resumo(
         mom = float(df_item.loc[idx, "mom"]) if pd.notna(df_item.loc[idx, "mom"]) else None
         yoy = float(df_item.loc[idx, "yoy"]) if pd.notna(df_item.loc[idx, "yoy"]) else None
 
-        mom_t_1 = _lag_value(df_item, period, "mom", 1)
-        mom_t_2 = _lag_value(df_item, period, "mom", 2)
-        mom_t_12 = _lag_value(df_item, period, "mom", 12)
-        yoy_t_1 = _lag_value(df_item, period, "yoy", 1)
-        yoy_t_2 = _lag_value(df_item, period, "yoy", 2)
-        yoy_t_12 = _lag_value(df_item, period, "yoy", 12)
+        mom_t_1 = _lag_value(df_item, effective_period, "mom", 1)
+        mom_t_2 = _lag_value(df_item, effective_period, "mom", 2)
+        mom_t_12 = _lag_value(df_item, effective_period, "mom", 12)
+        yoy_t_1 = _lag_value(df_item, effective_period, "yoy", 1)
+        yoy_t_2 = _lag_value(df_item, effective_period, "yoy", 2)
+        yoy_t_12 = _lag_value(df_item, effective_period, "yoy", 12)
 
         # BPS no IPCA geral = mom * 100 (para chegar em bps)
         mom_bps = mom * 100 if (mom is not None and weight is not None) else None
 
         result.append({
             "metric": name,
+            "period": effective_period,
+            "is_lagged": effective_period != period,
             "weight": round(weight, 1) if weight is not None else None,
             "mom_t_12": mom_t_12,
             "mom_t_2": mom_t_2,
