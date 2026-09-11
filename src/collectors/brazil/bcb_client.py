@@ -3,6 +3,8 @@ Coletor de dados do BCB (SGS) para núcleos do IPCA.
 """
 
 from typing import Optional
+import time
+
 import requests
 import pandas as pd
 
@@ -35,8 +37,10 @@ class BCBClient:
         "EX3 Industriais": 29684,
     }
 
-    def __init__(self, timeout: int = 60):
+    def __init__(self, timeout: int = 60, max_retries: int = 4, backoff_seconds: float = 1.5):
         self.timeout = timeout
+        self.max_retries = max(1, int(max_retries))
+        self.backoff_seconds = max(0.0, float(backoff_seconds))
         self.session = requests.Session()
         self.session.headers.update({
             "User-Agent": "inflation-dashboard/0.1.0",
@@ -45,7 +49,8 @@ class BCBClient:
 
     def fetch_series(self, code: int, start_date: str, end_date: str) -> pd.DataFrame:
         """
-        Busca série do SGS.
+        Busca série do SGS com retry para falhas transitórias, inclusive respostas
+        HTTP 200 vazias ou que não sejam JSON válido.
 
         Args:
             code: código da série no SGS
@@ -54,16 +59,54 @@ class BCBClient:
         """
         url = self.BASE_URL.format(code=code)
         params = {"formato": "json", "dataInicial": start_date, "dataFinal": end_date}
-        response = self.session.get(url, params=params, timeout=self.timeout)
-        response.raise_for_status()
-        data = response.json()
-        df = pd.DataFrame(data)
-        if df.empty:
-            return df
-        df["data"] = pd.to_datetime(df["data"], format="%d/%m/%Y", errors="coerce")
-        df["valor"] = pd.to_numeric(df["valor"].astype(str).str.replace(",", "."), errors="coerce")
-        df = df.dropna(subset=["data", "valor"])
-        return df
+        last_error = None
+
+        for attempt in range(1, self.max_retries + 1):
+            try:
+                response = self.session.get(url, params=params, timeout=self.timeout)
+                response.raise_for_status()
+
+                if not response.text or not response.text.strip():
+                    raise ValueError("resposta vazia do SGS")
+
+                data = response.json()
+                if not isinstance(data, list):
+                    raise ValueError(f"resposta inesperada do SGS: {type(data).__name__}")
+
+                df = pd.DataFrame(data)
+                if df.empty:
+                    return df
+
+                required = {"data", "valor"}
+                if not required.issubset(df.columns):
+                    raise ValueError(
+                        f"resposta do SGS sem colunas obrigatórias: {sorted(required - set(df.columns))}"
+                    )
+
+                df["data"] = pd.to_datetime(df["data"], format="%d/%m/%Y", errors="coerce")
+                df["valor"] = pd.to_numeric(
+                    df["valor"].astype(str).str.replace(",", ".", regex=False),
+                    errors="coerce",
+                )
+                df = df.dropna(subset=["data", "valor"])
+                return df
+
+            except (requests.RequestException, ValueError) as exc:
+                last_error = exc
+                if attempt >= self.max_retries:
+                    break
+
+                delay = self.backoff_seconds * (2 ** (attempt - 1))
+                print(
+                    f"Aviso: SGS série {code} falhou na tentativa {attempt}/{self.max_retries}: "
+                    f"{exc}. Nova tentativa em {delay:.1f}s."
+                )
+                if delay > 0:
+                    time.sleep(delay)
+
+        raise RuntimeError(
+            f"Falha ao carregar série SGS {code} após {self.max_retries} tentativas: {last_error}"
+        ) from last_error
 
     def fetch_ipca_cores(
         self,
